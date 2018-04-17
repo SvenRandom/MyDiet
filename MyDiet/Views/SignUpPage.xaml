@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="MyDiet.Views.SignUpPage"
+             Title="Register">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Done" Clicked="OnSignUpButtonClicked"/>
+    </ContentPage.ToolbarItems>
+
+   <ContentPage.Content >
+        <StackLayout VerticalOptions="StartAndExpand" Padding="15" >
+            <Label x:Name="messageLabel" BackgroundColor="Red" />
+            <Label Text="Email" />
+            <Entry x:Name="emailEntry" Keyboard="Email" Placeholder="sign up by email" />
+            <Label Text="Password" />
+            <Entry x:Name="passwordEntry" IsPassword="true" />
+            <Label Text="Name" />
+            <Entry x:Name="usernameEntry" />
+
+            <Label Text="Gender" />
+            <Picker x:Name="genderPicker" Title="select your gender" 
+                    SelectedItem="Male" SelectedIndex="1" > 
+                <Picker.Items>
+                    <x:String>Female</x:String>
+                    <x:String>Male</x:String>
+                </Picker.Items>
+            </Picker>
+            <Label Text="Date of birth " />
+            <DatePicker x:Name="dateOfBirthPicker" MinimumDate="1 1 1900" Format="dd MMM yyyy"
+                        MaximumDate="1 1 2020"/>
+
+            
+            <Label Text=" " />
+            <Label Text="Height (kg)" />
+            <Entry x:Name="heightEntry" Keyboard="Numeric" Placeholder="70 " />
+            
+            <Label Text="Weight (cm)" />
+            <Entry x:Name="weightEntry" Keyboard="Numeric" Placeholder="175 " />
+           
+         
+            
+            
+        </StackLayout>
+    </ContentPage.Content>
+<!--    <ContentPage.Content>
+    <TableView Intent="Form">
+        <TableView.Root>
+        <TableRoot>
+             <TableSection Title="Basics" >
+                <EntryCell Label="Email" Placeholder="(eg abc123@456.com)" 
+                           />
+                <EntryCell Label="Password" IsPassword="true"  
+                          />
+                <EntryCell Label="Name" Placeholder="(Bat Man)" 
+                          />
+                <EntryCell Label="Gender" Placeholder="Female" 
+                         />   
+
+               <ViewCell>
+                    <StackLayout Padding="15,0" Orientation="Horizontal" >
+                            <Label Text="Date of birth"  VerticalOptions="CenterAndExpand"
+                                   />
+                            <DatePicker 
+                                        HorizontalOptions="EndAndExpand"
+                                        VerticalOptions="CenterAndExpand"
+                                        MinimumDate="1 1 1900" 
+                                        MaximumDate="1 1 2020"/>
+                    </StackLayout>
+                        
+               </ViewCell>    
+               <EntryCell Label="Height (cm)" Placeholder="(eg 175)" 
+                           Keyboard="Numeric"/>
+               <EntryCell Label="Weight (kg)" Placeholder="(eg 70)" 
+                          Keyboard="Numeric"/>     
+                    
+               <TextCell  BackgroundColor="Red" />
+                    
+            </TableSection>
+        </TableRoot>      
+            </TableView.Root>
+    </TableView>
+    </ContentPage.Content>-->
+</ContentPage>

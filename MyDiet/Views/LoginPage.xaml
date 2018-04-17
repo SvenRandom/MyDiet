@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="MyDiet.Views.LoginPage"
+             Title="Welcome">
+    <ContentPage.Content>
+        <StackLayout Padding="15">
+            <Label Text="Diet Diary for your better life" 
+                       VerticalOptions="Start" HorizontalOptions="Center"
+                   FontSize="22" />
+            <StackLayout VerticalOptions="CenterAndExpand" >                
+                <Label x:Name="messageLabel" BackgroundColor="Red"/>
+                <Label Text="Email" FontSize="18"/>
+                <Entry x:Name="emailEntry" Placeholder="email" />
+                <Label Text="Password" FontSize="18"/>
+                <Entry x:Name="passwordEntry" IsPassword="true" />
+                <Button Text="Log in" Clicked="OnLoginButtonClicked" 
+                        BackgroundColor="{StaticResource Primary}" TextColor="White" />
+                
+                <Grid >
+                    <Button Grid.Row="0" Grid.Column="0" HorizontalOptions="Start" 
+                            VerticalOptions="Center"
+                           Text="Forgot password"   Clicked="OnForgotButtonClicked"/>
+                    <Button Grid.Row="0" Grid.Column="1" HorizontalOptions="End" 
+                            Text="Sign up" Clicked="OnSignUpButtonClicked" />
+                    
+                </Grid>
+
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

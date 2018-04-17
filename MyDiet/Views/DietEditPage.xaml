@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="MyDiet.Views.DietEditPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Comfirm" Clicked="OnComfirmClicked"/>
+    </ContentPage.ToolbarItems>
+       
+   <ContentPage.Content >
+        
+                <StackLayout Padding="15" >
+                    <Label x:Name="message" BackgroundColor="Red" />
+                    <Label Text="Choose a time" />
+                    <StackLayout Orientation="Horizontal" >
+                        <TimePicker Time="{Binding Time}"/>
+                        <DatePicker Date="{Binding Date}" Format="dd MMM yyyy" HorizontalOptions="EndAndExpand"/>
+                    </StackLayout>
+
+                    <Label Text="Description of new meal" /> 
+                    <Editor Text="{Binding Description}" BackgroundColor="Silver" HeightRequest="150"  />
+                    
+                   <Label Text="Calories: " />
+                   <Entry x:Name="calEntry" Text="{Binding Calories}" Keyboard="Numeric" /> 
+
+                    <Label Text="Image" />
+                    <Entry Text="{Binding Image}" Placeholder="take a photo" /> 
+
+
+                </StackLayout>
+     
+    </ContentPage.Content>
+</ContentPage>

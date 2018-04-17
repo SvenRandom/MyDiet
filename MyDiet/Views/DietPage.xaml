@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="MyDiet.Views.DietPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add" Clicked="OnAddClicked"/>
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.Content>
+        <StackLayout>
+        <ListView x:Name="dietRecordListView" HasUnevenRows="true">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                            <StackLayout Padding="15">
+                                <StackLayout Orientation="Horizontal">
+                                    <Label  Text="{Binding Date}" />
+                                    <Label Text="{Binding Calories}" HorizontalOptions="EndAndExpand" />
+                                    <Label Text="cal" HorizontalOptions="End" />
+                                </StackLayout>
+                                <Label Text="{Binding Description}" />
+                                <Label Text="{Binding Image}" />
+                            </StackLayout>
+                            <ViewCell.ContextActions>
+                                <MenuItem Text="Edit" Clicked="Edit_Clicked" CommandParameter="{Binding .}"/>
+                                <MenuItem Text="Delete" Clicked="Delete_Clicked"  IsDestructive="true" CommandParameter="{Binding .}"/>
+                            </ViewCell.ContextActions>
+                    </ViewCell>
+                            
+                </DataTemplate>
+
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <Button Text="add" Clicked="OnAddButtonClickedAsync" />   
+        <!--<Button Text="delete" Clicked="OnDeleteButtonClicked" />-->
+    </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
