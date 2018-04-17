@@ -20,9 +20,7 @@ namespace MyDiet.Views
         async void Handle_Clicked(object sender, System.EventArgs e)
         {
             App.IsUserLoggedIn = false;
-            //Navigation.InsertPageBefore(new LoginPage(), this);
-            //await Navigation.PopAsync();
-            //await Navigation.PushAsync(new LoginPage());
+           
             await Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
         }
 
