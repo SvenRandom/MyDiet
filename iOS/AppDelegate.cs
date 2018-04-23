@@ -19,6 +19,8 @@ namespace MyDiet.iOS
 			Xamarin.Calabash.Start();
 #endif
 
+			ZXing.Net.Mobile.Forms.iOS.Platform.Init();
+
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
