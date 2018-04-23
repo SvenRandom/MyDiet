@@ -9,7 +9,7 @@
    <ContentPage.Content >
         
                 <StackLayout Padding="15" >
-                    <Label x:Name="message" BackgroundColor="Red" />
+                    <Label x:Name="message" />
                     <Label Text="Choose a time" />
                     <StackLayout Orientation="Horizontal" >
                         <TimePicker Time="{Binding Time}"/>

@@ -58,10 +58,11 @@ namespace MyDiet.Views
                 await Navigation.PopToRootAsync();
 
             }
-            else
-                message.Text="please enter description and enter numbers in calories";
-
-
+			else{
+				message.Text = "please enter description and enter numbers in calories";
+				message.BackgroundColor = Color.Red;
+			}
+         
         }
 
 

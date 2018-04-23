@@ -36,10 +36,12 @@ namespace MyDiet
                             Title = "Profile"
                         };
 
-                   
-                    profilePage.Icon = "tab_about.png";
+			if (Device.RuntimePlatform == Device.iOS)
+			{
+				profilePage.Icon = "tab_about.png";
 
-                    homePage.Icon = "tab_feed.png";
+				homePage.Icon = "tab_feed.png";
+			}
 
 
             Children.Add(homePage);

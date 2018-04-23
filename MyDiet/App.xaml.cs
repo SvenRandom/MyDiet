@@ -21,8 +21,8 @@ namespace MyDiet
             //else
                 //DependencyService.Register<CloudDataStore>();
 
-            if (Device.RuntimePlatform == Device.iOS)
-            {
+            //if (Device.RuntimePlatform == Device.iOS)
+            
                 if (!IsUserLoggedIn)
                 {
                     MainPage = new NavigationPage(new LoginPage());
@@ -31,10 +31,9 @@ namespace MyDiet
                 {
                     MainPage = new NavigationPage(new MainPage());
                 }
-            }
+            
 
-            else
-                MainPage = new NavigationPage(new MainPage());
+           
             
             //MainPage = new NavigationPage(new MainPage());
             //MainPage = new RegisterPage();

@@ -53,6 +53,7 @@ namespace MyDiet.Views
             else
             {
                 messageLabel.Text = "Sign up failed! \nPlease enter valid email address and fill all";
+				messageLabel.BackgroundColor = Color.Red;
             }
 
         }

@@ -66,6 +66,7 @@ namespace MyDiet.Views
         }
         void loginFailed(){
             messageLabel.Text = "email not exist or password wrong";
+			messageLabel.BackgroundColor = Color.Red;
             passwordEntry.Text = string.Empty;
         }
 

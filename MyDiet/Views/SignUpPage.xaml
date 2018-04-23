@@ -9,7 +9,7 @@
 
    <ContentPage.Content >
         <StackLayout VerticalOptions="StartAndExpand" Padding="15" >
-            <Label x:Name="messageLabel" BackgroundColor="Red" />
+            <Label x:Name="messageLabel" />
             <Label Text="Email" />
             <Entry x:Name="emailEntry" Keyboard="Email" Placeholder="sign up by email" />
             <Label Text="Password" />

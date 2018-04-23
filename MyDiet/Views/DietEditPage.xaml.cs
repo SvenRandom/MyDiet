@@ -32,11 +32,14 @@ namespace MyDiet.Views
                 await _connection.UpdateAsync(diet);
 
                 await Navigation.PopToRootAsync();
-            }else
-                message.Text = "please enter description and enter numbers in calories";
+			}else{
+				message.BackgroundColor = Color.Red;
+				message.Text = "please enter description and enter numbers in calories";
+			}
+                
            
         }
-
+        
         bool IsAddValid()
         {
 

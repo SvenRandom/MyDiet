@@ -9,7 +9,7 @@
                        VerticalOptions="Start" HorizontalOptions="Center"
                    FontSize="22" />
             <StackLayout VerticalOptions="CenterAndExpand" >                
-                <Label x:Name="messageLabel" BackgroundColor="Red"/>
+                <Label x:Name="messageLabel" />
                 <Label Text="Email" FontSize="18"/>
                 <Entry x:Name="emailEntry" Placeholder="email" />
                 <Label Text="Password" FontSize="18"/>

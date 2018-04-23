@@ -8,21 +8,22 @@
        
    <ContentPage.Content>
         <StackLayout Padding="15" >
-            <Label x:Name="message" BackgroundColor="Red" />
+            <Label x:Name="message" />
             <Label Text="Choose a time" />
             <StackLayout Orientation="Horizontal" >
                 <TimePicker x:Name="timePicker" />
                 <DatePicker x:Name="datePicker" Format="dd MMM yyyy" HorizontalOptions="EndAndExpand"/>
             </StackLayout>
+            <Label Text="Image" />
+            <Entry x:Name="imageEntry" Placeholder="take a photo" /> 
+
+           <Label Text="Calories: " />
+           <Entry x:Name="calEntry" Keyboard="Numeric" Placeholder="(eg 200)" /> 
 
             <Label Text="Description of new meal" /> 
             <Editor Text="text here" x:Name="descriptionEditor" BackgroundColor="Silver" HeightRequest="150"  />
             
-           <Label Text="Calories: " />
-           <Entry x:Name="calEntry" Keyboard="Numeric" Placeholder="(eg 200)" /> 
 
-            <Label Text="Image" />
-            <Entry x:Name="imageEntry" Placeholder="take a photo" /> 
 
 
       </StackLayout>
