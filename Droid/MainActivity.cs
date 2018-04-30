@@ -7,6 +7,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Microsoft.WindowsAzure.MobileServices;
 
 namespace MyDiet.Droid
 {
@@ -23,6 +24,7 @@ namespace MyDiet.Droid
             global::Xamarin.Forms.Forms.Init(this, bundle);
 
 			ZXing.Net.Mobile.Forms.Android.Platform.Init();
+			Microsoft.WindowsAzure.MobileServices.CurrentPlatform.Init();
 
             LoadApplication(new App());
         }

@@ -15,24 +15,23 @@ namespace MyDiet.Views
         {
             InitializeComponent();
 
+
         }
 
-        async void Handle_Clicked(object sender, System.EventArgs e)
+		async void LogOutClicked(object sender, System.EventArgs e)
         {
             App.IsUserLoggedIn = false;
+
            
             await Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
         }
 
-        async void Handle_Clicked_1(object sender, System.EventArgs e)
+		async void DeleteAccountClicked(object sender, System.EventArgs e)
         {
-            _connection = DependencyService.Get<ISQLiteDb>().GetConnection();
-            await _connection.CreateTableAsync<User>();
+            //_connection = DependencyService.Get<ISQLiteDb>().GetConnection();
+            //await _connection.CreateTableAsync<User>();
 
-            await _connection.DeleteAsync(App.user);
-
-
-            App.user = new User();
+            //await _connection.DeleteAsync(App.user);
 
             await Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
         }

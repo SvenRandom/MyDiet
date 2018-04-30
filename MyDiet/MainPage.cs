@@ -8,8 +8,13 @@ namespace MyDiet
     {
         public MainPage()
         {
-            Page homePage, dietPage, medicinePage, activityPage, profilePage = null;
+            Page myDietPage, homePage, dietPage, medicinePage, activityPage, profilePage = null;
+            
 
+			myDietPage = new MyDietPage()
+            {
+                Title = "My Diet"
+            };
 
                         homePage = new HomePage()
                         {
@@ -20,6 +25,7 @@ namespace MyDiet
                         {
                             Title = "Diet"
                         };
+			         
 
                         medicinePage = new MedicinePage()
                         {
@@ -45,8 +51,9 @@ namespace MyDiet
 
 
             Children.Add(homePage);
-            Children.Add(dietPage);
-            Children.Add(medicinePage);
+            //Children.Add(dietPage);
+			Children.Add(myDietPage);
+            //Children.Add(medicinePage);
             Children.Add(activityPage);
             Children.Add(profilePage);
 

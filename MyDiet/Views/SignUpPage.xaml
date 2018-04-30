@@ -8,6 +8,7 @@
     </ContentPage.ToolbarItems>
 
    <ContentPage.Content >
+        <ScrollView>
         <StackLayout VerticalOptions="StartAndExpand" Padding="15" >
             <Label x:Name="messageLabel" />
             <Label Text="Email" />
@@ -31,16 +32,15 @@
 
             
             <Label Text=" " />
-            <Label Text="Height (kg)" />
-            <Entry x:Name="heightEntry" Keyboard="Numeric" Placeholder="70 " />
+            <Label Text="Height (cm)" />
+            <Entry x:Name="heightEntry" Keyboard="Numeric" Placeholder="175 " />
             
-            <Label Text="Weight (cm)" />
-            <Entry x:Name="weightEntry" Keyboard="Numeric" Placeholder="175 " />
+            <Label Text="Weight (kg)" />
+            <Entry x:Name="weightEntry" Keyboard="Numeric" Placeholder="70 " />
            
-         
-            
             
         </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 <!--    <ContentPage.Content>
     <TableView Intent="Form">

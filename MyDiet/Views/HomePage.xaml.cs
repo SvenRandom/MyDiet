@@ -10,7 +10,7 @@ namespace MyDiet.Views
         public HomePage()
         {
             InitializeComponent();
-            currentUser.Text = App.user.Username;
+			currentUser.Text = App.account.Email;
         }
     }
 }

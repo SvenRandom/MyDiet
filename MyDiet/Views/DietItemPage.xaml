@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="MyDiet.Views.DietItemPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Clicked="OnSaveActivated" Text="Done" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+      <ScrollView>
+            <StackLayout Padding="15" >
+                <Label x:Name="message" />
+                <Label Text="Meal time" />
+                <StackLayout Orientation="Horizontal" >
+                    <TimePicker x:Name="timePicker" Time="{Binding Path=Time}"/>
+                    <DatePicker x:Name="datePicker" Date="{Binding Path=Date}" Format="dd MMM yyyy" HorizontalOptions="EndAndExpand"/>
+                </StackLayout>
+          <!--       <StackLayout Orientation="Horizontal">
+                    <Label Text="Images:" VerticalOptions="Center" /> 
+                 <Button Text="Take Photo" Clicked="takePhotoClicked" VerticalOptions="Center" />
+                    <Button Text="Scan Barcode" Clicked="scanClicked" VerticalOptions="End" HorizontalOptions="End"/>
+               </StackLayout>
+
+                <StackLayout Orientation="Horizontal" >
+                    <Image x:Name="image1" HeightRequest="100" WidthRequest="100" />
+                    <Image x:Name="image2" HeightRequest="100" WidthRequest="100" />
+                    <Image x:Name="image3" HeightRequest="100" WidthRequest="100" />
+                </StackLayout>
+                <Label x:Name="bar" />
+-->
+               <Label Text="Calories: " />
+               <Entry x:Name="calEntry" Text="{Binding Path=Calories}" Keyboard="Numeric" Placeholder="(eg 200)" /> 
+
+                <Label Text="Description of new meal" /> 
+                <Editor Text="{Binding Path=Description}" x:Name="descriptionEditor" BackgroundColor="Silver" HeightRequest="150"  />
+                
+
+
+                <Button Text="Delete" Clicked="OnDeleteActivated" />
+                <Button Text="Cancel" Clicked="OnCancelActivated" />
+
+          </StackLayout>
+      </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

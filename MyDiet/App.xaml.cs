@@ -10,7 +10,10 @@ namespace MyDiet
         //public static bool UseMockDataStore = true;
         //public static string BackendUrl = "https://localhost:5000";
         public static bool IsUserLoggedIn { get; set; }
-        public static User user; 
+        public static User user;
+		public static AccountInfo account;
+		//private const string CurrentAccount = "CurrentUSer";
+		//private const string logstate = "IsLoggedIn";
 
         public App()
         {
@@ -35,8 +38,8 @@ namespace MyDiet
 
            
             
-            //MainPage = new NavigationPage(new MainPage());
-            //MainPage = new RegisterPage();
+            //MainPage = new NavigationPage(new MyAzurePage());
+			MainPage = new LoadingPage();
         }
 
         protected override void OnStart()
@@ -56,5 +59,36 @@ namespace MyDiet
             // Handle when your app resumes
            
         }
+
+		//public User CurrentUser
+		//{
+		//	get{
+		//		if (Application.Current.Properties.ContainsKey(CurrentAccount))
+		//			return (User)Application.Current.Properties[CurrentAccount];
+		//		else
+		//			return null;
+		//	}
+		//	set{
+		//		Application.Current.Properties[CurrentAccount] = value;
+
+		//	}
+		//}
+
+		//public bool IsLoggedIn
+    //    {
+    //        get
+    //        {
+				//if (Application.Current.Properties.ContainsKey(logstate))
+				//	return (bool)Application.Current.Properties[logstate];
+    //            else
+				//	return false;
+    //        }
+    //        set
+    //        {
+				//Application.Current.Properties[logstate] = value;
+
+        //    }
+        //}
+
     }
 }

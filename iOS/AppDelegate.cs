@@ -21,6 +21,10 @@ namespace MyDiet.iOS
 
 			ZXing.Net.Mobile.Forms.iOS.Platform.Init();
 
+            //to init Azure mobile client
+			Microsoft.WindowsAzure.MobileServices.CurrentPlatform.Init();
+            //SQLitePCL.CurrentPlatform.Init();
+
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
