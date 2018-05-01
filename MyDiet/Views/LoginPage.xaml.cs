@@ -5,6 +5,7 @@ using MyDiet.Manager;
 using MyDiet.Models;
 using SQLite;
 using Xamarin.Forms;
+using MyDiet.Helpers;
 
 namespace MyDiet.Views
 {
@@ -69,6 +70,8 @@ namespace MyDiet.Views
                     {
 
 						App.account = currentAccount;
+						Settings.LogStateSettings = true;
+						Settings.AccountSettings = currentAccount.Email;
                         Navigation.InsertPageBefore(new MainPage(), this);
                         await Navigation.PopAsync();
                     }

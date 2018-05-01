@@ -4,6 +4,7 @@ using System.Linq;
 using HelloWorld;
 using MyDiet.Manager;
 using MyDiet.Models;
+using MyDiet.Helpers;
 using SQLite;
 using Xamarin.Forms;
 
@@ -65,7 +66,9 @@ namespace MyDiet.Views
 					try{
 					    await accountManager.SaveTaskAsync(account, isNew);
                         //await _connection.InsertAsync(App.user);
-						App.IsUserLoggedIn = true;
+						Settings.LogStateSettings = true;
+						Settings.AccountSettings = account.Email;
+
 						App.account = account;
                         Navigation.InsertPageBefore(new MainPage(), Navigation.NavigationStack.First());
                         await Navigation.PopToRootAsync();

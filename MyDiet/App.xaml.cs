@@ -9,8 +9,7 @@ namespace MyDiet
     {
         //public static bool UseMockDataStore = true;
         //public static string BackendUrl = "https://localhost:5000";
-        public static bool IsUserLoggedIn { get; set; }
-        public static User user;
+        
 		public static AccountInfo account;
 		//private const string CurrentAccount = "CurrentUSer";
 		//private const string logstate = "IsLoggedIn";
@@ -26,14 +25,14 @@ namespace MyDiet
 
             //if (Device.RuntimePlatform == Device.iOS)
             
-                if (!IsUserLoggedIn)
-                {
-                    MainPage = new NavigationPage(new LoginPage());
-                }
-                else
-                {
-                    MainPage = new NavigationPage(new MainPage());
-                }
+                //if (!IsUserLoggedIn)
+                //{
+                //    MainPage = new NavigationPage(new LoginPage());
+                //}
+                //else
+                //{
+                //    MainPage = new NavigationPage(new MainPage());
+                //}
             
 
            

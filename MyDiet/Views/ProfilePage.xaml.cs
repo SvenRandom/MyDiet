@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using HelloWorld;
 using MyDiet.Models;
+using MyDiet.Helpers;
 using SQLite;
 using Xamarin.Forms;
 
@@ -20,9 +21,8 @@ namespace MyDiet.Views
 
 		async void LogOutClicked(object sender, System.EventArgs e)
         {
-            App.IsUserLoggedIn = false;
-
-           
+            
+			Settings.LogStateSettings = false;
             await Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
         }
 
