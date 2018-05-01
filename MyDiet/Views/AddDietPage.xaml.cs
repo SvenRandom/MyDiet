@@ -42,20 +42,20 @@ namespace MyDiet.Views
 
                 await _connection.CreateTableAsync<DietRecord>();
 
-                //var dietRecords = await _connection.Table<DietRecord>().ToListAsync();
-                //_dietRecords = new ObservableCollection<DietRecord>(dietRecords);
+				//var dietRecords = await _connection.Table<DietRecord>().ToListAsync();
+				//_dietRecords = new ObservableCollection<DietRecord>(dietRecords);
 
-                //dietRecordListView.ItemsSource = _dietRecords;
+				//dietRecordListView.ItemsSource = _dietRecords;
 
 
-                var newDiet = new DietRecord
-                {
-                    Description = descriptionEditor.Text,
-                    Calories = Convert.ToInt32(calEntry.Text),
-                    Image = imagesPath[0] + ";" + imagesPath[1] + ";" + imagesPath[2],
-                    Date = datePicker.Date,
-                    Time = timePicker.Time,
-                    UserId = App.user.UserId
+				var newDiet = new DietRecord
+				{
+					Description = descriptionEditor.Text,
+					Calories = Convert.ToInt32(calEntry.Text),
+					Image = imagesPath[0] + ";" + imagesPath[1] + ";" + imagesPath[2],
+					Date = datePicker.Date,
+					Time = timePicker.Time,
+					UserId = App.user.UserId
                 };
 
                 newDiet.SetTime();

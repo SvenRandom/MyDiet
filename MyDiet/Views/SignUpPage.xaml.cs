@@ -33,7 +33,8 @@ namespace MyDiet.Views
                 //_connection = DependencyService.Get<ISQLiteDb>().GetConnection();
 
                 //await _connection.CreateTableAsync<User>();
-
+				signingIndicator.IsRunning = true;
+				signingIndicator.IsVisible = true;
 				account = new AccountInfo
                 {
                     Id = emailEntry.Text,
@@ -67,23 +68,23 @@ namespace MyDiet.Views
 					    await accountManager.SaveTaskAsync(account, isNew);
                         //await _connection.InsertAsync(App.user);
 						Settings.LogStateSettings = true;
-						Settings.AccountSettings = account.Email;
+						Settings.AccountEmail = account.Email;
 
 						App.account = account;
                         Navigation.InsertPageBefore(new MainPage(), Navigation.NavigationStack.First());
                         await Navigation.PopToRootAsync();
 					}
 					catch{
-						messageLabel.Text = "Sign up failed! \nemail address already exist!";
-                        messageLabel.BackgroundColor = Color.Red;
+						SignUpFailed("Sign up failed! \nemail address already exist!");
+                        
 					}
      
                 }
             }
             else
             {
-                messageLabel.Text = "Sign up failed! \nPlease enter valid email address and fill all";
-				messageLabel.BackgroundColor = Color.Red;
+				SignUpFailed("Sign up failed! \nPlease enter valid email address and fill all");
+
             }
 
         }
@@ -99,5 +100,16 @@ namespace MyDiet.Views
                     int.TryParse(heightEntry.Text, out int i) &&
                     int.TryParse(weightEntry.Text, out i));
         }
+
+		void SignUpFailed(string message)
+        {
+			signingIndicator.IsRunning = false;
+			signingIndicator.IsVisible = false;
+            messageLabel.Text = message;
+            messageLabel.BackgroundColor = Color.Red;
+            
+        }
+
+
     }
 }

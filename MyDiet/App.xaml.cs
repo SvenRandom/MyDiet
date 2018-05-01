@@ -8,9 +8,10 @@ namespace MyDiet
     public partial class App : Application
     {
         //public static bool UseMockDataStore = true;
-        //public static string BackendUrl = "https://localhost:5000";
+        //public static string CurrentEmail;
         
 		public static AccountInfo account;
+		public static User user;
 		//private const string CurrentAccount = "CurrentUSer";
 		//private const string logstate = "IsLoggedIn";
 

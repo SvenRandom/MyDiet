@@ -10,7 +10,7 @@ namespace MyDiet.Views
 {
     public partial class ProfilePage : ContentPage
     {
-        private SQLiteAsyncConnection _connection;
+        //private SQLiteAsyncConnection _connection;
 
         public ProfilePage()
         {
@@ -23,6 +23,7 @@ namespace MyDiet.Views
         {
             
 			Settings.LogStateSettings = false;
+			Settings.AccountEmail = String.Empty;
             await Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
         }
 

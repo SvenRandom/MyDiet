@@ -27,7 +27,7 @@ namespace MyDiet.Views
         {
             base.OnAppearing();
            
-			await RefreshItems(true, syncItems: false);
+			//await RefreshItems(true, syncItems: false);//show activity indicator and not sync
             listView.ItemsSource = await dietManager.GetTodoItemsAsync();
 
 

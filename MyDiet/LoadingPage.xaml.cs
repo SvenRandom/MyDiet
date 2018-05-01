@@ -16,7 +16,7 @@ namespace MyDiet
         public LoadingPage()
         {
             InitializeComponent();
-			accountManager = new AccountManager();
+
 			//var app = Application.Current as App;
 			//if (Application.Current.Properties.ContainsKey("log"))
 			//	isLoggedIn.Text = Application.Current.Properties["log"].ToString();
@@ -31,15 +31,24 @@ namespace MyDiet
 
 		async void Handle_Clicked(object sender, System.EventArgs e)
         {
-           
-
+			
+			continueButton.IsVisible = false;
+			loadingIndicator.IsRunning = true;
+			loadingIndicator.IsVisible = true;
 			if (Settings.LogStateSettings)
             {
-				var account = await accountManager.GetAccountInfosAsync(Settings.AccountSettings);
-				App.account = account;
+				try{
+					accountManager = new AccountManager();
+					var account = await accountManager.GetAccountInfosAsync(Settings.AccountEmail);
+                    App.account = account;
+					
+				}catch{
+					await DisplayAlert("Warning", "No Network available", "continue","cancel");
+					continueButton.IsVisible = true;
+				}
 				await Navigation.PushModalAsync(new NavigationPage(new MainPage()));
 
-				//App.account;
+
             }
             else
             {

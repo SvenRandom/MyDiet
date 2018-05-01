@@ -10,6 +10,7 @@
                    FontSize="22" />
             <StackLayout VerticalOptions="CenterAndExpand" >                
                 <Label x:Name="messageLabel" />
+                  <ActivityIndicator IsVisible="False" IsEnabled="True" x:Name="logingIndicator" />
                 <Label Text="Email" FontSize="18"/>
                 <Entry x:Name="emailEntry" Placeholder="email" Keyboard="Email" />
                 <Label Text="Password" FontSize="18"/>

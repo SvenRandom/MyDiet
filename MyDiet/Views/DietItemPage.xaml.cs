@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using MyDiet.Manager;
 using MyDiet.Models;
+using MyDiet.Helpers;
 using Xamarin.Forms;
 
 namespace MyDiet.Views
@@ -26,7 +27,7 @@ namespace MyDiet.Views
                 };
                 dietItemCurrent.Date = DateTime.Now;
                 dietItemCurrent.Time = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, 0);
-				dietItemCurrent.UserId = App.account.Id;
+				dietItemCurrent.UserId = Settings.AccountEmail;
 
 
             }
@@ -45,9 +46,6 @@ namespace MyDiet.Views
 
         async void OnSaveActivated(object sender, EventArgs e)
         {
-			//var dietItem = (DietItem)BindingContext;
-			//dietItem.SetTime();
-			//dietItem.UserId = App.user.UserId.ToString();
 			dietItemCurrent.SetTime();
 			await dietManager.SaveTaskAsync(dietItemCurrent,isNewItem);
             await Navigation.PopAsync();
@@ -55,15 +53,24 @@ namespace MyDiet.Views
 
         async void OnDeleteActivated(object sender, EventArgs e)
         {
-            var dietItem = (DietItem)BindingContext;
-			await dietManager.DeleteTaskAsync(dietItem);
-            await Navigation.PopAsync();
+			var response =await DisplayAlert("Warning", "Are you sure to delete it?", "yes", "no");
+			if(response){
+				await dietManager.DeleteTaskAsync(dietItemCurrent);
+                await Navigation.PopAsync();
+			}
+
         }
 
         async void OnCancelActivated(object sender, EventArgs e)
         {
-            await Navigation.PopAsync();
+			var response =await DisplayAlert("Warning", "Are you sure to cancel?", "yes", "no");
+            if(response){
+				await Navigation.PopAsync();
+            }
+           
         }
+
+       
 
 
     }

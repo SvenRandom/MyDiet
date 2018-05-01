@@ -27,6 +27,8 @@ namespace MyDiet.Views
 
         async void OnLoginButtonClicked(object sender, EventArgs e)
         {
+			logingIndicator.IsRunning = true;
+			logingIndicator.IsVisible = true;
             //get user info from SQlite 
    //         _connection = DependencyService.Get<ISQLiteDb>().GetConnection();
 			//await _connection.CreateTableAsync<AccountInfo>();
@@ -71,44 +73,43 @@ namespace MyDiet.Views
 
 						App.account = currentAccount;
 						Settings.LogStateSettings = true;
-						Settings.AccountSettings = currentAccount.Email;
+						Settings.AccountEmail = currentAccount.Email;
                         Navigation.InsertPageBefore(new MainPage(), this);
                         await Navigation.PopAsync();
                     }
                     else
                     {
-                        loginFailed();
+						loginFailed("email not exist or password wrong");
+
                     }
 
                 }
                 else
                 {
-                    loginFailed();
+					loginFailed("email not exist or password wrong");
+                   
                 }
 
 			}
 			catch{
-				messageLabel.Text = "something wrong";
-                messageLabel.BackgroundColor = Color.Red;
-                passwordEntry.Text = string.Empty;
+				loginFailed("something wrong:like no network available");
 			}
 			      
 
 
         }
-
-        bool AreCredentialsCorrect(User user)
-        {
-            return user.Password == passwordEntry.Text;
-        }
+        
 
 
         void OnForgotButtonClicked(object sender, System.EventArgs e)
         {
 
         }
-        void loginFailed(){
-            messageLabel.Text = "email not exist or password wrong";
+
+        void loginFailed(string message){
+			logingIndicator.IsRunning = false;
+            logingIndicator.IsVisible = false;
+			messageLabel.Text = message;
 			messageLabel.BackgroundColor = Color.Red;
             passwordEntry.Text = string.Empty;
         }

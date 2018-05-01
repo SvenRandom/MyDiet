@@ -47,7 +47,7 @@ namespace MyDiet.Helpers
         #endregion
 
 
-        public static string AccountSettings
+        public static string AccountEmail
         {
             get
             {
