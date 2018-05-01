@@ -29,8 +29,9 @@ namespace MyDiet.Models
 		[JsonProperty(PropertyName = "DateOfBirth")]
         public DateTime DateOfBirth { get; set; }
 
-		[JsonProperty(PropertyName = "IsLoggedIn")]
-		public bool IsLoggedIn { get; set; }
+		[JsonProperty(PropertyName = "typeOfCuisine")]
+		public string typeOfCuisine { get; set; }
+
 
     }
 }

@@ -45,7 +45,7 @@ namespace MyDiet.Views
                     DateOfBirth = dateOfBirthPicker.Date,
                     Height = Convert.ToInt32(heightEntry.Text),
                     Weight = Convert.ToInt32(weightEntry.Text),
-					IsLoggedIn = true
+					typeOfCuisine = typeOfCuisineEntry.Text
 
                 };
                 var rootPage = Navigation.NavigationStack.FirstOrDefault();
@@ -98,7 +98,8 @@ namespace MyDiet.Views
                     emailEntry.Text.Contains("@") &&
                     !string.IsNullOrEmpty(genderPicker.Items[genderPicker.SelectedIndex]) &&
                     int.TryParse(heightEntry.Text, out int i) &&
-                    int.TryParse(weightEntry.Text, out i));
+                    int.TryParse(weightEntry.Text, out i) &&
+			        !string.IsNullOrWhiteSpace(typeOfCuisineEntry.Text));
         }
 
 		void SignUpFailed(string message)

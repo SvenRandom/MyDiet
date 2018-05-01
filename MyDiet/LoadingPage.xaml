@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="MyDiet.LoadingPage">
-    <ContentPage.Content>
-        <StackLayout HorizontalOptions="Center" VerticalOptions="Center" >
-            <ActivityIndicator IsVisible="False" IsEnabled="True" x:Name="loadingIndicator" />
 
-            <Button Text="continue" Clicked="Handle_Clicked" x:Name="continueButton"/>
-        </StackLayout>
-      
-    </ContentPage.Content>
+      <RelativeLayout>
+        <Image x:Name="image" Aspect="Fill" Opacity="0.8"
+                    RelativeLayout.WidthConstraint=
+                      "{ConstraintExpression Type=RelativeToParent, Property=Width}"
+                    RelativeLayout.HeightConstraint=
+                      "{ConstraintExpression Type=RelativeToParent, Property=Height}"/>
+        <Grid RelativeLayout.WidthConstraint=
+                  "{ConstraintExpression Type=RelativeToParent, Property=Width}"
+                RelativeLayout.HeightConstraint=
+                  "{ConstraintExpression Type=RelativeToParent, Property=Height}">
+
+           <ActivityIndicator IsVisible="False" IsEnabled="True" x:Name="loadingIndicator" />
+
+            <Button Text="continue" Clicked="Handle_Clicked" x:Name="continueButton" VerticalOptions="End"/>
+        </Grid>
+      </RelativeLayout>
+
+     
 </ContentPage>
