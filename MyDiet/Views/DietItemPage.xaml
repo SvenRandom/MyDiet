@@ -22,16 +22,16 @@
                </StackLayout>
 
                 <StackLayout Orientation="Horizontal" IsVisible="false" x:Name="imagesStack" >
+                    <Image x:Name="image0" HeightRequest="100" WidthRequest="100"  Focused="Handle_Focused" />
                     <Image x:Name="image1" HeightRequest="100" WidthRequest="100" />
                     <Image x:Name="image2" HeightRequest="100" WidthRequest="100" />
-                    <Image x:Name="image3" HeightRequest="100" WidthRequest="100" />
                 </StackLayout>
                 
                 <Label x:Name="bar" />
                 
                 <StackLayout Orientation="Horizontal" >                     
-                    <Label Text="Calories: (cal)" />
-                    <Button Text="Scan Barcode" Clicked="scanClicked" />
+                    <Label Text="Calories: (cal)" VerticalOptions="Center" />
+                    <Button Text="Scan Barcode" Clicked="scanClicked" VerticalOptions="Center" />
                 </StackLayout>
               
                <Entry x:Name="calEntry" Text="{Binding Path=Calories}" Keyboard="Numeric" Placeholder="(eg 200)" /> 
@@ -40,9 +40,9 @@
                 <Editor Text="{Binding Path=Description}" x:Name="descriptionEditor" BackgroundColor="Silver" HeightRequest="150"  />
                 
 
-
-                <Button Text="Delete" Clicked="OnDeleteActivated" />
-                <Button Text="Cancel" Clicked="OnCancelActivated" />
+                <ActivityIndicator x:Name="activityIndicator" IsRunning="false"/>
+                <Button Text="Delete" Clicked="OnDeleteActivated" x:Name="deleteButton"/>
+                <Button Text="Cancel" Clicked="OnCancelActivated" x:Name="cancelButton"/>
 
           </StackLayout>
       </ScrollView>

@@ -13,5 +13,7 @@ namespace MyDiet.Models
         public static readonly string CollectionName = "TodoItems";
 		public static readonly string CollectionNameDiet = "DietItem";
 		public static string ApplicationURL = @"https://mydietapp.azurewebsites.net";
+		public const string StorageConnection = "DefaultEndpointsProtocol=https;AccountName=mydietstorageforimages;AccountKey=3LRQGh7vafGp0fCwrG1LyKblH85RKgp5axt2Luu55x4T0dB/VnH+nVczoyuIuAZwSVTOv+UBOFWrJUOogVCXKQ==;EndpointSuffix=core.windows.net";
+        
     }
 }

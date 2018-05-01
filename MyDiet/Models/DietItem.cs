@@ -18,8 +18,15 @@ namespace MyDiet.Models
 		[JsonProperty(PropertyName = "Calories")]
         public int Calories { get; set; }
         
-		[JsonProperty(PropertyName = "Image")]
-        public String Image { get; set; }
+		[JsonProperty(PropertyName = "Image0")]
+        public String Image0 { get; set; }
+
+		[JsonProperty(PropertyName = "Image1")]
+        public String Image1 { get; set; }
+
+		[JsonProperty(PropertyName = "Image2")]
+        public String Image2 { get; set; }
+
 
 		[JsonProperty(PropertyName = "Date")]
 		public DateTime Date { get; set; }
