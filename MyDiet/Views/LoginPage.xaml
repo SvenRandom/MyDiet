@@ -12,7 +12,7 @@
                 <Label x:Name="messageLabel" />
                   <ActivityIndicator IsVisible="False" IsEnabled="True" x:Name="logingIndicator" />
                 <Label Text="Email" FontSize="18"/>
-                <Entry x:Name="emailEntry" Placeholder="email" Keyboard="eg abc@123.com" />
+                <Entry x:Name="emailEntry" Placeholder="eg abc@123.com" Keyboard="Email" />
                 <Label Text="Password" FontSize="18"/>
                 <Entry x:Name="passwordEntry" IsPassword="true" />
                 <Button Text="Log in" Clicked="OnLoginButtonClicked" 

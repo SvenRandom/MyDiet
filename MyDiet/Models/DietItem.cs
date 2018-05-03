@@ -18,19 +18,31 @@ namespace MyDiet.Models
 		[JsonProperty(PropertyName = "Calories")]
         public int Calories { get; set; }
         
-		[JsonProperty(PropertyName = "Image0")]
-        public String Image0 { get; set; }
+		[JsonProperty(PropertyName = "Image0UploadId")]
+        public String Image0UploadId { get; set; }
 
-		[JsonProperty(PropertyName = "Image1")]
-        public String Image1 { get; set; }
+		[JsonProperty(PropertyName = "Image1UploadId")]
+		public String Image1UploadId { get; set; }
 
-		[JsonProperty(PropertyName = "Image2")]
-        public String Image2 { get; set; }
+		[JsonProperty(PropertyName = "Image2UploadId")]
+		public String Image2UploadId { get; set; }
 
+		[JsonProperty(PropertyName = "Image0LocalPath")]
+        public String Image0LocalPath { get; set; }
+
+		[JsonProperty(PropertyName = "Image1LocalPath")]
+		public String Image1LocalPath { get; set; }
+
+		[JsonProperty(PropertyName = "Image2LocalPath")]
+		public String Image2LocalPath { get; set; }
 
 		[JsonProperty(PropertyName = "Date")]
 		public DateTime Date { get; set; }
 
+		[JsonProperty(PropertyName = "DateToDisplay")]
+		public string DateToDisplay { get; set; }
+
+		//Date.ToString("yyyy-MM-dd HH:mm dddd")
 		[JsonProperty(PropertyName = "Time")]
 		public TimeSpan Time { get; set; }
         
@@ -41,5 +53,9 @@ namespace MyDiet.Models
             Date = Date.AddMinutes(Time.Minutes);
 
         }
+
+		public void SetDateToDisplay(){
+			DateToDisplay = Date.ToString("HH:mm dd/MMM/yyyy dddd");
+		}
     }
 }

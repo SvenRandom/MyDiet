@@ -8,6 +8,7 @@ using Plugin.Media;
 using ZXing.Mobile;
 using Plugin.Media.Abstractions;
 using System.IO;
+using System.Reflection;
 
 namespace MyDiet.Views
 {
@@ -19,14 +20,17 @@ namespace MyDiet.Views
 		private int numberOfPhoto = 0;
 		private int existPhotos=-1;
 		private bool temp = false;
+		MediaFile file0;
+		MediaFile file1;
+		MediaFile file2;
         private String[] imagesPath = new string[3];
 
 		//List<Stream> listStreams = new List<Stream>();
 		//Stream[] streams = new Stream[3];
 
-		Stream stream0=null;
-		Stream stream1=null;
-		Stream stream2=null;
+		//Stream stream0=null;
+		//Stream stream1=null;
+		//Stream stream2=null;
 
         public DietItemPage(DietItem dietItem)
         {
@@ -43,9 +47,9 @@ namespace MyDiet.Views
                 dietItemCurrent.Date = DateTime.Now;
                 dietItemCurrent.Time = new TimeSpan(DateTime.Now.Hour, DateTime.Now.Minute, 0);
 				dietItemCurrent.UserId = Settings.AccountEmail;
-				dietItemCurrent.Image0 = null;
-				dietItemCurrent.Image1 = null;
-				dietItemCurrent.Image2 = null;
+				dietItemCurrent.Image0LocalPath = null;
+				dietItemCurrent.Image1LocalPath = null;
+				dietItemCurrent.Image2LocalPath = null;
 
 
             }
@@ -55,34 +59,50 @@ namespace MyDiet.Views
                 dietItemCurrent = dietItem;
 	           
             }
+			if (dietItemCurrent.Image0LocalPath != null){
+				imagesStack.IsVisible = true;
 
+			}
+			 
             BindingContext = dietItemCurrent;
 			dietManager = DietManager.DefaultManager;
-
+            
         }
         
-		async protected override void OnAppearing()
+		protected override void OnAppearing()
 		{
 			if (temp)
 			{
-				if (dietItemCurrent.Image0 != null)
+				if (dietItemCurrent.Image0LocalPath != null)
 				{
 					activityIndicator.IsRunning = true;
 					imagesStack.IsVisible = true;
 					numberOfPhoto = 1;
-					var imageData = await AzureStorage.GetFileAsync(ContainerType.Image, dietItemCurrent.Image0);
-					image0.Source = ImageSource.FromStream(() => new MemoryStream(imageData));
+					var fileSoure = ImageSource.FromFile(dietItemCurrent.Image0LocalPath);
 
-					if (dietItemCurrent.Image1 != null)
+						image00.Source = fileSoure;
+
+						//var imageData = await AzureStorage.GetFileAsync(ContainerType.Image, dietItemCurrent.Image0UploadId);
+                        //image00.Source = ImageSource.FromStream(() => new MemoryStream(imageData));
+
+
+					//var imageData = await AzureStorage.GetFileAsync(ContainerType.Image, dietItemCurrent.Image0UploadId);
+					//image0.Source = ImageSource.FromStream(() => new MemoryStream(imageData));
+
+					if (dietItemCurrent.Image1LocalPath != null)
 					{
 						numberOfPhoto = 2;
-						imageData = await AzureStorage.GetFileAsync(ContainerType.Image, dietItemCurrent.Image1);
-						image1.Source = ImageSource.FromStream(() => new MemoryStream(imageData));
-						if (dietItemCurrent.Image2 != null)
+						image11.Source = ImageSource.FromFile(dietItemCurrent.Image1LocalPath);
+						//imageData = await AzureStorage.GetFileAsync(ContainerType.Image, dietItemCurrent.Image1UploadId);
+						//image1.Source = ImageSource.FromStream(() => new MemoryStream(imageData));
+
+						if (dietItemCurrent.Image2LocalPath != null)
 						{
 							numberOfPhoto = 3;
-							imageData = await AzureStorage.GetFileAsync(ContainerType.Image, dietItemCurrent.Image2);
-							image2.Source = ImageSource.FromStream(() => new MemoryStream(imageData));
+							image22.Source = ImageSource.FromFile(dietItemCurrent.Image2LocalPath);
+							//imageData = await AzureStorage.GetFileAsync(ContainerType.Image, dietItemCurrent.Image2UploadId);
+							//image2.Source = ImageSource.FromStream(() => new MemoryStream(imageData));
+
 
 						}
 					}
@@ -98,20 +118,24 @@ namespace MyDiet.Views
 			activityIndicator.IsRunning = true;
 			deleteButton.IsEnabled = false;
             cancelButton.IsEnabled = false;
-
+            
 			//imagesPath[0]=await AzureStorage.UploadFileAsync(ContainerType.Image, stream);
 
-			//if(numberOfPhoto>0 && existPhotos<=0){
-   // 				dietItemCurrent.Image0 = await AzureStorage.UploadFileAsync(ContainerType.Image, stream0);
+			if(numberOfPhoto>0 && existPhotos<=0){
+				dietItemCurrent.Image0UploadId = await AzureStorage.UploadFileAsync(ContainerType.Image, file0.GetStream());
+                
+    			}	
+			if (numberOfPhoto>1&& existPhotos <= 1)
+				dietItemCurrent.Image1UploadId = await AzureStorage.UploadFileAsync(ContainerType.Image, file1.GetStream());
 
-   // 			}	
-			//if (numberOfPhoto>1&& existPhotos <= 1)
-    				
-			//if (numberOfPhoto>2&& existPhotos <= 2)
-    				
-		              
+			if (numberOfPhoto>2&& existPhotos <= 2)
+				dietItemCurrent.Image2UploadId = await AzureStorage.UploadFileAsync(ContainerType.Image, file2.GetStream());
+
+			//var uploadedFilename = await AzureStorage.UploadFileAsync(ContainerType.Image, file1.GetStream());
+			//await DisplayAlert("File ID", uploadedFilename, "OK");
 			dietItemCurrent.SetTime();
-
+			dietItemCurrent.SetDateToDisplay();
+			//file0.Dispose();
 			await dietManager.SaveTaskAsync(dietItemCurrent,isNewItem);
             await Navigation.PopAsync();
         }
@@ -140,7 +164,7 @@ namespace MyDiet.Views
 
         async void takePhotoClicked(object sender, System.EventArgs e)
         {
-            if (numberOfPhoto == 3)
+            if (numberOfPhoto >= 3)
             {
                 await DisplayAlert("Notice!", ":( at most three photos.", "OK");
                 return;
@@ -175,7 +199,7 @@ namespace MyDiet.Views
 
 		async void pickPhotoClicked(object sender, System.EventArgs e)
         {
-            if (numberOfPhoto == 3)
+            if (numberOfPhoto >= 3)
             {
                 await DisplayAlert("Notice!", ":( at most three photos.", "OK");
                 return;
@@ -188,9 +212,12 @@ namespace MyDiet.Views
                 return;
             }
             var photos = await CrossMedia.Current.PickPhotoAsync(new Plugin.Media.Abstractions.PickMediaOptions
-            {
+			{
+				PhotoSize = PhotoSize.Small,
+                CompressionQuality = 92,
                 
             });
+			//image.Source = ImageSource.FromFile(photos.Path);
 			if (photos == null)
 				return;
 			SetStream(photos);
@@ -224,50 +251,66 @@ namespace MyDiet.Views
             {
                 bar.Text = "no result";
             }
-
+             
 
         }
 
-		async public void SetStream(MediaFile file){
+		public void SetStream(MediaFile file){
 			activityIndicator.IsRunning = true;
             deleteButton.IsEnabled = false;
             cancelButton.IsEnabled = false;
 			imagesStack.IsVisible = true;
+
 			switch (numberOfPhoto)
             {
                 case 0:
-                    image0.Source = ImageSource.FromStream(() =>
-                    {                  
-						return file.GetStream();
-                    });
-					stream0 = file.GetStream();
-					dietItemCurrent.Image0 = await AzureStorage.UploadFileAsync(ContainerType.Image, stream0);
-					file.Dispose();
+					file0 = file;
+      //              image0.Source = ImageSource.FromStream(() =>
+      //              {                  
+						//var stream = file.GetStream();
+                    //    //file.Dispose();
+                    //    return stream;
+                    //});
+					image00.Source = ImageSource.FromFile(file.Path);
+					dietItemCurrent.Image0LocalPath = file.Path;
+					//stream0 = file.GetStream();
+					//dietItemCurrent.Image0 = await AzureStorage.UploadFileAsync(ContainerType.Image, stream0);
+
                     break;
                 case 1:
-                    image1.Source = ImageSource.FromStream(() =>
-                    {
-                       
-						return file.GetStream();;
-                    });
-					stream1 = file.GetStream();
-					dietItemCurrent.Image1 = await AzureStorage.UploadFileAsync(ContainerType.Image, stream1);
-					file.Dispose();
+					file1 = file;
+      //              image1.Source = ImageSource.FromStream(() =>
+      //              {   
+						//var stream = file.GetStream();
+                    //    //file.Dispose();
+                    //    return stream;
+                    //});
+					dietItemCurrent.Image1LocalPath = file.Path;
+					image11.Source = ImageSource.FromFile(file.Path);
+					//stream1 = file.GetStream();
+					//dietItemCurrent.Image1 = await AzureStorage.UploadFileAsync(ContainerType.Image, stream1);
+                    
                     break;
                 case 2:
-                    image2.Source = ImageSource.FromStream(() =>
-                    {
-                        
-						return file.GetStream();
-                    });
-					stream2 = file.GetStream();
-					dietItemCurrent.Image2 = await AzureStorage.UploadFileAsync(ContainerType.Image, stream2);
-					file.Dispose();
+					file2 = file;
+     //               image2.Source = ImageSource.FromStream(() =>
+					//{   
+						//var stream = file.GetStream();
+                    //    //file.Dispose();
+                    //    return stream;
+                    //});
+					dietItemCurrent.Image2LocalPath = file.Path;
+					image22.Source = ImageSource.FromFile(file.Path);
+					//stream2 = file.GetStream();
+					//dietItemCurrent.Image2 = await AzureStorage.UploadFileAsync(ContainerType.Image, stream2);
+
+					               
                     break;
                 default:
 
                     break;
             }
+
             numberOfPhoto++;
 			bar.Text = numberOfPhoto.ToString();
 			activityIndicator.IsRunning = false;

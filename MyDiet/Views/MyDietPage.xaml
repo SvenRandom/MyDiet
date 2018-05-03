@@ -11,9 +11,9 @@
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
-                    <StackLayout Padding="15">
+                    <StackLayout Padding="10">
                          <StackLayout Orientation="Horizontal">
-                                        <Label  Text="{Binding Date}" />
+                                        <Label   Text="{Binding DateToDisplay}" />
 
                                         <Label Text="{Binding Calories}" HorizontalOptions="EndAndExpand" />
                                         <Label Text="cal" HorizontalOptions="End" />
