@@ -10,11 +10,13 @@ namespace MyDiet.Views
 {
     public partial class ProfilePage : ContentPage
     {
+		
+
         //private SQLiteAsyncConnection _connection;
 
         public ProfilePage()
         {
-            InitializeComponent();
+			InitializeComponent();
 
 
         }
@@ -27,14 +29,18 @@ namespace MyDiet.Views
             await Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
         }
 
-		async void DeleteAccountClicked(object sender, System.EventArgs e)
+		async void OnModifyTapped(object sender, System.EventArgs e)
         {
-            //_connection = DependencyService.Get<ISQLiteDb>().GetConnection();
-            //await _connection.CreateTableAsync<User>();
-
-            //await _connection.DeleteAsync(App.user);
-
-            await Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
+		         
+			await Navigation.PushAsync(new ModifyPersonalInfoPage());
         }
+
+		async void OnPasswordTapped(object sender, System.EventArgs e)
+        {
+			await Navigation.PushAsync(new ChangePasswordPage());
+        }
+
+
+
     }
 }

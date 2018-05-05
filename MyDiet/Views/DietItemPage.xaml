@@ -26,6 +26,7 @@
                     <Image x:Name="image11" HeightRequest="110" WidthRequest="110" />
                     <Image x:Name="image22" HeightRequest="110" WidthRequest="110" />
                 </StackLayout>
+
                 <Label x:Name="bar" />
 
                 <StackLayout Orientation="Horizontal" >                     

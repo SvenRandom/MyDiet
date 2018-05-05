@@ -38,7 +38,7 @@
             
             <Label Text="Weight (kg)" />
             <Entry x:Name="weightEntry" Keyboard="Numeric" Placeholder="eg 70 " />
-           <Label Text="type of cuisine eaten at home" />
+           <Label Text="Type of cuisine eaten at home" />
                 <Entry x:Name="typeOfCuisineEntry" Placeholder="eg Chinese food" />
             
         </StackLayout>

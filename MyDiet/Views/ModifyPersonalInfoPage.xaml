@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="MyDiet.Views.ModifyPersonalInfoPage">
+     <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Done" Clicked="OnDoneClicked" />
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.Content>
+        <StackLayout >
+            <ActivityIndicator IsVisible="False" IsEnabled="True" x:Name="activityIndicator" />
+            <TableView Intent="Form" >
+                <TableRoot>
+                    <TableSection Title="Your Personal Inforamtion:" >
+                        <TextCell  x:Name="nameCell"/>
+                        <TextCell x:Name="sexCell" Text="Sex: "/>
+                        <TextCell x:Name="birthCell" Text="Date of birth: " />
+                        <EntryCell x:Name="heightEntry" Label="Height (cm): " Keyboard="Numeric" />
+                        <EntryCell x:Name="weightEntry" Label="Weight (kg): " Keyboard="Numeric" />
+                        <EntryCell x:Name="cuisineEntry" Label="Type Of Cuisine: " />
+                      
+                        
+                    </TableSection>
+                    
+                </TableRoot>
+            </TableView>
+
+           
+        </StackLayout>
+    </ContentPage.Content>
+    
+</ContentPage>

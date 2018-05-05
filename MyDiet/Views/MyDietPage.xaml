@@ -18,9 +18,13 @@
                                         <Label Text="{Binding Calories}" HorizontalOptions="EndAndExpand" />
                                         <Label Text="cal" HorizontalOptions="End" />
                         </StackLayout>
+                        <StackLayout Orientation="Horizontal"> 
+                            <!--<Image0 Source="{Binding Path=image0LocalPath}" />-->
+                        </StackLayout>    
 
-                         <Label Text="{Binding Description}" />
-                         <Label Text="{Binding Image}" />
+                            
+                        <Label Text="{Binding Description}" />
+
                          
                     </StackLayout>
                 </ViewCell>

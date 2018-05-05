@@ -45,7 +45,7 @@ namespace MyDiet.Views
                     DateOfBirth = dateOfBirthPicker.Date,
                     Height = Convert.ToInt32(heightEntry.Text),
                     Weight = Convert.ToInt32(weightEntry.Text),
-					typeOfCuisine = typeOfCuisineEntry.Text
+					TypeOfCuisine = typeOfCuisineEntry.Text
 
                 };
                 var rootPage = Navigation.NavigationStack.FirstOrDefault();

@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="MyDiet.LoadingPage">
 
       <RelativeLayout>
-        <Image x:Name="image" Aspect="Fill" Opacity="0.8"
+        <Image x:Name="image" Aspect="Fill" Opacity="0.9"
                     RelativeLayout.WidthConstraint=
                       "{ConstraintExpression Type=RelativeToParent, Property=Width}"
                     RelativeLayout.HeightConstraint=
@@ -12,9 +12,14 @@
                 RelativeLayout.HeightConstraint=
                   "{ConstraintExpression Type=RelativeToParent, Property=Height}">
 
-           <ActivityIndicator IsVisible="False" IsEnabled="True" x:Name="loadingIndicator" />
+            <!--<Label Text="Checking account state"  
+            HorizontalOptions="Center" VerticalOptions="Center"/>-->
+           <ActivityIndicator IsEnabled="True" IsVisible="false" x:Name="loadingIndicator" />
 
-            <Button Text="continue" Clicked="Handle_Clicked" x:Name="continueButton" VerticalOptions="End"/>
+          <Button Text="continue" 
+            Clicked="Handle_Clicked" 
+            x:Name="continueButton" 
+            VerticalOptions="End"/>
         </Grid>
       </RelativeLayout>
 

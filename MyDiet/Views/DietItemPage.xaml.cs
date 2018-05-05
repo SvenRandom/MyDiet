@@ -178,11 +178,15 @@ namespace MyDiet.Views
             }
 
 
-            var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
-            {
-				PhotoSize = PhotoSize.Small,
-				CompressionQuality = 92,
+			var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
+			{
+				
 				SaveToAlbum = true,
+				PhotoSize = PhotoSize.Small,
+                CompressionQuality = 92,
+                
+				AllowCropping = true,
+
                
 
             });

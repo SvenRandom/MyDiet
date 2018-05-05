@@ -1,14 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="MyDiet.Views.ProfilePage">
+<ContentPage 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:local="clr-namespace:MyDiet"
+    x:Class="MyDiet.Views.ProfilePage">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Log out" Clicked="LogOutClicked" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <StackLayout VerticalOptions="End">
-            <Label x:Name="isLoggedIn" />
-            <Button x:Name="deleteUser" Text="delete this account" 
-                    BackgroundColor="{StaticResource Primary}" TextColor="White" 
-                    Clicked="DeleteAccountClicked" HorizontalOptions="Center" VerticalOptions="End"/>
+        <StackLayout >
+            <TableView Intent="Menu">
+                <TableRoot>
+                    <TableSection >
+                        <ViewCell Tapped="OnModifyTapped" >
+                            <StackLayout Orientation="Horizontal" VerticalOptions="Center" Padding="15,0,15,0">
+                               <!--<StackLayout.GestureRecognizers>
+                                   <TapGestureRecognizer
+                                        Tapped="OnModifyTapped" />
+                               </StackLayout.GestureRecognizers>-->
+                               <Image Source="{local:EmbeddedImage MyDiet.Images.tab_info70.png}" HorizontalOptions="Start"
+                                      Aspect="AspectFit" />
+                               <Label Text="Modify personal information" VerticalOptions="Center" />
+                              
+                               <Label Text=">" HorizontalOptions="EndAndExpand" VerticalOptions="Center" />
+                            </StackLayout>
+                        </ViewCell>
+
+                        <ViewCell Tapped="OnPasswordTapped">
+                            <StackLayout Orientation="Horizontal" VerticalOptions="Center" Padding="15,0,15,0">
+                              <!-- <StackLayout.GestureRecognizers>
+                                   <TapGestureRecognizer
+                                        Tapped="OnPasswordTapped" />
+                               </StackLayout.GestureRecognizers>-->
+                               <Image Source="{local:EmbeddedImage MyDiet.Images.tab_password70.png}" HorizontalOptions="Start"/>
+                               <Label Text="Change password" VerticalOptions="Center" />
+
+                               <Label Text=">" HorizontalOptions="EndAndExpand" VerticalOptions="Center" />
+                            </StackLayout>
+                        </ViewCell>
+                        
+                    </TableSection>
+                    
+                </TableRoot>
+            </TableView>
+
+
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

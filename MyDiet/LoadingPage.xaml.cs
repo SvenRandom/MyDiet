@@ -25,6 +25,7 @@ namespace MyDiet
 			//	//isLoggedIn.Text = Application.Current.Properties["log"].ToString();
 
 			//}
+
 				
 				
         }
