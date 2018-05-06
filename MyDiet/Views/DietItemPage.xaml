@@ -6,45 +6,96 @@
         <ToolbarItem Clicked="OnSaveActivated" Text="Done" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-      <ScrollView>
-            <StackLayout Padding="15" >
-                <Label x:Name="message" />
-                <Label Text="Meal time" />
+      
+       <StackLayout> 
+          <ScrollView>
+            <StackLayout Padding="15" x:Name="oStackLayout" IsVisible="true">
+               
+                <Label Text="Meal time" FontSize="Large" />
                 <StackLayout Orientation="Horizontal" >
                     <TimePicker x:Name="timePicker" Time="{Binding Path=Time}"/>
                     <DatePicker x:Name="datePicker" Date="{Binding Path=Date}" Format="dd MMM yyyy" />
                 </StackLayout>
-                 <StackLayout Orientation="Horizontal">
-                    <Label Text="Images:" VerticalOptions="Center" /> 
-                    <Button Text="Take Photo" Clicked="takePhotoClicked" VerticalOptions="Center" />
-                    <Button Text="Pick Photo" Clicked="pickPhotoClicked" VerticalOptions="Center" />
+                    
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Images:" VerticalOptions="Center" FontSize="Large"/> 
+                    <Button Text="Add Photo" Clicked="AddPhotoClicked" VerticalOptions="Center" />
+                   
 
                </StackLayout>
 
                 <StackLayout Orientation="Horizontal" IsVisible="false" x:Name="imagesStack" >
-                    <Image x:Name="image00" HeightRequest="110" WidthRequest="110" />
-                    <Image x:Name="image11" HeightRequest="110" WidthRequest="110" />
-                    <Image x:Name="image22" HeightRequest="110" WidthRequest="110" />
+                    <Image x:Name="image00" HeightRequest="110" WidthRequest="110" >
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer
+                                       Tapped="OnImage00Tapped"  />
+                        </Image.GestureRecognizers>
+                    </Image>    
+                    <Image x:Name="image11" HeightRequest="110" WidthRequest="110" >
+                       <Image.GestureRecognizers>
+                            <TapGestureRecognizer
+                                        Tapped="OnImage11Tapped" />
+                       </Image.GestureRecognizers>
+                    </Image>    
+                    <Image x:Name="image22" HeightRequest="110" WidthRequest="110" >
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer
+                                        Tapped="OnImage22Tapped" />
+                       </Image.GestureRecognizers>
+                    </Image>    
                 </StackLayout>
 
                 <Label x:Name="bar" />
 
                 <StackLayout Orientation="Horizontal" >                     
-                    <Label Text="Calories: (cal)" VerticalOptions="Center" />
+                    <Label Text="Calories: (cal)" VerticalOptions="Center" FontSize="Large"/>
+                        
                     <Button Text="Scan Barcode" Clicked="scanClicked" VerticalOptions="Center" />
                 </StackLayout>
               
-               <Entry x:Name="calEntry" Text="{Binding Path=Calories}" Keyboard="Numeric" Placeholder="(eg 200)" /> 
+                <Entry x:Name="calEntry" Text="{Binding Path=Calories}" Keyboard="Numeric" Placeholder="(eg 200)" /> 
 
-                <Label Text="Description of new meal" /> 
+                <Label Text="Description of new meal" FontSize="Large"/> 
                 <Editor Text="{Binding Path=Description}" x:Name="descriptionEditor" BackgroundColor="Silver" HeightRequest="150"  />
                 
 
                 <ActivityIndicator x:Name="activityIndicator" IsRunning="false"/>
-                <Button Text="Delete" Clicked="OnDeleteActivated" x:Name="deleteButton"/>
+               <Button Text="Delete" Clicked="OnDeleteActivated" />
                 <Button Text="Cancel" Clicked="OnCancelActivated" x:Name="cancelButton"/>
 
+            </StackLayout>
+          </ScrollView>
+          <StackLayout x:Name="image00StackLayout" IsVisible="false" VerticalOptions="StartAndExpand" >
+                <Image x:Name="image00Display" Aspect="AspectFit" VerticalOptions="StartAndExpand" />
+                <StackLayout Padding="15" VerticalOptions="EndAndExpand" Orientation="Horizontal" >
+                    <Button Text="Comfirm" Clicked="OnImage00ComfirmClicked" 
+                            HorizontalOptions="StartAndExpand" />
+                    <Button Text="Delete" Clicked="OnImage00DeleteClicked" 
+                            HorizontalOptions="EndAndExpand" x:Name="delete00" />
+                </StackLayout>
           </StackLayout>
-      </ScrollView>
+
+          <StackLayout x:Name="image11StackLayout" IsVisible="false" VerticalOptions="StartAndExpand" >
+                <Image x:Name="image11Display" Aspect="AspectFit" VerticalOptions="StartAndExpand"/>
+                <StackLayout Padding="15" VerticalOptions="EndAndExpand" Orientation="Horizontal" >
+                    <Button Text="Comfirm" Clicked="OnImage11ComfirmClicked" 
+                            HorizontalOptions="StartAndExpand" />
+                    <Button Text="Delete" Clicked="OnImage11DeleteClicked" 
+                            HorizontalOptions="EndAndExpand" x:Name="delete11" />
+                </StackLayout>
+          </StackLayout>
+
+          <StackLayout x:Name="image22StackLayout" IsVisible="false" VerticalOptions="StartAndExpand" >
+                <Image x:Name="image22Display" Aspect="AspectFit" VerticalOptions="StartAndExpand" />
+                <StackLayout Padding="15" VerticalOptions="EndAndExpand" Orientation="Horizontal" >
+                    <Button Text="Comfirm" Clicked="OnImage22ComfirmClicked" 
+                            HorizontalOptions="StartAndExpand" />
+                    <Button Text="Delete" Clicked="OnImage22DeleteClicked" 
+                            HorizontalOptions="EndAndExpand" x:Name="delete22" />
+                </StackLayout>
+          </StackLayout>  
+
+       </StackLayout>        
+     
     </ContentPage.Content>
 </ContentPage>

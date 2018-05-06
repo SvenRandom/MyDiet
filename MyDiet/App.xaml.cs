@@ -12,6 +12,7 @@ namespace MyDiet
         
 		public static AccountInfo account;
 		public static User user;
+		public static string barcode = null;
 		//private const string CurrentAccount = "CurrentUSer";
 		//private const string logstate = "IsLoggedIn";
 
