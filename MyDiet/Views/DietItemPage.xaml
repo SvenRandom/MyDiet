@@ -52,7 +52,15 @@
                         
                     <Button Text="Scan Barcode" Clicked="scanClicked" VerticalOptions="Center" />
                 </StackLayout>
-              
+
+               <!-- <ListView x:Name="postsListView">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <TextCell Text="{Binding Title}" />
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>-->
+                    
                 <Entry x:Name="calEntry" Text="{Binding Path=Calories}" Keyboard="Numeric" Placeholder="(eg 200)" /> 
 
                 <Label Text="Description of new meal" FontSize="Large"/> 

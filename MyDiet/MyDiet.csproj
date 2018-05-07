@@ -147,6 +147,7 @@
     <Compile Include="Views\ChangePasswordPage.xaml.cs">
       <DependentUpon>ChangePasswordPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\BarcodeItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\" />
@@ -247,6 +248,12 @@
     </Reference>
     <Reference Include="Xamarin.Forms.Xaml">
       <HintPath>..\packages\Xamarin.Forms.2.5.1.527436\lib\portable-win+net45+wp80+win81+wpa81\Xamarin.Forms.Xaml.dll</HintPath>
+    </Reference>
+    <Reference Include="FubarCoder.RestSharp.Portable.Core">
+      <HintPath>..\packages\FubarCoder.RestSharp.Portable.Core.4.0.8\lib\portable45-net45+win8+wp8+wpa81\FubarCoder.RestSharp.Portable.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="FubarCoder.RestSharp.Portable.HttpClient">
+      <HintPath>..\packages\FubarCoder.RestSharp.Portable.HttpClient.4.0.8\lib\portable45-net45+win8+wp8+wpa81\FubarCoder.RestSharp.Portable.HttpClient.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

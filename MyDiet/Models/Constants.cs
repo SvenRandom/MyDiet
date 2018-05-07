@@ -14,6 +14,9 @@ namespace MyDiet.Models
 		public static readonly string CollectionNameDiet = "DietItem";
 		public static string ApplicationURL = @"https://mydietapp.azurewebsites.net";
 		public const string StorageConnection = "DefaultEndpointsProtocol=https;AccountName=mydietstorageforimages;AccountKey=3LRQGh7vafGp0fCwrG1LyKblH85RKgp5axt2Luu55x4T0dB/VnH+nVczoyuIuAZwSVTOv+UBOFWrJUOogVCXKQ==;EndpointSuffix=core.windows.net";
-        
+
+		public static readonly string BarcodeEndpointUri = "http://supermarketownbrandguide.co.uk/api/newfeed.php";
+
+		public static readonly string APIKey ="H64a7BuVGPWfwzGCJvGr";
     }
 }

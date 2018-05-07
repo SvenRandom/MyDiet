@@ -199,6 +199,13 @@
       <HintPath>..\packages\WindowsAzure.Storage.9.1.1\lib\netstandard1.3\Microsoft.WindowsAzure.Storage.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="FubarCoder.RestSharp.Portable.Core">
+      <HintPath>..\packages\FubarCoder.RestSharp.Portable.Core.4.0.8\lib\monoandroid10\FubarCoder.RestSharp.Portable.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="FubarCoder.RestSharp.Portable.HttpClient">
+      <HintPath>..\packages\FubarCoder.RestSharp.Portable.HttpClient.4.0.8\lib\monoandroid10\FubarCoder.RestSharp.Portable.HttpClient.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyDiet\MyDiet.csproj">

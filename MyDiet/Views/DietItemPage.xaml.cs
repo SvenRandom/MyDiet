@@ -10,6 +10,12 @@ using Plugin.Media.Abstractions;
 using System.IO;
 using System.Reflection;
 using ZXing.Net.Mobile.Forms;
+using System.Net.Http;
+using Newtonsoft.Json;
+using System.Collections.ObjectModel;
+
+using RestSharp.Portable;
+using RestSharp.Portable.HttpClient;
 
 namespace MyDiet.Views
 {
@@ -228,16 +234,55 @@ namespace MyDiet.Views
                 {
                     var result = App.barcode;
                     bar.Text = result;
-                    App.barcode = null;
+					SearchBarcodeAsync();
                     return false;
                 }
             });
+
          
-        
 
         }
 
+		async void SearchBarcodeAsync()
+		{
 
+           
+			var client = new RestClient("https://api.upcitemdb.com/prod/trial/");
+            // lookup request with GET
+			RestSharp.Portable.IRestRequest request = new RestRequest("lookup", Method.GET);
+            
+            
+			request.AddQueryParameter("upc", App.barcode);
+			//var response = await client.Execute(request);
+			var response =await client.Execute(request);
+			System.Diagnostics.Debug.WriteLine("response: " + response.Content);
+            // parsing json
+			var obj = JsonConvert.DeserializeObject<BarcodeItem>(response.Content);
+			System.Diagnostics.Debug.WriteLine("obj: " + obj.ToString());
+			System.Diagnostics.Debug.WriteLine("obj total: " + obj.total);
+     //**********************************       
+			//HttpClient _client = new HttpClient();
+   //         string quary = Constants.BarcodeEndpointUri + "?json=barcode&q={" + App.barcode + "}&apikey={" + Constants.APIKey + "}";
+
+
+			//var response = await _client.GetAsync(quary);
+			////var posts = JsonConvert.DeserializeObject<List<BarcodeItem>>(content);
+			//if (response.IsSuccessStatusCode)
+    //        {
+    //            var content = await response.Content.ReadAsStringAsync();
+				//var Items = JsonConvert.DeserializeObject(content);
+				//System.Diagnostics.Debug.WriteLine("response:"+Items.ToString());
+				//System.Diagnostics.Debug.WriteLine(content);
+
+            //    await DisplayAlert("barcode item title", content.Length.ToString(), "sure");
+            //}
+			//var posts = JsonConvert.DeserializeObject<BarcodeItem>(content);
+
+
+
+            App.barcode = null;
+
+		}
 
         void OnImage00Tapped(object sender, System.EventArgs e)
         {
