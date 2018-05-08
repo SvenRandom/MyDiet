@@ -206,6 +206,18 @@
     <Reference Include="FubarCoder.RestSharp.Portable.HttpClient">
       <HintPath>..\packages\FubarCoder.RestSharp.Portable.HttpClient.4.0.8\lib\monoandroid10\FubarCoder.RestSharp.Portable.HttpClient.dll</HintPath>
     </Reference>
+    <Reference Include="SkiaSharp.Views.Android">
+      <HintPath>..\packages\SkiaSharp.Views.1.59.1.1\lib\MonoAndroid\SkiaSharp.Views.Android.dll</HintPath>
+    </Reference>
+    <Reference Include="SkiaSharp.Views.Forms">
+      <HintPath>..\packages\SkiaSharp.Views.Forms.1.59.1.1\lib\MonoAndroid\SkiaSharp.Views.Forms.dll</HintPath>
+    </Reference>
+    <Reference Include="SkiaSharp">
+      <HintPath>..\packages\SkiaSharp.1.60.0\lib\MonoAndroid\SkiaSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microcharts.Forms">
+      <HintPath>..\packages\Microcharts.Forms.0.6.2\lib\portable-net45+win8+wpa81+wp8\Microcharts.Forms.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyDiet\MyDiet.csproj">
