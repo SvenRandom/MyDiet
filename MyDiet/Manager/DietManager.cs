@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 
 
 #if OFFLINE_SYNC_ENABLED
@@ -66,8 +67,9 @@ namespace MyDiet.Manager
         {
 			get { return dietTable is Microsoft.WindowsAzure.MobileServices.Sync.IMobileServiceSyncTable<DietItem>; }
         }
+  
 
-		public async Task<ObservableCollection<DietItem>> GetTodoItemsAsync(bool syncItems = false)
+		public async Task<ObservableCollection<DietItem>> GetHistoryAsync(bool syncItems = false)
         {
             try
             {
@@ -77,11 +79,11 @@ namespace MyDiet.Manager
                     await this.SyncAsync();
                 }
 #endif
-				IEnumerable<DietItem> items = await dietTable
-					.Where(dietItem => dietItem.UserId==App.account.Id)
+                IEnumerable<DietItem> items = await dietTable
+                    .Where(dietItem => dietItem.UserId == App.account.Id)
                     .ToEnumerableAsync();
 
-				return new ObservableCollection<DietItem>(items);
+                return new ObservableCollection<DietItem>(items);
             }
             catch (MobileServiceInvalidOperationException msioe)
             {
@@ -100,10 +102,12 @@ namespace MyDiet.Manager
 				if (isNew == true)
                 {
                     await dietTable.InsertAsync(item);
+
                 }
                 else
                 {
                     await dietTable.UpdateAsync(item);
+
                 }
 			}
 			catch (Exception ex)
@@ -137,7 +141,7 @@ namespace MyDiet.Manager
 				await this.dietTable.PullAsync(
                     //The first parameter is a query name that is used internally by the client SDK to implement incremental sync.
                     //Use a different query name for each unique query in your program
-                    "allTodoItems",
+                    "allDietItems",
 					this.dietTable.CreateQuery());
             }
             catch (MobileServicePushFailedException exc)
@@ -154,21 +158,42 @@ namespace MyDiet.Manager
             {
                 foreach (var error in syncErrors)
                 {
-                    if (error.OperationKind == MobileServiceTableOperationKind.Update && error.Result != null)
-                    {
-                        //Update failed, reverting to server's copy.
-                        await error.CancelAndUpdateItemAsync(error.Result);
-                    }
-                    else
-                    {
-                        // Discard local change.
-                        await error.CancelAndDiscardItemAsync();
-                    }
+					await ResolveConflictAsync(error);
+					Debug.WriteLine("confilct here.");
+      //              if (error.OperationKind == MobileServiceTableOperationKind.Update && error.Result != null)
+      //              {
+      //                  //Update failed, reverting to server's copy.
+      //                 await error.CancelAndUpdateItemAsync(error.Result);
+						//Debug.WriteLine("Update failed, reverting to server's copy.");
+      //              }
+      //              else
+      //              {
+						//// Discard local change.
+						//await error.CancelAndDiscardItemAsync();
+						//Debug.WriteLine("Discard local change.");
+                    //}
 
-                    Debug.WriteLine(@"Error executing sync operation. Item: {0} ({1}). Operation discarded.", error.TableName, error.Item["id"]);
+                    //Debug.WriteLine(@"Error executing sync operation. Item: {0} ({1}). Operation discarded.", error.TableName, error.Item["id"]);
                 }
             }
         }
+
+		public async Task ResolveConflictAsync(MobileServiceTableOperationError error)
+        {
+			var serverItem = error.Result.ToObject<DietItem>();
+			var localItem = error.Item.ToObject<DietItem>();
+
+            // Note that you need to implement the public override Equals(TodoItem item)
+            // method in the Model for this to work         
+            // Client Always Wins
+            localItem.Version = serverItem.Version;
+            await error.UpdateOperationAsync(JObject.FromObject(localItem));
+			Debug.WriteLine("update here");
+
+            // Server Always Wins
+            // await error.CancelAndDiscardItemAsync();
+        }
+
 #endif
   
 

@@ -10,7 +10,7 @@
        <StackLayout> 
           <ScrollView>
             <StackLayout Padding="15" x:Name="oStackLayout" IsVisible="true">
-               
+               <ActivityIndicator x:Name="activityIndicator" IsRunning="false"/>
                 <Label Text="Meal time" FontSize="Large" />
                 <StackLayout Orientation="Horizontal" >
                     <TimePicker x:Name="timePicker" Time="{Binding Path=Time}"/>
@@ -25,19 +25,19 @@
                </StackLayout>
 
                 <StackLayout Orientation="Horizontal" IsVisible="false" x:Name="imagesStack" >
-                    <Image x:Name="image00" HeightRequest="110" WidthRequest="110" >
+                    <Image x:Name="image00" HeightRequest="110" WidthRequest="110" IsVisible="false" >
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer
                                        Tapped="OnImage00Tapped"  />
                         </Image.GestureRecognizers>
                     </Image>    
-                    <Image x:Name="image11" HeightRequest="110" WidthRequest="110" >
+                    <Image x:Name="image11" HeightRequest="110" WidthRequest="110" IsVisible="false" >
                        <Image.GestureRecognizers>
                             <TapGestureRecognizer
                                         Tapped="OnImage11Tapped" />
                        </Image.GestureRecognizers>
                     </Image>    
-                    <Image x:Name="image22" HeightRequest="110" WidthRequest="110" >
+                    <Image x:Name="image22" HeightRequest="110" WidthRequest="110" IsVisible="false" >
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer
                                         Tapped="OnImage22Tapped" />
@@ -47,27 +47,21 @@
 
                 <Label x:Name="bar" />
 
-                <StackLayout Orientation="Horizontal" >                     
-                    <Label Text="Calories: (cal)" VerticalOptions="Center" FontSize="Large"/>
-                        
-                    <Button Text="Scan Barcode" Clicked="scanClicked" VerticalOptions="Center" />
-                </StackLayout>
-
-               <!-- <ListView x:Name="postsListView">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <TextCell Text="{Binding Title}" />
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>-->
-                    
+                          
+                <Label Text="Calories: (cal)" VerticalOptions="Center" FontSize="Large"/>                 
                 <Entry x:Name="calEntry" Text="{Binding Path=Calories}" Keyboard="Numeric" Placeholder="(eg 200)" /> 
 
+                <Button Text="Scan Barcode" Clicked="scanClicked" VerticalOptions="Center" />
+
+                <Label Text="Scan result:" />
+                <StackLayout x:Name="barItems" >
+                        
+                </StackLayout> 
                 <Label Text="Description of new meal" FontSize="Large"/> 
                 <Editor Text="{Binding Path=Description}" x:Name="descriptionEditor" BackgroundColor="Silver" HeightRequest="150"  />
                 
 
-                <ActivityIndicator x:Name="activityIndicator" IsRunning="false"/>
+
                <Button Text="Delete" Clicked="OnDeleteActivated" />
                 <Button Text="Cancel" Clicked="OnCancelActivated" x:Name="cancelButton"/>
 

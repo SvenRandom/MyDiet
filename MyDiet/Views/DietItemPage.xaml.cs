@@ -16,6 +16,7 @@ using System.Collections.ObjectModel;
 
 using RestSharp.Portable;
 using RestSharp.Portable.HttpClient;
+using Org.Json;
 
 namespace MyDiet.Views
 {
@@ -33,6 +34,7 @@ namespace MyDiet.Views
         MediaFile file0 = null;
         MediaFile file1 = null;
         MediaFile file2 = null;
+		List<string> items = new List<string>();
        
         public DietItemPage(DietItem dietItem)
         {
@@ -52,6 +54,7 @@ namespace MyDiet.Views
                 dietItemCurrent.Image0LocalPath = null;
                 dietItemCurrent.Image1LocalPath = null;
                 dietItemCurrent.Image2LocalPath = null;
+				dietItemCurrent.ScanItems = "";
 
 
             }
@@ -59,12 +62,14 @@ namespace MyDiet.Views
             else
             {
                 dietItemCurrent = dietItem;
-                //loaclPath0 = dietItemCurrent.Image0LocalPath;
-                //loaclPath1 = dietItemCurrent.Image1LocalPath;
-                //loaclPath2 = dietItemCurrent.Image2LocalPath;
-                //remotrId0 = dietItemCurrent.Image0UploadId;
-                //remotrId1 = dietItemCurrent.Image1UploadId;
-                //remotrId2 = dietItemCurrent.Image2UploadId;
+				if(dietItemCurrent.ScanItems!=""){
+					string[] str = dietItemCurrent.ScanItems.Split(';');
+					for (int i = 0; i < str.Length;i++){
+						SetScanItems(str[i]);
+						items.Add(str[i]);
+					}
+
+				}
 
             }
             if (dietItemCurrent.Image0LocalPath != null)
@@ -91,6 +96,7 @@ namespace MyDiet.Views
                     //if(fileSoure.ToString()!="")
                     image00.Source = fileSoure;
                     delete00.IsVisible = false;
+					image00.IsVisible = true;
                     //else
                     //{
                     //  var imageData = await AzureStorage.GetFileAsync(ContainerType.Image, dietItemCurrent.Image0UploadId);
@@ -106,6 +112,7 @@ namespace MyDiet.Views
                         numberOfPhoto = 2;
                         image11.Source = ImageSource.FromFile(dietItemCurrent.Image1LocalPath);
                         delete11.IsVisible = false;
+						image11.IsVisible = true;
                         //imageData = await AzureStorage.GetFileAsync(ContainerType.Image, dietItemCurrent.Image1UploadId);
                         //image1.Source = ImageSource.FromStream(() => new MemoryStream(imageData));
 
@@ -114,6 +121,7 @@ namespace MyDiet.Views
                             numberOfPhoto = 3;
                             image22.Source = ImageSource.FromFile(dietItemCurrent.Image2LocalPath);
                             delete22.IsVisible = false;
+							image22.IsVisible = true;
                             //imageData = await AzureStorage.GetFileAsync(ContainerType.Image, dietItemCurrent.Image2UploadId);
                             //image2.Source = ImageSource.FromStream(() => new MemoryStream(imageData));
 
@@ -127,11 +135,24 @@ namespace MyDiet.Views
             }
         }
 
-        async void OnSaveActivated(object sender, EventArgs e)
-        {
-            activityIndicator.IsRunning = true;
+		async void OnSaveActivated(object sender, EventArgs e)
+		{
+			activityIndicator.IsRunning = true;
 
-            cancelButton.IsEnabled = false;
+			cancelButton.IsEnabled = false;
+            
+			var size = items.Count;
+			//System.Diagnostics.Debug.WriteLine("size: "+size);
+			string str = "";
+			if(size>0){
+				for (int i = 0; i < size; i++)
+                {
+                    str = str + items[i] + ";";
+                }
+                str = str.Substring(0, str.Length - 2);
+                dietItemCurrent.ScanItems = str;
+			}
+
 
             //imagesPath[0]=await AzureStorage.UploadFileAsync(ContainerType.Image, stream);
 
@@ -194,6 +215,7 @@ namespace MyDiet.Views
 
         async void scanClicked(object sender, EventArgs e)
         {
+			
             //MobileBarcodeScanner.Initialize(Application);
             await DisplayAlert("notice", "start scan carcode", "yes");
 
@@ -245,21 +267,56 @@ namespace MyDiet.Views
 
 		async void SearchBarcodeAsync()
 		{
+			try{
+				
+    			
+    			activityIndicator.IsRunning = true;
+               
+    			var client = new RestClient("https://api.upcitemdb.com/prod/trial/");
+                // lookup request with GET
+    			RestSharp.Portable.IRestRequest request = new RestRequest("lookup", Method.GET);
 
-           
-			var client = new RestClient("https://api.upcitemdb.com/prod/trial/");
-            // lookup request with GET
-			RestSharp.Portable.IRestRequest request = new RestRequest("lookup", Method.GET);
-            
-            
-			request.AddQueryParameter("upc", App.barcode);
-			//var response = await client.Execute(request);
-			var response =await client.Execute(request);
-			System.Diagnostics.Debug.WriteLine("response: " + response.Content);
-            // parsing json
-			var obj = JsonConvert.DeserializeObject<BarcodeItem>(response.Content);
-			System.Diagnostics.Debug.WriteLine("obj: " + obj.ToString());
-			System.Diagnostics.Debug.WriteLine("obj total: " + obj.total);
+
+    			request.AddQueryParameter("upc", App.barcode);
+    			//request.AddQueryParameter("upc", "0000093613903");
+    			//var response = await client.Execute(request);
+    			var response =await client.Execute(request);
+    			//System.Diagnostics.Debug.WriteLine("response: " + response.ToString());
+    			//System.Diagnostics.Debug.WriteLine("response content: " + response.Content);
+                // parsing json
+    			var obj = JsonConvert.DeserializeObject<BarcodeItem>(response.Content);
+                
+    			var a = obj.items.ToString().Trim();
+    			//var b = a.Substring(1,a.Length-2);
+
+    			if(obj.total=="0"){
+    				await DisplayAlert("notice", "no result", "Sure");
+					activityIndicator.IsRunning = false;
+    			}
+    			else
+    			{
+    				var c = JsonConvert.DeserializeObject<List<Items>>(a);
+                    var title = c[0].title;
+    				await DisplayAlert("notice", title, "Sure");
+    				items.Add(title);
+					SetScanItems(title);
+
+    				activityIndicator.IsRunning = false;
+
+    			}
+
+			}catch{
+				await DisplayAlert("notice", "NetWork Error", "Sure");
+			}
+			//System.Diagnostics.Debug.WriteLine("obj: " + obj.items.ToString());
+			//JSONObject a = new JSONObject(response.Content);
+			//JsonObjectAttribute json = (Newtonsoft.Json.JsonObjectAttribute)obj;
+			//System.Diagnostics.Debug.WriteLine("c: " + c[0].title);
+			//JSONObject a =new JSONObject();
+			//a.Put("a","b");
+			//var c = a.GetString("a");
+			//System.Diagnostics.Debug.WriteLine("a: " + a);
+			//System.Diagnostics.Debug.WriteLine("obj total: " + obj.total);
      //**********************************       
 			//HttpClient _client = new HttpClient();
    //         string quary = Constants.BarcodeEndpointUri + "?json=barcode&q={" + App.barcode + "}&apikey={" + Constants.APIKey + "}";
@@ -313,12 +370,14 @@ namespace MyDiet.Views
                     dietItemCurrent.Image1LocalPath = dietItemCurrent.Image2LocalPath;
                     file2 = null;
                     image22.Source = "";
+					image22.IsVisible = false;
                     dietItemCurrent.Image2LocalPath = null;
                 }
                 else
                 {
                     file1 = null;
                     image11.Source = "";
+					image11.IsVisible = false;
                     dietItemCurrent.Image1LocalPath = null;
                 }
             }
@@ -326,6 +385,7 @@ namespace MyDiet.Views
             {
                 file0 = null;
                 image00.Source = "";
+				image00.IsVisible = false;
                 dietItemCurrent.Image0LocalPath = null;
                 imagesStack.IsVisible = false;
             }
@@ -359,12 +419,14 @@ namespace MyDiet.Views
                 dietItemCurrent.Image1LocalPath = dietItemCurrent.Image2LocalPath;
                 file2 = null;
                 image22.Source = "";
+				image22.IsVisible = false;
                 dietItemCurrent.Image2LocalPath = null;
             }
             else
             {
                 file1 = null;
                 image11.Source = "";
+				image11.IsVisible = false;
                 dietItemCurrent.Image1LocalPath = null;
             }
             numberOfPhoto--;
@@ -393,7 +455,7 @@ namespace MyDiet.Views
         {
             file2 = null;
             image22.Source = "";
-
+			image22.IsVisible = false;
             numberOfPhoto--;
 
             oStackLayout.IsVisible = true;
@@ -477,6 +539,7 @@ namespace MyDiet.Views
                     //    return stream;
                     //});
                     image00.Source = ImageSource.FromFile(file.Path);
+					image00.IsVisible = true;
                     dietItemCurrent.Image0LocalPath = file.Path;
                     //stream0 = file.GetStream();
                     //dietItemCurrent.Image0 = await AzureStorage.UploadFileAsync(ContainerType.Image, stream0);
@@ -492,6 +555,7 @@ namespace MyDiet.Views
                     //});
                     dietItemCurrent.Image1LocalPath = file.Path;
                     image11.Source = ImageSource.FromFile(file.Path);
+					image11.IsVisible = true;
                     //stream1 = file.GetStream();
                     //dietItemCurrent.Image1 = await AzureStorage.UploadFileAsync(ContainerType.Image, stream1);
 
@@ -506,6 +570,7 @@ namespace MyDiet.Views
                     //});
                     dietItemCurrent.Image2LocalPath = file.Path;
                     image22.Source = ImageSource.FromFile(file.Path);
+					image22.IsVisible = true;
                     //stream2 = file.GetStream();
                     //dietItemCurrent.Image2 = await AzureStorage.UploadFileAsync(ContainerType.Image, stream2);
 
@@ -521,6 +586,29 @@ namespace MyDiet.Views
 
 
         }
+
+
+		public void SetScanItems(string title){
+
+			StackLayout stackLayout = new StackLayout();
+            stackLayout.Orientation = StackOrientation.Horizontal;
+            Label label1 = new Label();
+            label1.Text = title;
+            label1.VerticalOptions = LayoutOptions.Center;
+            Button button = new Button();
+            button.VerticalOptions = LayoutOptions.Center;
+            button.Text = "delete";
+            button.HorizontalOptions = LayoutOptions.End;
+            stackLayout.Children.Add(label1);
+            stackLayout.Children.Add(button);
+
+            barItems.Children.Add(stackLayout);
+            button.Clicked += (sender, e) =>
+            {
+                barItems.Children.Remove(stackLayout);
+				items.Remove(title);
+            };
+		}
 
     }
 }

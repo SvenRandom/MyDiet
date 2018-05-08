@@ -48,6 +48,8 @@ namespace MyDiet
 					continueButton.IsVisible = true;
 					loadingIndicator.IsRunning = false;
 					loadingIndicator.IsVisible = false;
+					Settings.LogStateSettings = false;
+					await Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
 				}
 				await Navigation.PushModalAsync(new NavigationPage(new MainPage()));
 

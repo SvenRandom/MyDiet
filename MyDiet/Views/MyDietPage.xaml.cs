@@ -14,23 +14,37 @@ namespace MyDiet.Views
 {
     public partial class MyDietPage : ContentPage
     {
+		
+
 		DietManager dietManager;
 
+		int currentView;
 		public MyDietPage()
         {
             InitializeComponent();
             dietManager = DietManager.DefaultManager;
 
+			currentView = 0;
+
         }
 
-        protected override async void OnAppearing()
+		protected override void OnAppearing()
         {
             base.OnAppearing();
-           
+			//await RefreshItems(true, syncItems: true);
+			if(currentView==0){
+				TodayClicked();
+             
+            }
+			if (currentView == 1)
+				WeekClicked();
+
+			if (currentView == 2)
+				HistoryClicked();
+
+            
 			//await RefreshItems(true, syncItems: false);//show activity indicator and not sync
-			var temp =await dietManager.GetTodoItemsAsync();
-			listView.ItemsSource = temp;
-				
+
             
 
 
@@ -76,7 +90,7 @@ namespace MyDiet.Views
         }
         
 
-		public async void OnSyncItems(object sender, EventArgs e)
+		public async void OnSyncItems()
         {
             await RefreshItems(true, true);
         }
@@ -85,7 +99,25 @@ namespace MyDiet.Views
         {
             using (var scope = new ActivityIndicatorScope(syncIndicator, showActivityIndicator))
             {
-				listView.ItemsSource = await dietManager.GetTodoItemsAsync(syncItems);
+				if (currentView == 0)
+				{
+					var temp = await dietManager.GetHistoryAsync(syncItems);
+                    listView.ItemsSource = temp.Where(dietItem => dietItem.Date.Year == DateTime.Now.Year &&
+                                                                   dietItem.Date.Month == DateTime.Now.Month &&
+                                                                   dietItem.Date.Day == DateTime.Now.Day);
+				}
+					
+				if (currentView == 1){
+					var temp = await dietManager.GetHistoryAsync(syncItems);
+                    listView.ItemsSource = temp.Where(dietItem => (DateTime.Now - dietItem.Date).Days <= 7)
+						.OrderByDescending(DietItem => DietItem.Date);;
+				}
+            
+				if (currentView == 2)
+				{
+					var temp = await dietManager.GetHistoryAsync(syncItems);
+					listView.ItemsSource = temp.OrderByDescending(DietItem => DietItem.Date);
+				}
             }
         }
 
@@ -127,6 +159,63 @@ namespace MyDiet.Views
             }
         }
 
+		void TodayClicked(object sender, System.EventArgs e)
+        {
+			TodayClicked();
+        }
+        
+		async void TodayClicked()
+        {
+			var temp = await dietManager.GetHistoryAsync();
+			listView.ItemsSource = temp.Where(dietItem => dietItem.Date.Year == DateTime.Now.Year &&
+                                                           dietItem.Date.Month == DateTime.Now.Month  && 
+                                                           dietItem.Date.Day == DateTime.Now.Day);
+            today.BackgroundColor = Color.FromHex("#2196F3");
+            today.TextColor = Color.White;
+            week.BackgroundColor = Color.WhiteSmoke;
+            week.TextColor = Color.FromHex("#2196F3");
+            history.BackgroundColor = Color.WhiteSmoke;
+            history.TextColor = Color.FromHex("#2196F3");
+            currentView = 0;
+        }
+        
+		void WeekClicked(object sender, System.EventArgs e)
+        {
+			WeekClicked();
+        }
+		async void WeekClicked()
+        {
+			var temp = await dietManager.GetHistoryAsync();         
+			listView.ItemsSource = temp.Where(dietItem => (DateTime.Now - dietItem.Date).Days <= 7)
+				.OrderByDescending(DietItem => DietItem.Date);
+            today.BackgroundColor = Color.WhiteSmoke;
+            today.TextColor = Color.FromHex("#2196F3");
+            week.BackgroundColor = Color.FromHex("#2196F3");
+            week.TextColor = Color.White;
+            history.BackgroundColor = Color.WhiteSmoke;
+            history.TextColor = Color.FromHex("#2196F3");
+            currentView = 1;
+        }
+
+
+
+		void HistoryClicked(object sender, System.EventArgs e)
+        {
+			HistoryClicked();
+        }
+		async void HistoryClicked()
+        {
+            var temp = await dietManager.GetHistoryAsync();
+			listView.ItemsSource = temp.OrderByDescending(DietItem=>DietItem.Date);
+
+            today.BackgroundColor = Color.WhiteSmoke;
+            today.TextColor = Color.FromHex("#2196F3");
+            week.BackgroundColor = Color.WhiteSmoke;
+            week.TextColor = Color.FromHex("#2196F3");
+            history.BackgroundColor = Color.FromHex("#2196F3");
+            history.TextColor = Color.White;
+            currentView = 2;
+        }
 
     }
 }

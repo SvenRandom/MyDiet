@@ -36,6 +36,9 @@ namespace MyDiet.Models
 		[JsonProperty(PropertyName = "Image2LocalPath")]
 		public String Image2LocalPath { get; set; }
 
+		[JsonProperty(PropertyName = "ScanItems")]
+        public String ScanItems { get; set; }
+
 		[JsonProperty(PropertyName = "Date")]
 		public DateTime Date { get; set; }
 
@@ -46,6 +49,9 @@ namespace MyDiet.Models
 		[JsonProperty(PropertyName = "Time")]
 		public TimeSpan Time { get; set; }
         
+		[JsonProperty(PropertyName = "Version")]
+        public string Version { get; set; }
+
 		public void SetTime()
         {
 

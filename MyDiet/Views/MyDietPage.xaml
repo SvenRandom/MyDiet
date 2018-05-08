@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:local="clr-namespace:MyDiet"
              x:Class="MyDiet.Views.MyDietPage">
     <ContentPage.ToolbarItems>
         <ToolbarItem Clicked="OnItemAdded" Text="Add" />
     </ContentPage.ToolbarItems>
     <StackLayout>
     <ActivityIndicator HorizontalOptions="Center" VerticalOptions="Center" IsVisible="False" IsEnabled="True" x:Name="syncIndicator" />
+    <StackLayout Orientation="Horizontal" >
+       <Grid ColumnSpacing="2" >
+            <Button Grid.Row="0" Grid.Column="0"  Text="Today" x:Name="today" Clicked="TodayClicked" />
+            <Button Grid.Row="0" Grid.Column="1"  Text="Recent one Week" x:Name="week" Clicked="WeekClicked"/>   
+            <Button Grid.Row="0" Grid.Column="2"  Text="All history" x:Name="history" Clicked="HistoryClicked"/> 
+       </Grid>
+      
+    </StackLayout>    
     <ListView x:Name="listView" HasUnevenRows="true" ItemSelected="OnItemSelected" IsPullToRefreshEnabled="true" Refreshing="OnRefresh">
         <ListView.ItemTemplate>
             <DataTemplate>
@@ -16,12 +25,27 @@
                                         <Label   Text="{Binding DateToDisplay}" />
 
                                         <Label Text="{Binding Calories}" HorizontalOptions="EndAndExpand" />
-                                        <Label Text="cal" HorizontalOptions="End" />
+                                        <Label Text="cal" HorizontalOptions="End" x:Name="calLabel"/>
                         </StackLayout>
-                        <StackLayout Orientation="Horizontal"> 
-                            <!--<Image0 Source="{Binding Path=image0LocalPath}" />-->
-                        </StackLayout>    
-
+                        <!--<StackLayout Orientation="Horizontal"> 
+                                <Image Source="{Binding Image0LocalPath}" Aspect="AspectFit"
+                                       HeightRequest="110" WidthRequest="110" />
+                                 <Image Source="{Binding Image1LocalPath}" Aspect="AspectFit"
+                                       HeightRequest="110" WidthRequest="110" />
+                                 <Image Source="{Binding Image2LocalPath}" Aspect="AspectFit"
+                                       HeightRequest="110" WidthRequest="110" />
+                          
+                        </StackLayout> -->
+                        <StackLayout Orientation="Horizontal" HeightRequest="120" > 
+                                <Image Source="{Binding Image0LocalPath}" Aspect="AspectFit"
+                                        />
+                                 <Image Source="{Binding Image1LocalPath}" Aspect="AspectFit"
+                                        />
+                                 <Image Source="{Binding Image2LocalPath}" Aspect="AspectFit"
+                                       />
+                          
+                        </StackLayout> 
+                        <Label Text="{Binding ScanItems}" />
                             
                         <Label Text="{Binding Description}" />
 

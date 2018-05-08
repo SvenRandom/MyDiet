@@ -148,6 +148,8 @@
       <DependentUpon>ChangePasswordPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\BarcodeItem.cs" />
+    <Compile Include="MarkupExtension\FileImage.cs" />
+    <Compile Include="Models\Items.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\" />
