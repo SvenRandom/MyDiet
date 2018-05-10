@@ -16,7 +16,7 @@ namespace MyDiet
         public LoadingPage()
         {
             InitializeComponent();
-			image.Source = ImageSource.FromResource("MyDiet.Images.bigWhite.jpg");
+			image.Source = ImageSource.FromResource("MyDiet.Images.bigWhite2.jpg");
 			//var app = Application.Current as App;
 			//if (Application.Current.Properties.ContainsKey("log"))
 			//	isLoggedIn.Text = Application.Current.Properties["log"].ToString();

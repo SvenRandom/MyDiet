@@ -60,36 +60,7 @@ namespace MyDiet
             // Handle when your app resumes
            
         }
-
-		//public User CurrentUser
-		//{
-		//	get{
-		//		if (Application.Current.Properties.ContainsKey(CurrentAccount))
-		//			return (User)Application.Current.Properties[CurrentAccount];
-		//		else
-		//			return null;
-		//	}
-		//	set{
-		//		Application.Current.Properties[CurrentAccount] = value;
-
-		//	}
-		//}
-
-		//public bool IsLoggedIn
-    //    {
-    //        get
-    //        {
-				//if (Application.Current.Properties.ContainsKey(logstate))
-				//	return (bool)Application.Current.Properties[logstate];
-    //            else
-				//	return false;
-    //        }
-    //        set
-    //        {
-				//Application.Current.Properties[logstate] = value;
-
-        //    }
-        //}
+        
 
     }
 }

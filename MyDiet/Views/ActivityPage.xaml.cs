@@ -24,43 +24,43 @@ namespace MyDiet.Views
             new Entry(3490)  
             {  
                 Color=SKColor.Parse("#FF1943"),  
-                Label ="January",  
+                Label ="Monday",  
 				ValueLabel = "3490"  
             },  
             new Entry(4483)  
             {  
-                Color = SKColor.Parse("#00BFFF"),  
-                Label = "March",  
+				Color = SKColor.Parse("#2196F3"),  
+                Label = "TuesDay",  
 				ValueLabel = "4483"  
             },  
             new Entry(1236)  
             {  
-				Color =  SKColor.Parse("#2196F3"),  
-                Label = "Octobar",  
+				Color =  SKColor.Parse("#FF1943"),  
+                Label = "Wednesday",  
 				ValueLabel = "1236"  
             },  
 			new Entry(7694)
             {
-                Color =  SKColor.Parse("#00CED1"),
-                Label = "Octobar",
+				Color =  SKColor.Parse("#2196F3"),
+                Label = "Thursday",
 				ValueLabel = "7694"
             },
 			new Entry(13952)
             {
                 Color =  SKColor.Parse("#00CED1"),
-                Label = "Octobar",
+                Label = "Friday",
 				ValueLabel = "13952"
             },
 			new Entry(1100)
             {
-                Color =  SKColor.Parse("#00CED1"),
-                Label = "Octobar",
+				Color =  SKColor.Parse("#FF1943"),
+                Label = "Saturday",
 				ValueLabel = "1100"
             },
 			new Entry(5700)
             {
-                Color =  SKColor.Parse("#00CED1"),
-                Label = "Octobar",
+				Color =  SKColor.Parse("#2196F3"),
+                Label = "Sunday",
 				ValueLabel = "5700"
             },
             };  

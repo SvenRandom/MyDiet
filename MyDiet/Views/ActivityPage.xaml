@@ -2,45 +2,71 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms" 
-
              xmlns:local="clr-namespace:MyDiet"
              x:Class="MyDiet.Views.ActivityPage">
 
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label" >
+                <Setter Property="HorizontalOptions" Value="Center" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
      <ScrollView>   
-        <StackLayout VerticalOptions="FillAndExpand">
-            
-            <RelativeLayout VerticalOptions="Start" HeightRequest="150" BackgroundColor="#2196F3" >
+        <StackLayout VerticalOptions="FillAndExpand" >
+           
+            <RelativeLayout VerticalOptions="Start" HeightRequest="140" 
+                            BackgroundColor="#2196F3" >
                  <Grid RelativeLayout.WidthConstraint=
-                  "{ConstraintExpression Type=RelativeToParent, Property=Width}"
-                RelativeLayout.HeightConstraint=
-                  "{ConstraintExpression Type=RelativeToParent, Property=Height}">
+                     "{ConstraintExpression Type=RelativeToParent, Property=Width}"
+                        RelativeLayout.HeightConstraint=
+                     "{ConstraintExpression Type=RelativeToParent, Property=Height}">
                     
-                <Label Text="Today" HorizontalOptions="Center" TextColor="White" />
-                <Label Text="5,700" TextColor="White" FontSize="40"
-                       VerticalOptions="CenterAndExpand" HorizontalOptions="Center" />
+                 <Label Text="Today" TextColor="White" />
+                 <Label Text="5,700" TextColor="White" FontSize="40"
+                       VerticalOptions="CenterAndExpand" />
+                     <Grid VerticalOptions="End" >
+                        <StackLayout Grid.Column="0" >
+                            <Label Text="0.92" FontSize="Large"
+                                   TextColor="White"/>
+                            <Label Text="Walked km"
+                                   TextColor="White"/>
+                        </StackLayout>
+
+                        <StackLayout Grid.Column="1"  >
+                            <Label Text="9" FontSize="Large" 
+                                   TextColor="White"/>
+                            <Label Text="Climbed floor"
+                                   TextColor="White"/>
+                        </StackLayout>
+                     </Grid>
                  </Grid>   
             </RelativeLayout>
-            <Grid >
-                <StackLayout Grid.Column="0" >
-                    <Label Text="0.92" FontSize="Large" HorizontalOptions="Center" />
-                    <Label Text="Walked km" HorizontalOptions="Center"  />
+           
+            <StackLayout VerticalOptions="End">
+                <microcharts:ChartView x:Name="Chart4" 
+                                 HeightRequest="300"/> 
+                <Grid RowSpacing="5" ColumnSpacing="5" Padding="10" >
+                    <Label Grid.Column="0" Text="4.30" />
+                    <Label Grid.Column="1" Text="5.1" />
+                    <Label Grid.Column="2" Text="5.2" />
+                    <Label Grid.Column="3" Text="5.3" />
+                    <Label Grid.Column="4" Text="5.4" />
+                    <Label Grid.Column="5" Text="5.5" />
+                    <Label Grid.Column="6" Text="5.6" />
+
+                </Grid>
+                <StackLayout Orientation="Horizontal" Padding="10" >
+                    <Image Source="{local:EmbeddedImage MyDiet.Images.icons_left48.png}"
+                           HorizontalOptions="StartAndExpand" />
+                   
+                    <Label Text="Day" HorizontalOptions="Center" />
+                   
+                    <Image Source="{local:EmbeddedImage MyDiet.Images.icons_right48.png}"
+                           HorizontalOptions="EndAndExpand" />
                 </StackLayout>
-                <StackLayout Grid.Column="1"  >
-                    <Label Text="784" FontSize="Large" HorizontalOptions="Center"  />
-                    <Label Text="Caories" HorizontalOptions="Center"  />
-                </StackLayout>
-                <StackLayout Grid.Column="2"  >
-                    <Label Text="11" FontSize="Large" HorizontalOptions="Center"  />
-                    <Label Text="Active min" HorizontalOptions="Center"  />
-                </StackLayout>
-            </Grid>
-            <StackLayout VerticalOptions="End">  
-              
-            <microcharts:ChartView x:Name="Chart4" 
-                                 HeightRequest="300"/>  
-          
             </StackLayout> 
         </StackLayout>
     </ScrollView>  
-    
+
 </ContentPage>

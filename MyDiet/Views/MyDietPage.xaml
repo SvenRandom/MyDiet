@@ -3,16 +3,29 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:local="clr-namespace:MyDiet"
              x:Class="MyDiet.Views.MyDietPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Button" >
+                <Setter Property="BorderRadius" Value="0" />
+
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    
     <ContentPage.ToolbarItems>
         <ToolbarItem Clicked="OnItemAdded" Text="Add" />
     </ContentPage.ToolbarItems>
     <StackLayout>
     <ActivityIndicator HorizontalOptions="Center" VerticalOptions="Center" IsVisible="False" IsEnabled="True" x:Name="syncIndicator" />
-    <StackLayout Orientation="Horizontal" >
+    <StackLayout >
        <Grid ColumnSpacing="2" >
-            <Button Grid.Row="0" Grid.Column="0"  Text="Today" x:Name="today" Clicked="TodayClicked" />
-            <Button Grid.Row="0" Grid.Column="1"  Text="Recent one Week" x:Name="week" Clicked="WeekClicked"/>   
-            <Button Grid.Row="0" Grid.Column="2"  Text="All history" x:Name="history" Clicked="HistoryClicked"/> 
+            <Button Grid.Row="0" Grid.Column="0" 
+                    Text="Today" x:Name="today" Clicked="TodayClicked" />
+            <Button Grid.Row="0" Grid.Column="1"  
+                    Text="Recent one Week" x:Name="week" Clicked="WeekClicked"/>   
+            <Button Grid.Row="0" Grid.Column="2"  
+                    Text="All history" x:Name="history" Clicked="HistoryClicked"/> 
        </Grid>
       
     </StackLayout>    

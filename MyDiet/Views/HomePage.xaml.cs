@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 using Xamarin.Forms;
 
@@ -10,7 +9,8 @@ namespace MyDiet.Views
         public HomePage()
         {
             InitializeComponent();
-			currentUser.Text = App.account.Email;
+			//currentUser.Text = App.account.Email;
+			date.Text = DateTime.Now.ToString("dd MMM yyyy dddd");
         }
     }
 }

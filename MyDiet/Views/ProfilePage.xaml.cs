@@ -1,4 +1,5 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
 using HelloWorld;
 using MyDiet.Models;
@@ -10,6 +11,7 @@ namespace MyDiet.Views
 {
     public partial class ProfilePage : ContentPage
     {
+		      
 		
 
         //private SQLiteAsyncConnection _connection;
@@ -41,6 +43,15 @@ namespace MyDiet.Views
         }
 
 
+		void DataSourceTapped(object sender, System.EventArgs e)
+        {
+           
+        }
+
+		void AboutTapped(object sender, System.EventArgs e)
+        {
+
+        }
 
     }
 }

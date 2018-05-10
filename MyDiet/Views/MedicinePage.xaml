@@ -1,5 +1,56 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="MyDiet.Views.MedicinePage">
-    <ContentPage.Content>
-    </ContentPage.Content>
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="MyDiet.Views.MedicinePage">
+     <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Button" >
+                <Setter Property="BorderRadius" Value="0" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Clicked="OnAdded" Text="Add" />
+    </ContentPage.ToolbarItems>
+    
+    <StackLayout>
+        <ActivityIndicator HorizontalOptions="Center" VerticalOptions="Center" IsVisible="False" IsEnabled="True" x:Name="syncIndicator" />
+        <StackLayout>
+            <Grid ColumnSpacing="2" >
+                <Button  Grid.Column="0" 
+                        Text="Reminder" x:Name="reminder" Clicked="ReminderClicked" />
+                <Button  Grid.Column="1"  
+                        Text="My Medicine" x:Name="medicine" Clicked="MedicineClicked"/>   
+                <Button  Grid.Column="2"
+                        Text="History" x:Name="history" Clicked="HistoryClicked"/> 
+            </Grid>
+        </StackLayout>   
+        <ListView x:Name="listView" HasUnevenRows="true">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Padding="10">
+                             <!--<StackLayout Orientation="Horizontal">
+                                  <Label Text="{Binding TimeToDisplay}" />
+
+                                  <Label Text="{Binding MedicineName}" />
+                                  <Label Text="{Binding Quantity}" HorizontalOptions="EndAndExpand" />
+                            </StackLayout>-->
+                            <StackLayout Orientation="Horizontal">
+                                <Switch />
+                                
+                                <Label Text="Checked" />
+
+           
+                            </StackLayout>
+
+
+                         
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>            
+                
+        </ListView>
+    </StackLayout>
 </ContentPage>

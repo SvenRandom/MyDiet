@@ -208,7 +208,7 @@ namespace MyDiet.Views
             var temp = await dietManager.GetHistoryAsync();
 			listView.ItemsSource = temp.OrderByDescending(DietItem=>DietItem.Date);
 
-            today.BackgroundColor = Color.WhiteSmoke;
+			today.BackgroundColor = Color.WhiteSmoke;
             today.TextColor = Color.FromHex("#2196F3");
             week.BackgroundColor = Color.WhiteSmoke;
             week.TextColor = Color.FromHex("#2196F3");

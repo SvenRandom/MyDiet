@@ -8,14 +8,14 @@ namespace MyDiet
     {
         public MainPage()
         {
-            Page myDietPage, homePage, medicinePage, activityPage, profilePage = null;
+            Page dietPage, homePage, medicinePage, activityPage, profilePage = null;
             
 
-			myDietPage = new MyDietPage()
+			dietPage = new MyDietPage()
             {
-                Title = "My Diet"
+                Title = "Diet"
             };
-
+            
                         homePage = new HomePage()
                         {
                             Title = "Home"
@@ -25,7 +25,7 @@ namespace MyDiet
                         {
                             Title = "Medicine"
                         };
-
+            
                         activityPage = new ActivityPage()
                         {
                             Title = "Activity"
@@ -39,7 +39,7 @@ namespace MyDiet
 			if (Device.RuntimePlatform == Device.iOS)
 			{
 				profilePage.Icon = "tab_about.png";
-				myDietPage.Icon = "tab_feed.png";
+				dietPage.Icon = "tab_feed.png";
 				homePage.Icon = "tab_home30.png";
 				medicinePage.Icon = "tab_pill30.png";
 				activityPage.Icon = "tab_activity30.png";
@@ -48,7 +48,7 @@ namespace MyDiet
 
             Children.Add(homePage);
             
-			Children.Add(myDietPage);
+			Children.Add(dietPage);
             Children.Add(medicinePage);
             Children.Add(activityPage);
             Children.Add(profilePage);
