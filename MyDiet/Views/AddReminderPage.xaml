@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="MyDiet.Views.AddReminderPage"
+             xmlns:local="clr-namespace:MyDiet"
+             Title="New Reminder">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="cellLayout" TargetType="StackLayout" >
+                <Setter Property="Orientation" Value="Horizontal" />
+                <Setter Property="Padding" Value="15" />
+
+            </Style>
+            <Style TargetType="Label" >
+                <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Done" Clicked="DoneClicked" />
+    </ContentPage.ToolbarItems>
+
+    <StackLayout>
+        
+        <TableView Intent="Form" HasUnevenRows="true" >
+            <TableRoot>
+                <TableSection >
+                    <ViewCell>
+                        <StackLayout Style="{StaticResource cellLayout}" >
+                            <Image Source="{local:EmbeddedImage MyDiet.Images.icons_clock80.png}" HorizontalOptions="Start"
+                                    Aspect="AspectFit" />
+                            <Label Text="Reminder time: " />
+                            <TimePicker />
+                        </StackLayout>
+                    </ViewCell>
+                </TableSection>
+
+                <TableSection >
+                    <ViewCell>
+                        <StackLayout Style="{StaticResource cellLayout}" >
+                            <Image Source="{local:EmbeddedImage MyDiet.Images.icons_pill80.png}" HorizontalOptions="Start"
+                                    Aspect="AspectFit" />
+                            <Label Text="Pick medicine:" />
+                            <Picker x:Name="medicinePicker" Title="From my medicines" 
+                                    SelectedItem="enalapril(Vasotec)" SelectedIndex="1" > 
+                                <Picker.Items>
+                                    <x:String>enalapril(Vasotec)</x:String>
+                                    <x:String>Eplerenone (Inspra)</x:String>
+                                    <x:String>Lomotil</x:String>
+                                </Picker.Items>
+                            </Picker>
+                        </StackLayout>
+                    </ViewCell>
+                </TableSection>
+
+                <TableSection >
+                    <ViewCell>
+                        <StackLayout Style="{StaticResource cellLayout}" >
+                            <Image Source="{local:EmbeddedImage MyDiet.Images.icons_number80.png}" HorizontalOptions="Start"
+                                    Aspect="AspectFit" />
+                            <Label Text="Quantity needed:" />
+                            <Entry Keyboard="Numeric" Placeholder="(eg 2)" />
+                            <Label Text="Tablet" />
+                        </StackLayout>
+                    </ViewCell>
+                </TableSection>
+
+            </TableRoot> 
+                
+            
+        </TableView> 
+        
+    </StackLayout>
+</ContentPage>

@@ -49,7 +49,7 @@
                                        HeightRequest="110" WidthRequest="110" />
                           
                         </StackLayout> -->
-                        <StackLayout Orientation="Horizontal" HeightRequest="120" > 
+                        <StackLayout Orientation="Horizontal" HeightRequest="120" WidthRequest="330" > 
                                 <Image Source="{Binding Image0LocalPath}" Aspect="AspectFit"
                                         />
                                  <Image Source="{Binding Image1LocalPath}" Aspect="AspectFit"

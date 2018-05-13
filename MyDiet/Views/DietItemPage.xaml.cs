@@ -70,13 +70,14 @@ namespace MyDiet.Views
 					}
 
 				}
+				if (dietItemCurrent.Image0LocalPath != null)
+                {
+                    imagesStack.IsVisible = true;
+
+                }
 
             }
-            if (dietItemCurrent.Image0LocalPath != null)
-            {
-                imagesStack.IsVisible = true;
-
-            }
+            
 
             BindingContext = dietItemCurrent;
             dietManager = DietManager.DefaultManager;
@@ -200,16 +201,19 @@ namespace MyDiet.Views
 
         async void AddPhotoClicked(object sender, System.EventArgs e)
         {
-            if (numberOfPhoto >= 3)
-            {
-                await DisplayAlert("Notice!", ":( at most three photos.", "OK");
+			if (numberOfPhoto >= 3)
+			{
+				await DisplayAlert("Notice!", ":( at most three photos.", "OK");
 
-            }
-            var response = await DisplayActionSheet("Choose resource", "Cancel", null, "Take a photo", "Choose from album");
-            if (response == "Take a photo")
-                TakePhotoClicked();
-            if (response == "Choose from album")
-                PickPhotoClicked();
+			}
+			else
+			{
+				var response = await DisplayActionSheet("Choose resource", "Cancel", null, "Take a photo", "Choose from album");
+				if (response == "Take a photo")
+					TakePhotoClicked();
+				if (response == "Choose from album")
+					PickPhotoClicked();
+			}
         }
 
 

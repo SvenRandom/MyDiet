@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="MyDiet.Views.AddMedicinePage"
+             Title="New Medicine">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Done" Clicked="DoneClicked" />
+    </ContentPage.ToolbarItems>
+
+    <StackLayout >
+        
+        <TableView Intent="Form" HasUnevenRows="true" >
+            <TableRoot>
+                <TableSection Title="New medicine details">
+                    <EntryCell Label="Medicine name:" Placeholder="(eg Paracetamol)" />
+                    <EntryCell Label="Unit:" Placeholder="(eg pills, ml, g)" />
+                    
+                    <ViewCell>
+                        <StackLayout Padding="15">
+                            <Label Text="Description:" />
+                            <Editor BackgroundColor="Silver" HeightRequest="150"/>
+                        </StackLayout>
+
+                    </ViewCell>
+                        
+                </TableSection>  
+            </TableRoot>        
+        </TableView>    
+    </StackLayout>
+
+    
+</ContentPage>

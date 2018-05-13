@@ -89,6 +89,27 @@
     <EmbeddedResource Include="Images\icons_info40.png" />
     <EmbeddedResource Include="Images\icons_password40.png" />
     <EmbeddedResource Include="Images\icons_source40.png" />
+    <EmbeddedResource Include="Images\icons_left48.png" />
+    <EmbeddedResource Include="Images\icons_right48.png" />
+    <EmbeddedResource Include="Views\AddReminderPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\AddMedicinePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Images\icons_clock64.png" />
+    <EmbeddedResource Include="Images\icons_pill50.png" />
+    <EmbeddedResource Include="Images\icons_barcodefilled80.png" />
+    <EmbeddedResource Include="Images\icons_camera80.png" />
+    <EmbeddedResource Include="Images\icons_watch80.png" />
+    <EmbeddedResource Include="Images\icons_calories80.png" />
+    <EmbeddedResource Include="Images\icons_email80.png" />
+    <EmbeddedResource Include="Images\icons_password80.png" />
+    <EmbeddedResource Include="Images\icons_pill80.png" />
+    <EmbeddedResource Include="Images\icons_number80.png" />
+    <EmbeddedResource Include="Images\icons_clock80.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -153,6 +174,14 @@
     <Compile Include="Models\BarcodeItem.cs" />
     <Compile Include="MarkupExtension\FileImage.cs" />
     <Compile Include="Models\Items.cs" />
+    <Compile Include="Models\Reminder.cs" />
+    <Compile Include="Models\Medicine.cs" />
+    <Compile Include="Views\AddReminderPage.xaml.cs">
+      <DependentUpon>AddReminderPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddMedicinePage.xaml.cs">
+      <DependentUpon>AddMedicinePage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\" />

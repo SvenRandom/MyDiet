@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:local="clr-namespace:MyDiet"
              x:Class="MyDiet.Views.MedicinePage">
      <ContentPage.Resources>
         <ResourceDictionary>
@@ -10,11 +11,12 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
-        <ToolbarItem Clicked="OnAdded" Text="Add" />
+        <ToolbarItem Clicked="OnAdded" Text="Add"  />
     </ContentPage.ToolbarItems>
     
     <StackLayout>
         <ActivityIndicator HorizontalOptions="Center" VerticalOptions="Center" IsVisible="False" IsEnabled="True" x:Name="syncIndicator" />
+       
         <StackLayout>
             <Grid ColumnSpacing="2" >
                 <Button  Grid.Column="0" 
@@ -24,28 +26,50 @@
                 <Button  Grid.Column="2"
                         Text="History" x:Name="history" Clicked="HistoryClicked"/> 
             </Grid>
-        </StackLayout>   
-        <ListView x:Name="listView" HasUnevenRows="true">
+        </StackLayout>  
+
+        
+        <ListView HasUnevenRows="true" x:Name="reminderListView">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout Padding="10">
-                             <!--<StackLayout Orientation="Horizontal">
-                                  <Label Text="{Binding TimeToDisplay}" />
+                        <StackLayout Orientation="Horizontal" Padding="15">
+                            <Image Source="{local:EmbeddedImage MyDiet.Images.icons_clock64.png}" HorizontalOptions="Start"
+                                      Aspect="AspectFit" />
+                            <StackLayout HorizontalOptions="FillAndExpand">
+                                <StackLayout  Orientation="Horizontal">
+                                      <Label Text="{Binding TimeToDisplay}" />
 
-                                  <Label Text="{Binding MedicineName}" />
-                                  <Label Text="{Binding Quantity}" HorizontalOptions="EndAndExpand" />
-                            </StackLayout>-->
-                            <StackLayout Orientation="Horizontal">
-                                <Switch />
-                                
-                                <Label Text="Checked" />
+                                      <Label Text="{Binding MedicineName}" />
+                                      <Label Text="{Binding Quantity}" HorizontalOptions="EndAndExpand" />
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <Switch IsToggled="{Binding Checked}" />
+                                    <Label Text="Checked" VerticalOptions="Center" />
+                                </StackLayout>
+                            </StackLayout>
+                        </StackLayout>
 
-           
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>            
+                
+        </ListView>
+        <ListView HasUnevenRows="true" x:Name="medicineListView">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Padding="15" >
+                            <StackLayout Orientation="Horizontal" >
+                                <Label Text="{Binding MedicineName}" 
+                                       HorizontalOptions="StartAndExpand" />
+                                <Image Source="{local:EmbeddedImage MyDiet.Images.icons_pill50.png}" HorizontalOptions="Center"
+                                       Aspect="AspectFit" />
+                                <Label Text="{Binding Unit}" HorizontalOptions="EndAndExpand" />
                             </StackLayout>
 
-
-                         
+                            <Label Text="{Binding Description}" FontSize="Small" />
+                           
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
