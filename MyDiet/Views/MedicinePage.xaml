@@ -15,8 +15,7 @@
     </ContentPage.ToolbarItems>
     
     <StackLayout>
-        <ActivityIndicator HorizontalOptions="Center" VerticalOptions="Center" IsVisible="False" IsEnabled="True" x:Name="syncIndicator" />
-       
+        
         <StackLayout>
             <Grid ColumnSpacing="2" >
                 <Button  Grid.Column="0" 
@@ -27,7 +26,7 @@
                         Text="History" x:Name="history" Clicked="HistoryClicked"/> 
             </Grid>
         </StackLayout>  
-
+        <ActivityIndicator HorizontalOptions="Center" VerticalOptions="Center" IsVisible="False" IsEnabled="True" x:Name="syncIndicator" />
         
         <ListView HasUnevenRows="true" x:Name="reminderListView">
             <ListView.ItemTemplate>
@@ -55,7 +54,7 @@
             </ListView.ItemTemplate>            
                 
         </ListView>
-        <ListView HasUnevenRows="true" x:Name="medicineListView">
+        <ListView HasUnevenRows="true" x:Name="medicineListView" ItemSelected="MedicineItemSelected" IsPullToRefreshEnabled="true" Refreshing="OnMedicineRefresh" >
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

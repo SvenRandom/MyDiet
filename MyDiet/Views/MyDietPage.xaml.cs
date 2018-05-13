@@ -18,6 +18,7 @@ namespace MyDiet.Views
 
 		DietManager dietManager;
 
+
 		int currentView;
 		public MyDietPage()
         {

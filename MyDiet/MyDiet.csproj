@@ -182,6 +182,7 @@
     <Compile Include="Views\AddMedicinePage.xaml.cs">
       <DependentUpon>AddMedicinePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Manager\MedicineManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\" />

@@ -1,20 +1,42 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using MyDiet.Manager;
+using MyDiet.Models;
 using Xamarin.Forms;
 
 namespace MyDiet.Views
 {
     public partial class AddMedicinePage : ContentPage
     {
-        public AddMedicinePage()
+		Medicine currentMedicine;
+		bool isNewItem=false;
+		MedicineManager medicineManager;
+		public AddMedicinePage(Medicine medicine) 
         {
             InitializeComponent();
+			if(medicine==null){
+				isNewItem = true;
+				currentMedicine = new Medicine
+				{
+					Id = Guid.NewGuid().ToString(),
+					UserId = App.account.Id             
+                };
+
+
+			}else
+			{
+				currentMedicine = medicine;
+			}
+			tableView.BindingContext = currentMedicine;
+
         }
 
-		void DoneClicked(object sender, EventArgs e)
+		async void DoneClicked(object sender, EventArgs e)
 		{
-			Navigation.PopAsync();
+			
+			medicineManager = MedicineManager.DefaultManager;
+			await medicineManager.SaveTaskAsync(currentMedicine, isNewItem);
+			await Navigation.PopAsync();
 		}
     }
 }
