@@ -21,7 +21,7 @@ namespace MyDiet.Views
 			reminderManager = ReminderManager.DefaultManager;
             
 			currentView = 0;
-
+			//ReminderClicked();
 		}
 		protected override void OnAppearing()
         {
@@ -37,10 +37,7 @@ namespace MyDiet.Views
 
             if (currentView == 2)
                 HistoryClicked();
-
-
-      
-
+                     
         }
 
 		async void OnAdded(object sender, System.EventArgs e)
@@ -79,7 +76,8 @@ namespace MyDiet.Views
 
 		void ReminderClicked(object sender, System.EventArgs e)
         {
-			ReminderClicked();
+			if(currentView!=0)
+    			ReminderClicked();
 
         }
 
@@ -133,7 +131,8 @@ namespace MyDiet.Views
 
 		void MedicineClicked(object sender, System.EventArgs e)
         {
-			MedicineClicked();
+			if (currentView != 1)
+			    MedicineClicked();
 
         }
 
@@ -182,14 +181,15 @@ namespace MyDiet.Views
 			//medicines.Add(medicine3);
 			//medicineListView.ItemsSource = medicines;
 
-
+                
         }
-
+        
 
 
         void HistoryClicked(object sender, System.EventArgs e)
         {
-            HistoryClicked();
+			if (currentView != 2)
+              HistoryClicked();
         }
          void HistoryClicked()
         {

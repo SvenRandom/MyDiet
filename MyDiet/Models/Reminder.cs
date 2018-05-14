@@ -17,6 +17,9 @@ namespace MyDiet.Models
 		[JsonProperty(PropertyName = "Quantity")]
 		public string Quantity { get; set; }
 
+		[JsonProperty(PropertyName = "Unit")]
+		public string Unit { get; set; }
+
 		[JsonProperty(PropertyName = "TimeToDisplay")]
 		public string TimeToDisplay { get; set; }
 

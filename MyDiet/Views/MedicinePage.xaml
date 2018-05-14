@@ -38,14 +38,17 @@
                                       Aspect="AspectFit" />
                             <StackLayout HorizontalOptions="FillAndExpand">
                                 <StackLayout  Orientation="Horizontal">
-                                      <Label Text="{Binding TimeToDisplay}" />
+                                    <Label Text="{Binding TimeToDisplay}" />
 
-                                      <Label Text="{Binding MedicineName}" />
-                                      <Label Text="{Binding Quantity}" HorizontalOptions="EndAndExpand" />
+                                    <Label Text="{Binding MedicineName}" />
+
+
+                                    <Label Text="{Binding Unit}" HorizontalOptions="EndAndExpand" />
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal">
                                     <Switch IsToggled="{Binding Checked}" />
                                     <Label Text="Checked" VerticalOptions="Center" />
+                                    <Label Text="{Binding Quantity}" HorizontalOptions="EndAndExpand" />
                                 </StackLayout>
                             </StackLayout>
                         </StackLayout>
