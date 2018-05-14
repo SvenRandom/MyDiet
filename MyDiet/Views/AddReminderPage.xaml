@@ -22,7 +22,7 @@
 
     <StackLayout>
         
-        <TableView Intent="Form" HasUnevenRows="true" >
+        <TableView x:Name="tableView" Intent="Form" HasUnevenRows="true" >
             <TableRoot>
                 <TableSection >
                     <ViewCell>
@@ -30,7 +30,7 @@
                             <Image Source="{local:EmbeddedImage MyDiet.Images.icons_clock80.png}" HorizontalOptions="Start"
                                     Aspect="AspectFit" />
                             <Label Text="Reminder time: " />
-                            <TimePicker />
+                            <TimePicker Time="{Binding Time}" />
                         </StackLayout>
                     </ViewCell>
                 </TableSection>
@@ -42,7 +42,7 @@
                                     Aspect="AspectFit" />
                             <Label Text="Pick medicine:" />
                             <Picker x:Name="medicinePicker" Title="From my medicines" 
-                                    SelectedItem="enalapril(Vasotec)" SelectedIndex="1" > 
+                                    SelectedItem="{Binding MedicineName}" SelectedIndex="1" > 
                                 <Picker.Items>
                                     <x:String>enalapril(Vasotec)</x:String>
                                     <x:String>Eplerenone (Inspra)</x:String>
@@ -59,7 +59,7 @@
                             <Image Source="{local:EmbeddedImage MyDiet.Images.icons_number80.png}" HorizontalOptions="Start"
                                     Aspect="AspectFit" />
                             <Label Text="Quantity needed:" />
-                            <Entry Keyboard="Numeric" Placeholder="(eg 2)" />
+                            <Entry Keyboard="Numeric" Placeholder="(eg 2)" Text="{Binding Quantity}" />
                             <Label Text="Tablet" />
                         </StackLayout>
                     </ViewCell>

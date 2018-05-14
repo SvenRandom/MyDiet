@@ -10,7 +10,7 @@ namespace MyDiet.Views
     {
 		Medicine currentMedicine;
 		bool isNewItem=false;
-		MedicineManager medicineManager;
+
 		public AddMedicinePage(Medicine medicine) 
         {
             InitializeComponent();
@@ -33,8 +33,7 @@ namespace MyDiet.Views
 
 		async void DoneClicked(object sender, EventArgs e)
 		{
-			
-			medicineManager = MedicineManager.DefaultManager;
+			MedicineManager medicineManager = MedicineManager.DefaultManager;
 			await medicineManager.SaveTaskAsync(currentMedicine, isNewItem);
 			await Navigation.PopAsync();
 		}

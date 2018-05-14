@@ -183,6 +183,7 @@
       <DependentUpon>AddMedicinePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Manager\MedicineManager.cs" />
+    <Compile Include="Manager\ReminderManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\" />

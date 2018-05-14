@@ -16,37 +16,37 @@ using Microsoft.WindowsAzure.MobileServices.Sync;
 
 namespace MyDiet.Manager
 {
-	public partial class MedicineManager
+	public partial class ReminderManager
     {
-		static MedicineManager defaultInstance = new MedicineManager();
+		static ReminderManager defaultInstance = new ReminderManager();
         MobileServiceClient client;
         
 #if OFFLINE_SYNC_ENABLED
-		IMobileServiceSyncTable<Medicine> medicineTable;
+		IMobileServiceSyncTable<Reminder> reminderTable;
 #else
-		IMobileServiceTable<MedicineManager> medicineTable;
+		IMobileServiceTable<ReminderManager> medicineTable;
 #endif
 
         const string offlineDbPath = @"localstore.db";
 
-		private MedicineManager()
+		private ReminderManager()
         {
             this.client = new MobileServiceClient(Constants.ApplicationURL);
 
 #if OFFLINE_SYNC_ENABLED
             var store = new MobileServiceSQLiteStore(offlineDbPath);
-			store.DefineTable<Medicine>();
+			store.DefineTable<Reminder>();
 
             //Initializes the SyncContext using the default IMobileServiceSyncHandler.
             this.client.SyncContext.InitializeAsync(store);
 
-			this.medicineTable = client.GetSyncTable<Medicine>();
+			this.reminderTable = client.GetSyncTable<Reminder>();
 #else
-			this.dietTable = client.GetTable<Medicine>();
+			this.dietTable = client.GetTable<Reminder>();
 #endif
         }
 
-		public static MedicineManager DefaultManager
+		public static ReminderManager DefaultManager
         {
             get
             {
@@ -65,11 +65,11 @@ namespace MyDiet.Manager
 
         public bool IsOfflineEnabled
         {
-			get { return medicineTable is Microsoft.WindowsAzure.MobileServices.Sync.IMobileServiceSyncTable<Medicine>; }
+			get { return reminderTable is Microsoft.WindowsAzure.MobileServices.Sync.IMobileServiceSyncTable<Reminder>; }
         }
   
 
-		public async Task<ObservableCollection<Medicine>> GetMedicinesAsync(bool syncItems = false)
+		public async Task<ObservableCollection<Reminder>> GetReminderAsync(bool syncItems = false)
         {
             try
             {
@@ -79,11 +79,11 @@ namespace MyDiet.Manager
                     await this.SyncAsync();
                 }
 #endif
-				IEnumerable<Medicine> items = await medicineTable
+				IEnumerable<Reminder> items = await reminderTable
 					.Where(medicine => medicine.UserId == App.account.Id)
                     .ToEnumerableAsync();
 
-				return new ObservableCollection<Medicine>(items);
+				return new ObservableCollection<Reminder>(items);
             }
             catch (MobileServiceInvalidOperationException msioe)
             {
@@ -96,17 +96,17 @@ namespace MyDiet.Manager
             return null;
         }
 
-		public async Task SaveTaskAsync(Medicine item, bool isNew)
+		public async Task SaveTaskAsync(Reminder item, bool isNew)
         {
 			try{
 				if (isNew == true)
                 {
-					await medicineTable.InsertAsync(item);
+					await reminderTable.InsertAsync(item);
 
                 }
                 else
                 {
-					await medicineTable.UpdateAsync(item);
+					await reminderTable.UpdateAsync(item);
 
                 }
 			}
@@ -118,10 +118,10 @@ namespace MyDiet.Manager
 
         }
 
-		public async Task DeleteTaskAsync(Medicine item)
+		public async Task DeleteTaskAsync(Reminder item)
         {
            
-			await medicineTable.DeleteAsync(item);
+			await reminderTable.DeleteAsync(item);
 
 
         }
@@ -138,11 +138,11 @@ namespace MyDiet.Manager
             {
                 await this.client.SyncContext.PushAsync();
 
-				await this.medicineTable.PullAsync(
+				await this.reminderTable.PullAsync(
                     //The first parameter is a query name that is used internally by the client SDK to implement incremental sync.
                     //Use a different query name for each unique query in your program
                     "allDietItems",
-					this.medicineTable.CreateQuery());
+					this.reminderTable.CreateQuery());
             }
             catch (MobileServicePushFailedException exc)
             {
@@ -180,8 +180,8 @@ namespace MyDiet.Manager
 
 		public async Task ResolveConflictAsync(MobileServiceTableOperationError error)
         {
-			var serverItem = error.Result.ToObject<Medicine>();
-			var localItem = error.Item.ToObject<Medicine>();
+			var serverItem = error.Result.ToObject<Reminder>();
+			var localItem = error.Item.ToObject<Reminder>();
 
             // Note that you need to implement the public override Equals(TodoItem item)
             // method in the Model for this to work         

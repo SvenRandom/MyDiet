@@ -13,10 +13,13 @@ namespace MyDiet.Views
 
 		int currentView = 0;
 		MedicineManager medicineManager;
+		ReminderManager reminderManager;
 		public MedicinePage()
 		{
 			InitializeComponent();
 			medicineManager =MedicineManager.DefaultManager;
+			reminderManager = ReminderManager.DefaultManager;
+            
 			currentView = 0;
 
 		}
@@ -44,7 +47,8 @@ namespace MyDiet.Views
         {
 			var response = await DisplayActionSheet("Which to add?", "Cancel", null, "New Reminder", "New Medicine");
 			if (response == "New Reminder"){
-				await Navigation.PushAsync(new AddReminderPage());
+				Reminder reminder = null;
+				await Navigation.PushAsync(new AddReminderPage(reminder));
 			}
                
 			if (response == "New Medicine"){
@@ -56,6 +60,13 @@ namespace MyDiet.Views
             
         }
 
+		void ReminderItemSelected(object sender, Xamarin.Forms.SelectedItemChangedEventArgs e)
+        {
+            var reminder = e.SelectedItem as Reminder;
+
+			Navigation.PushAsync(new AddReminderPage(reminder));
+        }
+
 		void MedicineItemSelected(object sender, Xamarin.Forms.SelectedItemChangedEventArgs e)
         {
 			var medicine = e.SelectedItem as Medicine;
@@ -65,17 +76,19 @@ namespace MyDiet.Views
 
 
 
+
 		void ReminderClicked(object sender, System.EventArgs e)
         {
 			ReminderClicked();
 
         }
 
-		void ReminderClicked()
+		async void ReminderClicked()
         {
-         
-			medicineListView.IsVisible = false;
+			var temp =await reminderManager.GetReminderAsync();
+			reminderListView.ItemsSource = temp;
 
+			medicineListView.IsVisible = false;
 			reminderListView.IsVisible = true;
             reminder.BackgroundColor = Color.FromHex("#2196F3");
             reminder.TextColor = Color.White;
@@ -85,36 +98,36 @@ namespace MyDiet.Views
             history.TextColor = Color.FromHex("#2196F3");
             currentView = 0;
 
-			List<Reminder> reminders = new List<Reminder>();
-            Reminder reminder1 = new Reminder
-            {
-				MedicineName = "enalapril(Vasotec)",
-                Time = new TimeSpan(9, 00, 00),
-				Quantity = "2 Tablet"
-            };
-            reminder1.SetTimeToDisplay();
+			//List<Reminder> reminders = new List<Reminder>();
+   //         Reminder reminder1 = new Reminder
+   //         {
+			//	MedicineName = "enalapril(Vasotec)",
+   //             Time = new TimeSpan(9, 00, 00),
+			//	Quantity = "2 Tablet"
+   //         };
+   //         reminder1.SetTimeToDisplay();
 
-            Reminder reminder2 = new Reminder
-            {
-				MedicineName = "Eplerenone (Inspra)",
-                Time = new TimeSpan(12, 00, 00),
-                Quantity = "1 Tablet"
-            };
-            reminder1.SetTimeToDisplay();
-            Reminder reminder3 = new Reminder
-            {
-				MedicineName = "enalapril(Vasotec)",
-                Time = new TimeSpan(19, 00, 00),
-				Quantity = "2 Tablet"
-            };
-            reminder1.SetTimeToDisplay();
-            reminder2.SetTimeToDisplay();
-            reminder3.SetTimeToDisplay();
+   //         Reminder reminder2 = new Reminder
+   //         {
+			//	MedicineName = "Eplerenone (Inspra)",
+   //             Time = new TimeSpan(12, 00, 00),
+   //             Quantity = "1 Tablet"
+   //         };
+   //         reminder1.SetTimeToDisplay();
+   //         Reminder reminder3 = new Reminder
+   //         {
+			//	MedicineName = "enalapril(Vasotec)",
+   //             Time = new TimeSpan(19, 00, 00),
+			//	Quantity = "2 Tablet"
+   //         };
+   //         reminder1.SetTimeToDisplay();
+   //         reminder2.SetTimeToDisplay();
+   //         reminder3.SetTimeToDisplay();
 
-            reminders.Add(reminder1);
-            reminders.Add(reminder2);
-            reminders.Add(reminder3);
-			reminderListView.ItemsSource = reminders;
+   //         reminders.Add(reminder1);
+   //         reminders.Add(reminder2);
+   //         reminders.Add(reminder3);
+			//reminderListView.ItemsSource = reminders;
             
         }
 
@@ -237,7 +250,48 @@ namespace MyDiet.Views
             }
         }
 
+        //********************offline **************for reminder
+		public async void OnReminderRefresh(object sender, EventArgs e)
+        {
+            var list = (ListView)sender;
+            Exception error = null;
+            try
+            {
+                await RefreshReminder(false, true);
+            }
+            catch (Exception ex)
+            {
+                error = ex;
+            }
+            finally
+            {
+                list.EndRefresh();
+            }
 
+            if (error != null)
+            {
+                await DisplayAlert("Refresh Error", "Couldn't refresh data (" + error.Message + ")", "OK");
+            }
+        }
+
+        
+
+		private async Task RefreshReminder(bool showActivityIndicator, bool syncItems)
+        {
+            using (var scope = new ActivityIndicatorScope(syncIndicator, showActivityIndicator))
+            {
+
+				var temp = await reminderManager.GetReminderAsync(syncItems);
+				reminderListView.ItemsSource = temp;
+
+
+            }
+        }
+
+
+
+
+        //****************show activity indicator
         private class ActivityIndicatorScope : IDisposable
         {
             private bool showIndicator;

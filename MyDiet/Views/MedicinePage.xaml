@@ -28,7 +28,8 @@
         </StackLayout>  
         <ActivityIndicator HorizontalOptions="Center" VerticalOptions="Center" IsVisible="False" IsEnabled="True" x:Name="syncIndicator" />
         
-        <ListView HasUnevenRows="true" x:Name="reminderListView">
+        <ListView HasUnevenRows="true" x:Name="reminderListView" ItemSelected="ReminderItemSelected" 
+                  IsPullToRefreshEnabled="true" Refreshing="OnReminderRefresh">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -54,7 +55,8 @@
             </ListView.ItemTemplate>            
                 
         </ListView>
-        <ListView HasUnevenRows="true" x:Name="medicineListView" ItemSelected="MedicineItemSelected" IsPullToRefreshEnabled="true" Refreshing="OnMedicineRefresh" >
+        <ListView HasUnevenRows="true" x:Name="medicineListView" ItemSelected="MedicineItemSelected" 
+                  IsPullToRefreshEnabled="true" Refreshing="OnMedicineRefresh" >
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
