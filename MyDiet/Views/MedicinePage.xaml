@@ -35,7 +35,9 @@
                     <ViewCell>
                         <StackLayout Orientation="Horizontal" Padding="15">
                             <Image Source="{local:EmbeddedImage MyDiet.Images.icons_clock64.png}" HorizontalOptions="Start"
-                                      Aspect="AspectFit" />
+                                      Aspect="AspectFit" IsVisible="{Binding UnChecked}" />
+                            <Image Source="{local:EmbeddedImage MyDiet.Images.icons_checked64.png}" HorizontalOptions="Start"
+                                      Aspect="AspectFit" IsVisible="{Binding  Checked}" />
                             <StackLayout HorizontalOptions="FillAndExpand">
                                 <StackLayout  Orientation="Horizontal">
                                     <Label Text="{Binding TimeToDisplay}" />
@@ -46,13 +48,17 @@
                                     <Label Text="{Binding Unit}" HorizontalOptions="EndAndExpand" />
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal">
-                                    <Switch IsToggled="{Binding Checked}" />
+                                    <Switch IsToggled="{Binding Checked}" Toggled="Handle_Toggled" 
+                                            x:Name="checkState" IsEnabled="false" />
                                     <Label Text="Checked" VerticalOptions="Center" />
                                     <Label Text="{Binding Quantity}" HorizontalOptions="EndAndExpand" />
                                 </StackLayout>
                             </StackLayout>
                         </StackLayout>
-
+                        <ViewCell.ContextActions>
+                                <MenuItem Text="Edit" Clicked="ReminderEditClicked" CommandParameter="{Binding .}"/>
+                                <MenuItem Text="Delete" Clicked="ReminderDeleteClicked"  IsDestructive="true" CommandParameter="{Binding .}"/>
+                            </ViewCell.ContextActions>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>            

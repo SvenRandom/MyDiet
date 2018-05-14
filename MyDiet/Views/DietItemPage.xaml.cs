@@ -323,7 +323,7 @@ namespace MyDiet.Views
 			//System.Diagnostics.Debug.WriteLine("obj total: " + obj.total);
      //**********************************       
 			//HttpClient _client = new HttpClient();
-   //         string quary = Constants.BarcodeEndpointUri + "?json=barcode&q={" + App.barcode + "}&apikey={" + Constants.APIKey + "}";
+   //         string quary = Constants.BarcodeEndpointUri + "?json=barcode&q=" + App.barcode + "&apikey=" + Constants.APIKey;
 
 
 			//var response = await _client.GetAsync(quary);

@@ -110,6 +110,7 @@
     <EmbeddedResource Include="Images\icons_pill80.png" />
     <EmbeddedResource Include="Images\icons_number80.png" />
     <EmbeddedResource Include="Images\icons_clock80.png" />
+    <EmbeddedResource Include="Images\icons_checked64.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">

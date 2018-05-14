@@ -4,12 +4,13 @@ using System.Threading.Tasks;
 using MyDiet.Manager;
 using MyDiet.Models;
 using Xamarin.Forms;
+using System.Linq;
 
 namespace MyDiet.Views
 {
     public partial class MedicinePage : ContentPage
     {
-		
+
 
 		int currentView = 0;
 		MedicineManager medicineManager;
@@ -19,14 +20,20 @@ namespace MyDiet.Views
 			InitializeComponent();
 			medicineManager =MedicineManager.DefaultManager;
 			reminderManager = ReminderManager.DefaultManager;
-            
+                    
+
 			currentView = 0;
 			//ReminderClicked();
 		}
-		protected override void OnAppearing()
+		async protected override void OnAppearing()
         {
             base.OnAppearing();
-           
+			var temp = await reminderManager.GetReminderAsync();
+			reminderListView.ItemsSource = temp.OrderBy(reminder => reminder.Time);
+            
+
+            var temp1 = await medicineManager.GetMedicinesAsync();
+            medicineListView.ItemsSource = temp1;
             if (currentView == 0)
             {
 				ReminderClicked();
@@ -57,20 +64,53 @@ namespace MyDiet.Views
             
         }
 
-		void ReminderItemSelected(object sender, Xamarin.Forms.SelectedItemChangedEventArgs e)
+        //**************** reminder selected ******************8
+		async void ReminderItemSelected(object sender, Xamarin.Forms.SelectedItemChangedEventArgs e)
         {
-            var reminder = e.SelectedItem as Reminder;
+            var reminderN = e.SelectedItem as Reminder;
+			var confirm = await DisplayAlert("Notice!", "Checked status can not be modified! Are you sure to check this reminder?", "Yes", "Cancel");
+            if (confirm)
+            {
+				reminderN.Checked = true;
+				reminderN.SetUnChecked();
+				await reminderManager.SaveTaskAsync(reminderN, false);
+				var temp = await reminderManager.GetReminderAsync();
+				reminderListView.ItemsSource = temp.OrderBy(reminder => reminder.Time.Hours);
+               
+            }
 
-			Navigation.PushAsync(new AddReminderPage(reminder));
         }
-
+        
 		void MedicineItemSelected(object sender, Xamarin.Forms.SelectedItemChangedEventArgs e)
         {
 			var medicine = e.SelectedItem as Medicine;
 
 			Navigation.PushAsync(new AddMedicinePage(medicine));
+            
         }
 
+        //*********** reminder edit click ****************
+		void ReminderEditClicked(object sender, System.EventArgs e)
+        {
+			var reminder = (sender as MenuItem).CommandParameter as Reminder;
+			Navigation.PushAsync(new AddReminderPage(reminder));
+
+        }
+
+        //************** reminder delete ******************
+		async void ReminderDeleteClicked(object sender, System.EventArgs e)
+        {
+			var reminder = (sender as MenuItem).CommandParameter as Reminder;
+			var confirm = await DisplayAlert("Notice!", "Are you sure to delete this reminder?", "Yes", "Cancel");
+            if (confirm)
+            {
+                
+				await reminderManager.DeleteTaskAsync(reminder);
+				var temp = await reminderManager.GetReminderAsync();
+				reminderListView.ItemsSource = temp.OrderBy(reminders => reminders.Time);
+            }
+
+        }
 
 
 
@@ -81,10 +121,10 @@ namespace MyDiet.Views
 
         }
 
-		async void ReminderClicked()
+		void ReminderClicked()
         {
-			var temp =await reminderManager.GetReminderAsync();
-			reminderListView.ItemsSource = temp;
+			//var temp =await reminderManager.GetReminderAsync();
+			//reminderListView.ItemsSource = temp;
 
 			medicineListView.IsVisible = false;
 			reminderListView.IsVisible = true;
@@ -133,13 +173,13 @@ namespace MyDiet.Views
         {
 			if (currentView != 1)
 			    MedicineClicked();
-
+            
         }
 
-		async void MedicineClicked()
+		void MedicineClicked()
         {
-			var temp =await medicineManager.GetMedicinesAsync();
-			medicineListView.ItemsSource = temp;
+			//var temp =await medicineManager.GetMedicinesAsync();
+			//medicineListView.ItemsSource = temp;
 
 			reminderListView.IsVisible = false;
 
@@ -205,7 +245,13 @@ namespace MyDiet.Views
         }
 
 
+        //************* handle togged **************
+		void Handle_Toggled(object sender, Xamarin.Forms.ToggledEventArgs e)
+        {
+			
+        }
 
+        
 
 
         //************************Offline************** medicine
@@ -282,7 +328,7 @@ namespace MyDiet.Views
             {
 
 				var temp = await reminderManager.GetReminderAsync(syncItems);
-				reminderListView.ItemsSource = temp;
+				reminderListView.ItemsSource = temp.OrderBy(reminder => reminder.Time);
 
 
             }

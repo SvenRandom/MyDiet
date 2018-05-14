@@ -26,6 +26,9 @@ namespace MyDiet.Models
 		[JsonProperty(PropertyName = "Checked")]
         public bool Checked { get; set; }
 
+		[JsonProperty(PropertyName = "UnChecked")]
+        public bool UnChecked { get; set; }
+
         [JsonProperty(PropertyName = "Time")]
         public TimeSpan Time { get; set; }
         
@@ -33,5 +36,11 @@ namespace MyDiet.Models
         {
             TimeToDisplay = Time.ToString(@"hh\:mm");
         }
+
+		public void SetUnChecked()
+        {
+			UnChecked=!Checked;
+        }
+
     }
 }

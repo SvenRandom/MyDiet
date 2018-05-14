@@ -28,7 +28,8 @@ namespace MyDiet.Views
 				currentReminder = new Reminder
 				{
 					Id = Guid.NewGuid().ToString(),
-					UserId = App.account.Id
+					UserId = App.account.Id,
+					Checked=false
 				};
 
 			}else
@@ -63,6 +64,7 @@ namespace MyDiet.Views
 		async void DoneClicked(object sender, EventArgs e)
         {
 			currentReminder.SetTimeToDisplay();
+			currentReminder.SetUnChecked();
 			ReminderManager reminderManeger = ReminderManager.DefaultManager;
 			await reminderManeger.SaveTaskAsync(currentReminder, isNewItem);
 			await Navigation.PopAsync();
@@ -82,8 +84,8 @@ namespace MyDiet.Views
         {
 			var confirm = await DisplayAlert("Notice!", "Are you sure to delete this reminder?", "Yes", "Cancel");
 			if(confirm){
-				ReminderManager reminderManeger = ReminderManager.DefaultManager;
-                await reminderManeger.DeleteTaskAsync(currentReminder);
+				ReminderManager reminderManager = ReminderManager.DefaultManager;
+                await reminderManager.DeleteTaskAsync(currentReminder);
                 await Navigation.PopAsync();
 			}
 
