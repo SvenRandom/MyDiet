@@ -16,11 +16,13 @@ namespace MyDiet.Views
 		int currentView = 0;
 		MedicineManager medicineManager;
 		ReminderManager reminderManager;
+		MedicineHistoryManager medicineHistoryManager;
 		public MedicinePage()
 		{
 			InitializeComponent();
 			medicineManager =MedicineManager.DefaultManager;
 			reminderManager = ReminderManager.DefaultManager;
+			medicineHistoryManager = MedicineHistoryManager.DefaultManager;
 			Init();      
 			ReminderClicked();
 			currentView = 0;
@@ -31,10 +33,13 @@ namespace MyDiet.Views
 		{
 			var temp = await reminderManager.GetReminderAsync();
             reminderListView.ItemsSource = temp.OrderBy(reminder => reminder.Time);
-
-
+            
+            
             var temp1 = await medicineManager.GetMedicinesAsync();
             medicineListView.ItemsSource = temp1;
+
+			var temp2 = await medicineHistoryManager.GetMedicinesAsync();
+			historyListView.ItemsSource = temp2 .OrderByDescending(history => history.Time);
 
 		}
 
@@ -42,7 +47,7 @@ namespace MyDiet.Views
         {
             base.OnAppearing();
 			if(!(Settings.ReminderDate.Month==DateTime.Now.Month && Settings.ReminderDate.Day==DateTime.Now.Day
-			     ))
+			     && Settings.ReminderDate.Minute == DateTime.Now.Minute))
 			{
 				UpdateCheck();
 			}
@@ -97,7 +102,7 @@ namespace MyDiet.Views
             
         }
 
-        //**************** reminder selected ******************8
+        //**************** reminder Checked ******************8
 		async void ReminderItemSelected(object sender, Xamarin.Forms.SelectedItemChangedEventArgs e)
         {
             var reminderN = e.SelectedItem as Reminder;
@@ -113,6 +118,24 @@ namespace MyDiet.Views
 					reminderListView.ItemsSource = temp.OrderBy(reminder => reminder.Time.Hours);
 
 				}
+				//add new medicine record to history
+				MedicineHistory medicineHistory = new MedicineHistory
+				{
+					Id = Guid.NewGuid().ToString(),
+					UserId = App.account.Id,
+					MedicineName = reminderN.MedicineName,
+					Quantity = reminderN.Quantity,
+					Checked = reminderN.Checked,
+					Unit = reminderN.Unit,
+					Time = DateTime.Now
+                    
+				};
+				medicineHistory.SetTimeToDisplay();
+				await medicineHistoryManager.SaveTaskAsync(medicineHistory, true);
+				var temp2 = await medicineHistoryManager.GetMedicinesAsync();
+                historyListView.ItemsSource = temp2.OrderByDescending(history => history.Time);
+
+
 			}
 			else
 				await DisplayAlert("Notice:", "You have checked this today!", "OK");
@@ -156,6 +179,21 @@ namespace MyDiet.Views
         }
 
 
+		//************** history delete ******************
+        async void HistoryDeleteClicked(object sender, System.EventArgs e)
+        {
+			var medicineHistory = (sender as MenuItem).CommandParameter as MedicineHistory;
+            var confirm = await DisplayAlert("Notice!", "Are you sure to delete this medicine record?", "Yes", "Cancel");
+            if (confirm)
+            {
+
+				await medicineHistoryManager.DeleteTaskAsync(medicineHistory);
+				var temp2 = await medicineHistoryManager.GetMedicinesAsync();
+                historyListView.ItemsSource = temp2.OrderByDescending(history => history.Time);
+            }
+
+        }
+
 
 		void ReminderClicked(object sender, System.EventArgs e)
         {
@@ -170,7 +208,9 @@ namespace MyDiet.Views
 			//reminderListView.ItemsSource = temp;
 
 			medicineListView.IsVisible = false;
+			historyListView.IsVisible = false;
 			reminderListView.IsVisible = true;
+
             reminder.BackgroundColor = Color.FromHex("#2196F3");
             reminder.TextColor = Color.White;
             medicine.BackgroundColor = Color.WhiteSmoke;
@@ -225,7 +265,7 @@ namespace MyDiet.Views
 			//medicineListView.ItemsSource = temp;
 
 			reminderListView.IsVisible = false;
-
+			historyListView.IsVisible = false;
 			medicineListView.IsVisible = true;
 			reminder.BackgroundColor = Color.WhiteSmoke;
 			reminder.TextColor = Color.FromHex("#2196F3");
@@ -276,7 +316,10 @@ namespace MyDiet.Views
         }
          void HistoryClicked()
         {
-          
+			
+			reminderListView.IsVisible = false;
+			medicineListView.IsVisible = false;
+			historyListView.IsVisible = true;
 
 			reminder.BackgroundColor = Color.WhiteSmoke;
 			reminder.TextColor = Color.FromHex("#2196F3");
@@ -287,13 +330,7 @@ namespace MyDiet.Views
             currentView = 2;
         }
 
-
-        //************* handle togged **************
-		void Handle_Toggled(object sender, Xamarin.Forms.ToggledEventArgs e)
-        {
-			
-        }
-
+              
         
 
 
@@ -377,6 +414,44 @@ namespace MyDiet.Views
             }
         }
 
+
+		//********************offline **************for history
+        public async void OnHistoryRefresh(object sender, EventArgs e)
+        {
+            var list = (ListView)sender;
+            Exception error = null;
+            try
+            {
+                await RefreshHistory(false, true);
+            }
+            catch (Exception ex)
+            {
+                error = ex;
+            }
+            finally
+            {
+                list.EndRefresh();
+            }
+
+            if (error != null)
+            {
+                await DisplayAlert("Refresh Error", "Couldn't refresh data (" + error.Message + ")", "OK");
+            }
+        }
+
+
+
+        private async Task RefreshHistory(bool showActivityIndicator, bool syncItems)
+        {
+            using (var scope = new ActivityIndicatorScope(syncIndicator, showActivityIndicator))
+            {
+
+				var temp2 = await medicineHistoryManager.GetMedicinesAsync();
+                historyListView.ItemsSource = temp2.OrderByDescending(history => history.Time);
+
+
+            }
+        }
 
 
 

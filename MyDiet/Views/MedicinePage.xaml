@@ -48,7 +48,7 @@
                                     <Label Text="{Binding Unit}" HorizontalOptions="EndAndExpand" />
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal">
-                                    <Switch IsToggled="{Binding Checked}" Toggled="Handle_Toggled" 
+                                    <Switch IsToggled="{Binding Checked}"  
                                             x:Name="checkState" IsEnabled="false" />
                                     <Label Text="Checked" VerticalOptions="Center" />
                                     <Label Text="{Binding Quantity}" HorizontalOptions="EndAndExpand" />
@@ -86,5 +86,41 @@
             </ListView.ItemTemplate>            
                 
         </ListView>
+
+
+         <ListView HasUnevenRows="true" x:Name="historyListView"
+                  IsPullToRefreshEnabled="true" Refreshing="OnHistoryRefresh">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" Padding="15">
+                            <Image Source="{local:EmbeddedImage MyDiet.Images.icons_checked64.png}" HorizontalOptions="Start"
+                                      Aspect="AspectFit" IsVisible="{Binding  Checked}" />
+                            <StackLayout HorizontalOptions="FillAndExpand">
+                                <StackLayout  Orientation="Horizontal">
+                                    <Label Text="{Binding TimeToDisplay}" />
+
+
+
+
+                                    <Label Text="{Binding Unit}" HorizontalOptions="EndAndExpand" />
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <Switch IsToggled="{Binding Checked}" 
+                                            x:Name="checkState" IsEnabled="false" />
+                                    <Label Text="{Binding MedicineName}" VerticalOptions="Center" />
+                                    <Label Text="{Binding Quantity}" HorizontalOptions="EndAndExpand" />
+                                </StackLayout>
+                            </StackLayout>
+                        </StackLayout>
+                        <ViewCell.ContextActions>
+                                <MenuItem Text="Delete" Clicked="HistoryDeleteClicked"  IsDestructive="true" CommandParameter="{Binding .}"/>
+                            </ViewCell.ContextActions>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>            
+                
+        </ListView>
+        
     </StackLayout>
 </ContentPage>

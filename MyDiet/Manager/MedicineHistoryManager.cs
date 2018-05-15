@@ -16,37 +16,37 @@ using Microsoft.WindowsAzure.MobileServices.Sync;
 
 namespace MyDiet.Manager
 {
-	public partial class MedicineManager
+	public partial class MedicineHistoryManager
     {
-		static MedicineManager defaultInstance = new MedicineManager();
+		static MedicineHistoryManager defaultInstance = new MedicineHistoryManager();
         MobileServiceClient client;
         
 #if OFFLINE_SYNC_ENABLED
-		IMobileServiceSyncTable<Medicine> medicineTable;
+		IMobileServiceSyncTable<MedicineHistory> medicineTable;
 #else
-		IMobileServiceTable<Medicine> medicineTable;
+		IMobileServiceTable<MedicineHistory> medicineTable;
 #endif
 
         const string offlineDbPath = @"localstore.db";
 
-		private MedicineManager()
+		private MedicineHistoryManager()
         {
             this.client = new MobileServiceClient(Constants.ApplicationURL);
 
 #if OFFLINE_SYNC_ENABLED
             var store = new MobileServiceSQLiteStore(offlineDbPath);
-			store.DefineTable<Medicine>();
+			store.DefineTable<MedicineHistory>();
 
             //Initializes the SyncContext using the default IMobileServiceSyncHandler.
             this.client.SyncContext.InitializeAsync(store);
 
-			this.medicineTable = client.GetSyncTable<Medicine>();
+			this.medicineTable = client.GetSyncTable<MedicineHistory>();
 #else
 			this.dietTable = client.GetTable<Medicine>();
 #endif
         }
 
-		public static MedicineManager DefaultManager
+		public static MedicineHistoryManager DefaultManager
         {
             get
             {
@@ -65,11 +65,11 @@ namespace MyDiet.Manager
 
         public bool IsOfflineEnabled
         {
-			get { return medicineTable is Microsoft.WindowsAzure.MobileServices.Sync.IMobileServiceSyncTable<Medicine>; }
+			get { return medicineTable is Microsoft.WindowsAzure.MobileServices.Sync.IMobileServiceSyncTable<MedicineHistory>; }
         }
   
 
-		public async Task<ObservableCollection<Medicine>> GetMedicinesAsync(bool syncItems = false)
+		public async Task<ObservableCollection<MedicineHistory>> GetMedicinesAsync(bool syncItems = false)
         {
             try
             {
@@ -79,11 +79,11 @@ namespace MyDiet.Manager
                     await this.SyncAsync();
                 }
 #endif
-				IEnumerable<Medicine> items = await medicineTable
+				IEnumerable<MedicineHistory> items = await medicineTable
 					.Where(medicine => medicine.UserId == App.account.Id)
                     .ToEnumerableAsync();
 
-				return new ObservableCollection<Medicine>(items);
+				return new ObservableCollection<MedicineHistory>(items);
             }
             catch (MobileServiceInvalidOperationException msioe)
             {
@@ -96,7 +96,7 @@ namespace MyDiet.Manager
             return null;
         }
 
-		public async Task SaveTaskAsync(Medicine item, bool isNew)
+		public async Task SaveTaskAsync(MedicineHistory item, bool isNew)
         {
 			try{
 				if (isNew == true)
@@ -118,7 +118,7 @@ namespace MyDiet.Manager
 
         }
 
-		public async Task DeleteTaskAsync(Medicine item)
+		public async Task DeleteTaskAsync(MedicineHistory item)
         {
            
 			await medicineTable.DeleteAsync(item);
@@ -180,8 +180,8 @@ namespace MyDiet.Manager
 
 		public async Task ResolveConflictAsync(MobileServiceTableOperationError error)
         {
-			var serverItem = error.Result.ToObject<Medicine>();
-			var localItem = error.Item.ToObject<Medicine>();
+			var serverItem = error.Result.ToObject<MedicineHistory>();
+			var localItem = error.Item.ToObject<MedicineHistory>();
 
             // Note that you need to implement the public override Equals(TodoItem item)
             // method in the Model for this to work         
