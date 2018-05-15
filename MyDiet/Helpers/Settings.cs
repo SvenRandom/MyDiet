@@ -1,4 +1,5 @@
 // Helpers/Settings.cs
+using System;
 using Plugin.Settings;
 using Plugin.Settings.Abstractions;
 
@@ -19,6 +20,8 @@ namespace MyDiet.Helpers
 			}
 		}
 
+
+		//********************* the status of logging ***************
 		#region Setting Constants
 
 		private const string SettingsLog = "IsLoggedin";
@@ -26,7 +29,7 @@ namespace MyDiet.Helpers
 
 		#endregion
 
-
+        
 		public static bool LogStateSettings
 		{
 			get
@@ -39,6 +42,8 @@ namespace MyDiet.Helpers
 			}
 		}
 
+
+        //************************* current user email ***************
 		#region Setting Constants
 
         private const string SettingsKey = "settings_key";
@@ -58,5 +63,29 @@ namespace MyDiet.Helpers
                 AppSettings.AddOrUpdateValue(SettingsKey, value);
             }
         }
+
+
+        //*********************** current reminder date ****************************
+		#region Setting Constants
+
+        private const string SettingsDate = "reminderDate";
+        private static readonly DateTime SettingsReminderDefault = DateTime.Now;
+
+        #endregion
+
+
+		public static DateTime ReminderDate
+        {
+            get
+            {
+				return AppSettings.GetValueOrDefault(SettingsDate, SettingsReminderDefault);
+            }
+            set
+            {
+				AppSettings.AddOrUpdateValue(SettingsDate, value);
+            }
+        }
+
+
 	}
 }

@@ -35,6 +35,7 @@ namespace MyDiet.Views
 		{
 			MedicineManager medicineManager = MedicineManager.DefaultManager;
 			await medicineManager.SaveTaskAsync(currentMedicine, isNewItem);
+			App.contentChanged = true;
 			await Navigation.PopAsync();
 		}
     }

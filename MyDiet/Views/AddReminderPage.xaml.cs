@@ -67,6 +67,7 @@ namespace MyDiet.Views
 			currentReminder.SetUnChecked();
 			ReminderManager reminderManeger = ReminderManager.DefaultManager;
 			await reminderManeger.SaveTaskAsync(currentReminder, isNewItem);
+			App.contentChanged = true;
 			await Navigation.PopAsync();
         }
 

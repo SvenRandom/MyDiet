@@ -35,10 +35,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\DietPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Include="Views\ActivityPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
@@ -52,14 +48,6 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\MedicinePage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\AddDietPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\DietEditPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -124,9 +112,6 @@
     <Compile Include="Views\SignUpPage.xaml.cs">
       <DependentUpon>SignUpPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\DietPage.xaml.cs">
-      <DependentUpon>DietPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\ActivityPage.xaml.cs">
       <DependentUpon>ActivityPage.xaml</DependentUpon>
     </Compile>
@@ -142,12 +127,6 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Persistence\ISQLiteDb.cs" />
     <Compile Include="Models\DietRecord.cs" />
-    <Compile Include="Views\AddDietPage.xaml.cs">
-      <DependentUpon>AddDietPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\DietEditPage.xaml.cs">
-      <DependentUpon>DietEditPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Models\AccountInfo.cs" />
     <Compile Include="Models\DietItem.cs" />
     <Compile Include="Models\Constants.cs" />

@@ -64,8 +64,8 @@
             </ListView.ItemTemplate>            
                 
         </ListView>
-        <ListView HasUnevenRows="true" x:Name="medicineListView" ItemSelected="MedicineItemSelected" 
-                  IsPullToRefreshEnabled="true" Refreshing="OnMedicineRefresh" >
+        <ListView HasUnevenRows="true" x:Name="medicineListView" ItemSelected="MedicineItemSelected"
+                  IsPullToRefreshEnabled="true" Refreshing="OnMedicineRefresh" ItemTapped="Handle_ItemTapped" >
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

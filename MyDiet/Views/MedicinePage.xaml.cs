@@ -5,12 +5,13 @@ using MyDiet.Manager;
 using MyDiet.Models;
 using Xamarin.Forms;
 using System.Linq;
+using MyDiet.Helpers;
 
 namespace MyDiet.Views
 {
     public partial class MedicinePage : ContentPage
     {
-
+		
 
 		int currentView = 0;
 		MedicineManager medicineManager;
@@ -20,33 +21,65 @@ namespace MyDiet.Views
 			InitializeComponent();
 			medicineManager =MedicineManager.DefaultManager;
 			reminderManager = ReminderManager.DefaultManager;
-                    
-
+			Init();      
+			ReminderClicked();
 			currentView = 0;
-			//ReminderClicked();
+
 		}
-		async protected override void OnAppearing()
-        {
-            base.OnAppearing();
+
+		async public void Init()
+		{
 			var temp = await reminderManager.GetReminderAsync();
-			reminderListView.ItemsSource = temp.OrderBy(reminder => reminder.Time);
-            
+            reminderListView.ItemsSource = temp.OrderBy(reminder => reminder.Time);
+
 
             var temp1 = await medicineManager.GetMedicinesAsync();
             medicineListView.ItemsSource = temp1;
-            if (currentView == 0)
-            {
-				ReminderClicked(); 
 
-            }
-            if (currentView == 1)
-				MedicineClicked();
+		}
 
-            if (currentView == 2)
-                HistoryClicked();
+		protected override void OnAppearing()
+        {
+            base.OnAppearing();
+			if(!(Settings.ReminderDate.Month==DateTime.Now.Month && Settings.ReminderDate.Day==DateTime.Now.Day
+			     ))
+			{
+				UpdateCheck();
+			}
+
+			if(App.contentChanged)
+			{
+				Init();
+				App.contentChanged = false;
+			}
+    //        if (currentView == 0)
+    //        {
+				//ReminderClicked(); 
+
+    //        }
+    //        if (currentView == 1)
+				//MedicineClicked();
+
+            //if (currentView == 2)
+                //HistoryClicked();
                      
         }
+        
+		async public void UpdateCheck()
+		{
+			var temp = await reminderManager.GetReminderAsync();
+			foreach(Reminder reminder1 in temp)
+			{
+				reminder1.Checked = false;
+				reminder1.SetUnChecked();
+				await reminderManager.SaveTaskAsync(reminder1, false);
+			}
+			Settings.ReminderDate = DateTime.Now;
+			temp = await reminderManager.GetReminderAsync();
+			reminderListView.ItemsSource = temp.OrderBy(reminder => reminder.Time);
 
+
+		}
 		async void OnAdded(object sender, System.EventArgs e)
         {
 			var response = await DisplayActionSheet("Which to add?", "Cancel", null, "New Reminder", "New Medicine");
@@ -85,32 +118,37 @@ namespace MyDiet.Views
 				await DisplayAlert("Notice:", "You have checked this today!", "OK");
 
         }
+
+		void Handle_ItemTapped(object sender, Xamarin.Forms.ItemTappedEventArgs e)
+        {
+			var medicine2 = e.Item as Medicine;
+
+		    Navigation.PushAsync(new AddMedicinePage(medicine2));
+        }
         
 		void MedicineItemSelected(object sender, Xamarin.Forms.SelectedItemChangedEventArgs e)
         {
-			var medicine = e.SelectedItem as Medicine;
-
-			Navigation.PushAsync(new AddMedicinePage(medicine));
+			medicineListView.SelectedItem = null;
             
         }
 
         //*********** reminder edit click ****************
 		void ReminderEditClicked(object sender, System.EventArgs e)
         {
-			var reminder = (sender as MenuItem).CommandParameter as Reminder;
-			Navigation.PushAsync(new AddReminderPage(reminder));
+			var reminder1 = (sender as MenuItem).CommandParameter as Reminder;
+			Navigation.PushAsync(new AddReminderPage(reminder1));
 
         }
 
         //************** reminder delete ******************
 		async void ReminderDeleteClicked(object sender, System.EventArgs e)
         {
-			var reminder = (sender as MenuItem).CommandParameter as Reminder;
+			var reminder2 = (sender as MenuItem).CommandParameter as Reminder;
 			var confirm = await DisplayAlert("Notice!", "Are you sure to delete this reminder?", "Yes", "Cancel");
             if (confirm)
             {
                 
-				await reminderManager.DeleteTaskAsync(reminder);
+				await reminderManager.DeleteTaskAsync(reminder2);
 				var temp = await reminderManager.GetReminderAsync();
 				reminderListView.ItemsSource = temp.OrderBy(reminders => reminders.Time);
             }
