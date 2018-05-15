@@ -36,7 +36,7 @@ namespace MyDiet.Views
             medicineListView.ItemsSource = temp1;
             if (currentView == 0)
             {
-				ReminderClicked();
+				ReminderClicked(); 
 
             }
             if (currentView == 1)
@@ -68,16 +68,21 @@ namespace MyDiet.Views
 		async void ReminderItemSelected(object sender, Xamarin.Forms.SelectedItemChangedEventArgs e)
         {
             var reminderN = e.SelectedItem as Reminder;
-			var confirm = await DisplayAlert("Notice!", "Checked status can not be modified! Are you sure to check this reminder?", "Yes", "Cancel");
-            if (confirm)
-            {
-				reminderN.Checked = true;
-				reminderN.SetUnChecked();
-				await reminderManager.SaveTaskAsync(reminderN, false);
-				var temp = await reminderManager.GetReminderAsync();
-				reminderListView.ItemsSource = temp.OrderBy(reminder => reminder.Time.Hours);
-               
-            }
+			if (reminderN.Checked == false)
+			{
+				var confirm = await DisplayAlert("Notice!", "Checked status can not be modified! Are you sure to check this reminder?", "Yes", "Cancel");
+				if (confirm)
+				{
+					reminderN.Checked = true;
+					reminderN.SetUnChecked();
+					await reminderManager.SaveTaskAsync(reminderN, false);
+					var temp = await reminderManager.GetReminderAsync();
+					reminderListView.ItemsSource = temp.OrderBy(reminder => reminder.Time.Hours);
+
+				}
+			}
+			else
+				await DisplayAlert("Notice:", "You have checked this today!", "OK");
 
         }
         
