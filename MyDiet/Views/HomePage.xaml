@@ -30,8 +30,8 @@
             <StackLayout Orientation="Horizontal" >
                 <Label Text="Diet" />
                 <StackLayout HorizontalOptions="EndAndExpand">
-                    <Label Text="3 Meals"  HorizontalOptions="EndAndExpand"/> 
-                    <Label Text="345 Total Cal"  HorizontalOptions="EndAndExpand"/>
+                    <Label x:Name="mealLabel"  HorizontalOptions="EndAndExpand"/> 
+                    <Label x:Name="calLabel"  HorizontalOptions="EndAndExpand"/>
                 </StackLayout>
                
             </StackLayout>
@@ -42,8 +42,8 @@
            <StackLayout Orientation="Horizontal" >
                 <Label Text="Activity" />
                 <StackLayout HorizontalOptions="EndAndExpand">
-                    <Label Text="3345 Steps"  HorizontalOptions="EndAndExpand"/> 
-                    <Label Text=" 1.1 Walked km"  HorizontalOptions="EndAndExpand"/>
+                    <Label x:Name="stepLabel" Text="3345 Steps"  HorizontalOptions="EndAndExpand"/> 
+                    <Label x:Name="kmLabel" Text=" 1.1 Walked km"  HorizontalOptions="EndAndExpand"/>
                 </StackLayout>
                
             </StackLayout>
@@ -53,8 +53,8 @@
            <StackLayout Orientation="Horizontal" >
                 <Label Text="Medicine" />
                 <StackLayout HorizontalOptions="EndAndExpand">
-                    <Label Text="2 Taken"  HorizontalOptions="EndAndExpand"/> 
-                    <Label Text="1 To take"  HorizontalOptions="EndAndExpand"/>
+                    <Label x:Name="takenLabel" Text="2 Taken"  HorizontalOptions="EndAndExpand"/> 
+                    <Label x:Name="toTakeLabel" Text="1 To take"  HorizontalOptions="EndAndExpand"/>
                 </StackLayout>
                
             </StackLayout>
