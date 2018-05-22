@@ -82,6 +82,7 @@ namespace MyDiet.Views
 			else
 			{
 				takenLabel.Text = " No Reminder";
+				toTakeLabel.Text = " ";
 			}
 
 		}

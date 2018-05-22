@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using MyDiet.Manager;
 using MyDiet.Models;
+using Plugin.LocalNotifications;
 using Xamarin.Forms;
 
 namespace MyDiet.Views
@@ -68,6 +69,18 @@ namespace MyDiet.Views
 			ReminderManager reminderManeger = ReminderManager.DefaultManager;
 			await reminderManeger.SaveTaskAsync(currentReminder, isNewItem);
 			App.contentChanged = true;
+			DateTime notiTime = new DateTime(
+				DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 
+				currentReminder.Time.Hours, currentReminder.Time.Minutes, 0
+                    );
+            
+			if(DateTime.Compare(notiTime, DateTime.Now)<0){
+				notiTime = notiTime.AddDays(1);
+			}
+			CrossLocalNotifications.Current.Show("Medicine Notification",
+			                                     "It's time to take "+currentReminder.MedicineName, currentReminder.GetHashCode(),
+			                                     notiTime);
+			
 			await Navigation.PopAsync();
         }
 

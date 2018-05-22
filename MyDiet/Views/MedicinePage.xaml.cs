@@ -6,6 +6,7 @@ using MyDiet.Models;
 using Xamarin.Forms;
 using System.Linq;
 using MyDiet.Helpers;
+using Plugin.LocalNotifications;
 
 namespace MyDiet.Views
 {
@@ -78,6 +79,7 @@ namespace MyDiet.Views
 				reminder1.Checked = false;
 				reminder1.SetUnChecked();
 				await reminderManager.SaveTaskAsync(reminder1, false);
+
 			}
 			Settings.ReminderDate = DateTime.Now;
 			temp = await reminderManager.GetReminderAsync();
@@ -106,7 +108,7 @@ namespace MyDiet.Views
 		async void ReminderItemSelected(object sender, Xamarin.Forms.SelectedItemChangedEventArgs e)
         {
             var reminderN = e.SelectedItem as Reminder;
-			if (reminderN.Checked == false)
+			if (!reminderN.Checked)
 			{
 				var confirm = await DisplayAlert("Notice!", "Checked status can not be modified! Are you sure to check this reminder?", "Yes", "Cancel");
 				if (confirm)
@@ -116,24 +118,38 @@ namespace MyDiet.Views
 					await reminderManager.SaveTaskAsync(reminderN, false);
 					var temp = await reminderManager.GetReminderAsync();
 					reminderListView.ItemsSource = temp.OrderBy(reminder => reminder.Time.Hours);
+                    //cancel today notification 
+					CrossLocalNotifications.Current.Cancel(reminderN.GetHashCode());
+
+                    //set new notificatoin for next day
+					DateTime notiTime = new DateTime(
+						DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, reminderN.Time.Hours, reminderN.Time.Minutes, 0
+                    );
+					notiTime = notiTime.AddMinutes(1);
+					//notiTime = notiTime.AddDays(1);
+					CrossLocalNotifications.Current.Show("Medicine Notification",
+					                                     "It's time to take " + reminderN.MedicineName, reminderN.GetHashCode(),
+					                                     notiTime);
+
+					//add new medicine record to history
+                    MedicineHistory medicineHistory = new MedicineHistory
+                    {
+                        Id = Guid.NewGuid().ToString(),
+                        UserId = App.account.Id,
+                        MedicineName = reminderN.MedicineName,
+                        Quantity = reminderN.Quantity,
+                        Checked = reminderN.Checked,
+                        Unit = reminderN.Unit,
+                        Time = DateTime.Now
+
+                    };
+                    medicineHistory.SetTimeToDisplay();
+                    await medicineHistoryManager.SaveTaskAsync(medicineHistory, true);
+                    var temp2 = await medicineHistoryManager.GetMedicinesAsync();
+                    historyListView.ItemsSource = temp2.OrderByDescending(history => history.Time);
 
 				}
-				//add new medicine record to history
-				MedicineHistory medicineHistory = new MedicineHistory
-				{
-					Id = Guid.NewGuid().ToString(),
-					UserId = App.account.Id,
-					MedicineName = reminderN.MedicineName,
-					Quantity = reminderN.Quantity,
-					Checked = reminderN.Checked,
-					Unit = reminderN.Unit,
-					Time = DateTime.Now
-                    
-				};
-				medicineHistory.SetTimeToDisplay();
-				await medicineHistoryManager.SaveTaskAsync(medicineHistory, true);
-				var temp2 = await medicineHistoryManager.GetMedicinesAsync();
-                historyListView.ItemsSource = temp2.OrderByDescending(history => history.Time);
+
 
 
 			}
@@ -174,6 +190,8 @@ namespace MyDiet.Views
 				await reminderManager.DeleteTaskAsync(reminder2);
 				var temp = await reminderManager.GetReminderAsync();
 				reminderListView.ItemsSource = temp.OrderBy(reminders => reminders.Time);
+				CrossLocalNotifications.Current.Cancel(reminder2.GetHashCode());
+
             }
 
         }

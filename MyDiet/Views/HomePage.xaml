@@ -6,7 +6,7 @@
         <ResourceDictionary>
             <Style x:Key="frameBlue" TargetType="Frame">
                 <Setter Property="CornerRadius" Value="15" />
-                <Setter Property="HeightRequest" Value="75" />
+                <Setter Property="HeightRequest" Value="65" />
                 <Setter Property="HasShadow" Value="false" />
                 <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
             </Style>

@@ -68,7 +68,7 @@
                 </TableRoot>
             </TableView>
 
-
+           <!-- <Button Text="send notificatoin after 10 seconds" Clicked="SendNotiClicked" />-->
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
