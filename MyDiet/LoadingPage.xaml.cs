@@ -25,7 +25,15 @@ namespace MyDiet
 			//	//isLoggedIn.Text = Application.Current.Properties["log"].ToString();
 
 			//}
+			if (Settings.LogStateSettings){
+				App.email = Settings.AccountEmail;
+				Navigation.PushModalAsync(new NavigationPage(new MainPage()));
+			}else
+            {
 
+                Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
+
+            }
 				
 				
         }

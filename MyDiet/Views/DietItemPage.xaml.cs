@@ -22,7 +22,7 @@ namespace MyDiet.Views
 {
     public partial class DietItemPage : ContentPage
     {
-
+		
 
 
         bool isNewItem = false;
@@ -264,10 +264,34 @@ namespace MyDiet.Views
                     return false;
                 }
             });
-
+            
          
 
         }
+
+		async void BarTestClicked(object sender, System.EventArgs e)
+        {
+			HttpClient _client = new HttpClient();
+			string quary = Constants.BarcodeEndpointUri + "?json=barcode&q=" + "21045622" + "&apikey=" + Constants.APIKey;
+
+
+            var response = await _client.GetAsync(quary);
+            //var posts = JsonConvert.DeserializeObject<List<BarcodeItem>>(content);
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                var Items = JsonConvert.DeserializeObject(content);
+                System.Diagnostics.Debug.WriteLine("response:"+Items.ToString());
+				System.Diagnostics.Debug.WriteLine("content: "+content);
+
+                await DisplayAlert("barcode item length", content.Length.ToString(), "sure");
+				var posts = JsonConvert.DeserializeObject<Items>(content);
+				System.Diagnostics.Debug.WriteLine("title: " + posts.title);
+
+            }
+
+        }
+
 
 		async void SearchBarcodeAsync()
 		{

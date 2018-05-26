@@ -6,9 +6,10 @@ namespace MyDiet
 {
     public class MainPage : TabbedPage
     {
+		readonly Page dietPage, homePage, medicinePage, activityPage, profilePage;
         public MainPage()
         {
-            Page dietPage, homePage, medicinePage, activityPage, profilePage = null;
+            
             
 
 			dietPage = new MyDietPage()
@@ -20,7 +21,7 @@ namespace MyDiet
                         {
                             Title = "Home"
                         };
-         
+   
                         medicinePage = new MedicinePage()
                         {
                             Title = "Medicine"
@@ -55,11 +56,27 @@ namespace MyDiet
 
             Title = Children[0].Title;
         }
+	
+
 
         protected override void OnCurrentPageChanged()
         {
             base.OnCurrentPageChanged();
             Title = CurrentPage?.Title ?? string.Empty;
         }
+
+
+		public void SwitchToDiet()
+        {
+			CurrentPage = dietPage;
+        }
+
+        public void SwitchToMedicine()
+        {
+			CurrentPage = medicinePage;
+        }
+
+        
+        
     }
 }

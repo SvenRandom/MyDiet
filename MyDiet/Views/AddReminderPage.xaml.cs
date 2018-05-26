@@ -29,7 +29,7 @@ namespace MyDiet.Views
 				currentReminder = new Reminder
 				{
 					Id = Guid.NewGuid().ToString(),
-					UserId = App.account.Id,
+					UserId = App.email,
 					Checked=false
 				};
 

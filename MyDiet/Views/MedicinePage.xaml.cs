@@ -135,7 +135,7 @@ namespace MyDiet.Views
                     MedicineHistory medicineHistory = new MedicineHistory
                     {
                         Id = Guid.NewGuid().ToString(),
-                        UserId = App.account.Id,
+						UserId = App.email,
                         MedicineName = reminderN.MedicineName,
                         Quantity = reminderN.Quantity,
                         Checked = reminderN.Checked,

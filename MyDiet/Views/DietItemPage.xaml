@@ -22,7 +22,7 @@
       
     <StackLayout> 
           <ActivityIndicator x:Name="activityIndicator" HorizontalOptions="Center"  
-                                  VerticalOptions="Center" IsVisible="False" IsEnabled="True"/>
+                                  VerticalOptions="Start" IsVisible="False" IsEnabled="True"/>
           <ScrollView>
              <!--<StackLayout x:Name="oStackLayout" IsVisible="true"> 
                 <TableView Intent="Form" HasUnevenRows="true" >
@@ -128,22 +128,22 @@
 
 
                </StackLayout>
-
+               <ScrollView>
                 <StackLayout Orientation="Horizontal" IsVisible="false" x:Name="imagesStack"
-                             HeightRequest="120" WidthRequest="330">
-                    <Image x:Name="image00" IsVisible="false" >
+                             HeightRequest="110" >
+                    <Image x:Name="image00" IsVisible="false" WidthRequest="110" Aspect="AspectFill" >
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer
                                        Tapped="OnImage00Tapped"  />
                         </Image.GestureRecognizers>
                     </Image>    
-                    <Image x:Name="image11" IsVisible="false" >
+                    <Image x:Name="image11" IsVisible="false" WidthRequest="110" Aspect="AspectFill" >
                        <Image.GestureRecognizers>
                             <TapGestureRecognizer
-                                        Tapped="OnImage11Tapped" />
+                                        Tapped="OnImage11Tapped"  />
                        </Image.GestureRecognizers>
                     </Image>    
-                    <Image x:Name="image22" IsVisible="false" >
+                    <Image x:Name="image22" IsVisible="false" WidthRequest="110" Aspect="AspectFill" >
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer
                                         Tapped="OnImage22Tapped" />
@@ -151,7 +151,7 @@
                     </Image>    
                 </StackLayout>
 
-               
+               </ScrollView>
 
                           
                   
@@ -173,7 +173,7 @@
                                        Tapped="scanClicked"  />
                         </Image.GestureRecognizers>
                     </Image>
-                   
+                    <Button x:Name="BarTest" Text="barTest" Clicked="BarTestClicked" />
                     <Label x:Name="bar" />
                 </StackLayout>
 
@@ -190,7 +190,7 @@
 
             </StackLayout>
           </ScrollView>
-          <StackLayout x:Name="image00StackLayout" IsVisible="false" VerticalOptions="StartAndExpand" >
+          <StackLayout x:Name="image00StackLayout" IsVisible="false" VerticalOptions="FillAndExpand" >
                 <Image x:Name="image00Display" Aspect="AspectFit" VerticalOptions="StartAndExpand" />
                 <StackLayout Padding="15" VerticalOptions="EndAndExpand" Orientation="Horizontal" >
                     <Button Text="Comfirm" Clicked="OnImage00ComfirmClicked" 

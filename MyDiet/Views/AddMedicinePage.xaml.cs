@@ -19,7 +19,7 @@ namespace MyDiet.Views
 				currentMedicine = new Medicine
 				{
 					Id = Guid.NewGuid().ToString(),
-					UserId = App.account.Id             
+					UserId = App.email            
                 };
 
 

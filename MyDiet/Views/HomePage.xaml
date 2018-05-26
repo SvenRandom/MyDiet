@@ -22,10 +22,12 @@
     <StackLayout Padding="15" Spacing="7" >
        
         <Label x:Name="date" HorizontalOptions="Center" VerticalOptions="Start" TextColor="Black" /> 
-
+        <ScrollView>
+            <StackLayout>
         <Frame Style="{StaticResource frameGreen}" >
             <Frame.GestureRecognizers>
-                
+                <TapGestureRecognizer x:Name="dietFrame"
+                                       Tapped="OnDietTapped"  />
             </Frame.GestureRecognizers>
             <StackLayout Orientation="Horizontal" >
                 <Label Text="Diet" />
@@ -39,6 +41,10 @@
         </Frame>
 
         <Frame Style="{StaticResource frameBlue}" >
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer
+                                       Tapped="OnActivityTapped"  />
+            </Frame.GestureRecognizers>
            <StackLayout Orientation="Horizontal" >
                 <Label Text="Activity" />
                 <StackLayout HorizontalOptions="EndAndExpand">
@@ -50,6 +56,10 @@
         </Frame>
 
         <Frame  Style="{StaticResource frameGreen}" >
+           <Frame.GestureRecognizers>
+                <TapGestureRecognizer
+                                       Tapped="OnMedicineTapped"  />
+            </Frame.GestureRecognizers>
            <StackLayout Orientation="Horizontal" >
                 <Label Text="Medicine" />
                 <StackLayout HorizontalOptions="EndAndExpand">
@@ -87,8 +97,8 @@
         <Frame CornerRadius="15"  HeightRequest="75" BackgroundColor="#F2BE24" HasShadow="false" >
     
         </Frame>-->
-
-
+        </StackLayout>
+        </ScrollView>
         
     </StackLayout>
 

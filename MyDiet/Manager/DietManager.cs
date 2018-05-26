@@ -80,7 +80,7 @@ namespace MyDiet.Manager
                 }
 #endif
                 IEnumerable<DietItem> items = await dietTable
-                    .Where(dietItem => dietItem.UserId == App.account.Id)
+					.Where(dietItem => dietItem.UserId == App.email)
                     .ToEnumerableAsync();
 
                 return new ObservableCollection<DietItem>(items);

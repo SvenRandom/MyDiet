@@ -2,7 +2,6 @@
 using MyDiet.Views;
 using Xamarin.Forms;
 
-
 namespace MyDiet
 {
     public partial class App : Application
@@ -10,6 +9,7 @@ namespace MyDiet
         //public static bool UseMockDataStore = true; 
         
 		public static AccountInfo account;
+		public static string email;
 
 		public static string barcode = null;
 		public static bool contentChanged = false; 

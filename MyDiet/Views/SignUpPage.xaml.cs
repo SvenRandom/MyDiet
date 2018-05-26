@@ -69,7 +69,7 @@ namespace MyDiet.Views
                         //await _connection.InsertAsync(App.user);
 						Settings.LogStateSettings = true;
 						Settings.AccountEmail = account.Email;
-
+						App.email = account.Email;
 						App.account = account;
                         Navigation.InsertPageBefore(new MainPage(), Navigation.NavigationStack.First());
                         await Navigation.PopToRootAsync();

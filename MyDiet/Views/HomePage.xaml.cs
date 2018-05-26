@@ -19,6 +19,11 @@ namespace MyDiet.Views
 			date.Text = DateTime.Now.ToString("dd MMM yyyy dddd");
 			dietManager = DietManager.DefaultManager;
 			reminderManager = ReminderManager.DefaultManager;
+			//dietFrame.Tapped += async (sender, e) => {
+    //            var tabbedPage = this.Parent as TabbedPage;
+				//tabbedPage.SwitchToDiet();
+            //};
+
         }
 
 
@@ -86,5 +91,30 @@ namespace MyDiet.Views
 			}
 
 		}
+
+
+		void OnDietTapped(object sender, System.EventArgs e)
+        {
+			//tabbedPage.CurrentPage = tabbedPage.Children[1];
+			var tabbedPage = this.Parent as TabbedPage;
+			tabbedPage.CurrentPage=tabbedPage.Children[1];
+
+        }
+		void OnActivityTapped(object sender, System.EventArgs e)
+        {
+            //tabbedPage.CurrentPage = tabbedPage.Children[1];
+            var tabbedPage = this.Parent as TabbedPage;
+            tabbedPage.CurrentPage = tabbedPage.Children[3];
+
+        }
+
+		void OnMedicineTapped(object sender, System.EventArgs e)
+        {
+            //tabbedPage.CurrentPage = tabbedPage.Children[1];
+            var tabbedPage = this.Parent as TabbedPage;
+            tabbedPage.CurrentPage = tabbedPage.Children[2];
+
+        }
+
 	}
 }
