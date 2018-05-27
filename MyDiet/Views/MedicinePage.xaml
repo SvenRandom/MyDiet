@@ -11,7 +11,7 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
-        <ToolbarItem Clicked="OnAdded" Text="Add"  />
+        <ToolbarItem Clicked="OnAdded" Text="Add" Icon="icons_add30.png" />
     </ContentPage.ToolbarItems>
     
     <StackLayout>

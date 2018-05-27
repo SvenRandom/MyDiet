@@ -12,9 +12,9 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    
+
     <ContentPage.ToolbarItems>
-        <ToolbarItem Clicked="OnItemAdded" Text="Add" />
+        <ToolbarItem Clicked="OnItemAdded" Text="Add" Icon="icons_add30.png" />
     </ContentPage.ToolbarItems>
     <StackLayout>
     <ActivityIndicator HorizontalOptions="Center" VerticalOptions="Center" IsVisible="False" IsEnabled="True" x:Name="syncIndicator" />
