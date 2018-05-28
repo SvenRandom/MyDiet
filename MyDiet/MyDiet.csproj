@@ -164,6 +164,8 @@
     <Compile Include="Manager\ReminderManager.cs" />
     <Compile Include="Models\MedicineHistory.cs" />
     <Compile Include="Manager\MedicineHistoryManager.cs" />
+    <Compile Include="Models\MedicineDatabase.cs" />
+    <Compile Include="Models\MedicineReminder.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\" />

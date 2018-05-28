@@ -17,8 +17,23 @@ namespace MyDiet.Models
         [JsonProperty(PropertyName = "Description")]
 		public string Description { get; set; }
 
-		[JsonProperty(PropertyName = "Unit")]
+		[JsonProperty(PropertyName = "Directions")]
+        public string Directions { get; set; }
+
+        [JsonProperty(PropertyName = "Duration")]
+        public string Duration { get; set; }
+
+        [JsonProperty(PropertyName = "TimesPerDay")]
+        public int TimesPerDay { get; set; }
+
+        [JsonProperty(PropertyName = "Unit")]
         public string Unit { get; set; }
+
+		[JsonProperty(PropertyName = "StartTime")]
+		public DateTime StartTime { get; set; }
+          
+		[JsonProperty(PropertyName = "IsTaking")]
+		public bool IsTaking { get; set; }
   
     }
 }

@@ -3,20 +3,20 @@ using Newtonsoft.Json;
 
 namespace MyDiet.Models
 {
-    public class Reminder
+    public class MedicineReminder
     {
 		[JsonProperty(PropertyName = "id")]
         public string Id { get; set; }
 
-        [JsonProperty(PropertyName = "UserId")]
+		[JsonProperty(PropertyName = "UserId")]
         public string UserId { get; set; }
 
 		[JsonProperty(PropertyName = "MedicineId")]
         public string MedicineId { get; set; }
 
-        [JsonProperty(PropertyName = "MedicineName")]
-        public string MedicineName { get; set; }
-
+		[JsonProperty(PropertyName = "MedicineName")]
+		public string MedicineName { get; set; }
+       
 		[JsonProperty(PropertyName = "Unit")]
 		public string Unit { get; set; }
 

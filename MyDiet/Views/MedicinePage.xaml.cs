@@ -137,7 +137,6 @@ namespace MyDiet.Views
                         Id = Guid.NewGuid().ToString(),
 						UserId = App.email,
                         MedicineName = reminderN.MedicineName,
-                        Quantity = reminderN.Quantity,
                         Checked = reminderN.Checked,
                         Unit = reminderN.Unit,
                         Time = DateTime.Now

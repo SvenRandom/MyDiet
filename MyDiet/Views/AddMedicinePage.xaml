@@ -2,32 +2,86 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              x:Class="MyDiet.Views.AddMedicinePage"
-             Title="New Medicine">
+             xmlns:local="clr-namespace:MyDiet"
+             Title="Medicine Detail">
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="cellLayout" TargetType="StackLayout" >
+                <Setter Property="Orientation" Value="Horizontal" />
+                <Setter Property="Padding" Value="15" />
+
+            </Style>
+            <Style TargetType="Label" >
+                <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Done" Clicked="DoneClicked" />
     </ContentPage.ToolbarItems>
-
+    <ScrollView>
     <StackLayout >
-        
+        <Label x:Name="status" HorizontalOptions="CenterAndExpand" />
+            
         <TableView x:Name="tableView" Intent="Form" HasUnevenRows="true" >
             <TableRoot>
                 <TableSection Title="New medicine details">
                     <EntryCell Text="{Binding MedicineName}" Label="Medicine name:" Placeholder="(eg Paracetamol)" />
-                    <EntryCell Text="{Binding Unit}" Label="Unit:" Placeholder="(eg pills, ml, g)" />
-                    
+                    <!--<EntryCell Text="{Binding Unit}" Label="Unit:" Placeholder="(eg pills, ml, g)" />-->
+                   
                     <ViewCell>
                         <StackLayout Padding="15">
-                            <Label Text="Description:" />
-                            <Editor Text="{Binding Description}" BackgroundColor="Silver" HeightRequest="150"/>
+                            <Label Text="Benefits:" />
+                            <Editor Text="{Binding Description}" BackgroundColor="Silver" HeightRequest="130"/>
                         </StackLayout>
 
                     </ViewCell>
                         
                 </TableSection>  
-            </TableRoot>        
-        </TableView>    
-    </StackLayout>
 
+                <TableSection Title="directions for use">
+                    <ViewCell>
+                        <StackLayout Padding="15">
+                            <Label Text="Description: (by defult)" />
+                            <Editor Text="{Binding Directions}" BackgroundColor="Silver" HeightRequest="100"/>
+                        </StackLayout>
+
+                    </ViewCell>
+                    <EntryCell Text="{Binding Duration}" Label="A cycle of treatment(days):" Placeholder="(eg 7)" />
+                    <EntryCell Text="{Binding TimesPerDay}" Label="Frequency(times per day):" Placeholder="(eg 3)" 
+                               Keyboard="Numeric" Completed="FrequancyCompleted" />
+                    <EntryCell Text="{Binding Unit}" Label="Basic unit: " Placeholder="(eg 2 tablets)" />
+
+                    <ViewCell>
+                        <StackLayout Style="{StaticResource cellLayout}" >
+                            <Label Text="Start date: " />
+                            <DatePicker Date="{Binding StartTime}"  />     
+                        </StackLayout>
+                    </ViewCell>
+                            
+                </TableSection>  
+
+              
+            </TableRoot>        
+        </TableView> 
+            <StackLayout Padding="15,0,15,0" >
+                <Label Text="Reminders:"  />
+            </StackLayout>
+                
+            <StackLayout x:Name="reminders" Padding="15,0,15,0" />
+                
+            <StackLayout Padding="15,0,15,0" >
+                
+                <StackLayout Orientation="Horizontal" >
+                    <Button Text="Start" Clicked="StartClicked" HorizontalOptions="Start" />
+                    <Button Text="End" Clicked="EndClicked" HorizontalOptions="EndAndExpand" />
+                    
+                </StackLayout>
+            </StackLayout>
+    </StackLayout>
+    </ScrollView>
     
 </ContentPage>

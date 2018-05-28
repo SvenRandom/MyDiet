@@ -51,7 +51,7 @@
                                     <Switch IsToggled="{Binding Checked}"  
                                             x:Name="checkState" IsEnabled="false" />
                                     <Label Text="Checked" VerticalOptions="Center" />
-                                    <Label Text="{Binding Quantity}" HorizontalOptions="EndAndExpand" />
+                                   
                                 </StackLayout>
                             </StackLayout>
                         </StackLayout>
