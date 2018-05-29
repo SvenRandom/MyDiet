@@ -164,8 +164,10 @@
     <Compile Include="Manager\ReminderManager.cs" />
     <Compile Include="Models\MedicineHistory.cs" />
     <Compile Include="Manager\MedicineHistoryManager.cs" />
+    <Compile Include="Models\PackageFoodDatabase.cs" />
+    <Compile Include="Manager\MedicineDatabaseManager.cs" />
     <Compile Include="Models\MedicineDatabase.cs" />
-    <Compile Include="Models\MedicineReminder.cs" />
+    <Compile Include="Manager\PackageFoodDatabaseManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\" />

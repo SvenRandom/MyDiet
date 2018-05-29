@@ -7,6 +7,7 @@ using Xamarin.Forms;
 using System.Linq;
 using MyDiet.Helpers;
 using Plugin.LocalNotifications;
+using System.Diagnostics;
 
 namespace MyDiet.Views
 {
@@ -40,7 +41,7 @@ namespace MyDiet.Views
             medicineListView.ItemsSource = temp1;
 
 			var temp2 = await medicineHistoryManager.GetMedicinesAsync();
-			historyListView.ItemsSource = temp2 .OrderByDescending(history => history.Time);
+			historyListView.ItemsSource = temp2;
 
 		}
 
@@ -87,19 +88,22 @@ namespace MyDiet.Views
 
 
 		}
-		async void OnAdded(object sender, System.EventArgs e)
+		void OnAdded(object sender, System.EventArgs e)
         {
-			var response = await DisplayActionSheet("Which to add?", "Cancel", null, "New Reminder", "New Medicine");
-			if (response == "New Reminder"){
-				Reminder reminder = null;
-				await Navigation.PushAsync(new AddReminderPage(reminder));
-			}
+			//var response = await DisplayActionSheet("Which to add?", "Cancel", null, "New Reminder", "New Medicine");
+			//if (response == "New Reminder"){
+			//	Reminder reminder = null;
+			//	await Navigation.PushAsync(new AddReminderPage(reminder));
+			//}
                
-			if (response == "New Medicine"){
-				Medicine medicine =null;
+			//if (response == "New Medicine"){
+			//	Medicine medicine =null;
 
-				await Navigation.PushAsync(new AddMedicinePage(medicine));
-			}
+			//	await Navigation.PushAsync(new AddMedicinePage(medicine));
+			//}
+			Medicine medicine = null;
+
+            Navigation.PushAsync(new AddMedicinePage(medicine));
 				
             
         }
@@ -131,22 +135,6 @@ namespace MyDiet.Views
 					                                     "It's time to take " + reminderN.MedicineName, reminderN.GetHashCode(),
 					                                     notiTime);
 
-					//add new medicine record to history
-                    MedicineHistory medicineHistory = new MedicineHistory
-                    {
-                        Id = Guid.NewGuid().ToString(),
-						UserId = App.email,
-                        MedicineName = reminderN.MedicineName,
-                        Checked = reminderN.Checked,
-                        Unit = reminderN.Unit,
-                        Time = DateTime.Now
-
-                    };
-                    medicineHistory.SetTimeToDisplay();
-                    await medicineHistoryManager.SaveTaskAsync(medicineHistory, true);
-                    var temp2 = await medicineHistoryManager.GetMedicinesAsync();
-                    historyListView.ItemsSource = temp2.OrderByDescending(history => history.Time);
-
 				}
 
 
@@ -157,7 +145,7 @@ namespace MyDiet.Views
 
         }
 
-		void Handle_ItemTapped(object sender, Xamarin.Forms.ItemTappedEventArgs e)
+		void Handle_MedicineTapped(object sender, Xamarin.Forms.ItemTappedEventArgs e)
         {
 			var medicine2 = e.Item as Medicine;
 
@@ -171,12 +159,12 @@ namespace MyDiet.Views
         }
 
         //*********** reminder edit click ****************
-		void ReminderEditClicked(object sender, System.EventArgs e)
-        {
-			var reminder1 = (sender as MenuItem).CommandParameter as Reminder;
-			Navigation.PushAsync(new AddReminderPage(reminder1));
+		//void ReminderEditClicked(object sender, System.EventArgs e)
+   //     {
+			//var reminder1 = (sender as MenuItem).CommandParameter as Reminder;
+			//Navigation.PushAsync(new AddReminderPage(reminder1));
 
-        }
+        //}
 
         //************** reminder delete ******************
 		async void ReminderDeleteClicked(object sender, System.EventArgs e)
@@ -206,7 +194,7 @@ namespace MyDiet.Views
 
 				await medicineHistoryManager.DeleteTaskAsync(medicineHistory);
 				var temp2 = await medicineHistoryManager.GetMedicinesAsync();
-                historyListView.ItemsSource = temp2.OrderByDescending(history => history.Time);
+                historyListView.ItemsSource = temp2;
             }
 
         }
@@ -388,7 +376,7 @@ namespace MyDiet.Views
                 
 				var temp = await medicineManager.GetMedicinesAsync(syncItems);
 				medicineListView.ItemsSource = temp;
- 
+                
                 
             }
         }
@@ -464,7 +452,7 @@ namespace MyDiet.Views
             {
 
 				var temp2 = await medicineHistoryManager.GetMedicinesAsync();
-                historyListView.ItemsSource = temp2.OrderByDescending(history => history.Time);
+                historyListView.ItemsSource = temp2;
 
 
             }

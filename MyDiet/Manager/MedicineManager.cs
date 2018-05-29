@@ -77,6 +77,7 @@ namespace MyDiet.Manager
                 if (syncItems)
                 {
                     await this.SyncAsync();
+
                 }
 #endif
 				IEnumerable<Medicine> items = await medicineTable
@@ -122,8 +123,7 @@ namespace MyDiet.Manager
         {
            
 			await medicineTable.DeleteAsync(item);
-
-
+   
         }
 
 
@@ -136,6 +136,7 @@ namespace MyDiet.Manager
 
             try
             {
+				Debug.WriteLine("refersh here.");
                 await this.client.SyncContext.PushAsync();
 
 				await this.medicineTable.PullAsync(
@@ -143,11 +144,14 @@ namespace MyDiet.Manager
                     //Use a different query name for each unique query in your program
                     "allDietItems",
 					this.medicineTable.CreateQuery());
-            }
+				
+			}
             catch (MobileServicePushFailedException exc)
             {
+				
                 if (exc.PushResult != null)
                 {
+					
                     syncErrors = exc.PushResult.Errors;
                 }
             }
@@ -156,6 +160,7 @@ namespace MyDiet.Manager
             // server conflicts and others via the IMobileServiceSyncHandler.
             if (syncErrors != null)
             {
+				
                 foreach (var error in syncErrors)
                 {
 					await ResolveConflictAsync(error);

@@ -13,28 +13,13 @@ namespace MyDiet.Models
 
 		[JsonProperty(PropertyName = "MedicineName")]
 		public string MedicineName { get; set; }
-
-		[JsonProperty(PropertyName = "Quantity")]
-		public string Quantity { get; set; }
-
-		[JsonProperty(PropertyName = "Unit")]
-		public string Unit { get; set; }
+        
+		[JsonProperty(PropertyName = "Directions")]
+		public string Directions { get; set; }
 
 		[JsonProperty(PropertyName = "TimeToDisplay")]
 		public string TimeToDisplay { get; set; }
-
-		[JsonProperty(PropertyName = "Checked")]
-        public bool Checked { get; set; }
         
-
-        [JsonProperty(PropertyName = "Time")]
-		public DateTime Time { get; set; }
-        
-        public void SetTimeToDisplay()
-        {
-			TimeToDisplay = Time.ToString("HH:mm dd/MMM/yyyy dddd");
-        }
-        
-
+      
     }
 }

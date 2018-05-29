@@ -185,7 +185,7 @@
                 
 
 
-               <!--<Button Text="Delete" Clicked="OnDeleteActivated" />-->
+               <Button Text="Delete" Clicked="OnDeleteActivated" />
                <Button Text="Cancel" Clicked="OnCancelActivated" x:Name="cancelButton"/>
 
             </StackLayout>

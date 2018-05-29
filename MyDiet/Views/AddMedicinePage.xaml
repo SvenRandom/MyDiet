@@ -24,36 +24,63 @@
     </ContentPage.ToolbarItems>
     <ScrollView>
     <StackLayout >
-        <Label x:Name="status" HorizontalOptions="CenterAndExpand" />
+            <StackLayout Padding="15" >
+                  <Label x:Name="status" HorizontalOptions="CenterAndExpand" />
+            </StackLayout>
+      
             
-        <TableView x:Name="tableView" Intent="Form" HasUnevenRows="true" >
+        <StackLayout Orientation="Horizontal" x:Name="choice" Padding="15" IsVisible="false" >
+                <Label  Text="You can enter medicine manually or scan barcode on package" VerticalOptions="Center" />
+                <Image Source="{local:EmbeddedImage MyDiet.Images.icons_barcodefilled80.png}" 
+                                    Aspect="AspectFit" >
+                        <Image.GestureRecognizers>
+                             <TapGestureRecognizer
+                                       Tapped="scanClicked"  />
+                        </Image.GestureRecognizers>
+                </Image>
+        </StackLayout>    
+        
+        <TableView Intent="Form" HasUnevenRows="true" >
             <TableRoot>
                 <TableSection Title="New medicine details">
-                    <EntryCell Text="{Binding MedicineName}" Label="Medicine name:" Placeholder="(eg Paracetamol)" />
-                    <!--<EntryCell Text="{Binding Unit}" Label="Unit:" Placeholder="(eg pills, ml, g)" />-->
+                    <EntryCell x:Name="nameEntry" Text="{Binding MedicineName}" Label="Medicine name:" Placeholder="(eg Paracetamol)" />
                    
                     <ViewCell>
                         <StackLayout Padding="15">
                             <Label Text="Benefits:" />
-                            <Editor Text="{Binding Description}" BackgroundColor="Silver" HeightRequest="130"/>
+                            <Editor x:Name="descriptionEntry" Text="{Binding Description}" BackgroundColor="Silver" HeightRequest="70"/>
                         </StackLayout>
 
                     </ViewCell>
                         
                 </TableSection>  
 
+          <!--  </TableRoot>        
+        </TableView> 
+
+        <TableView Intent="Form" HasUnevenRows="true" >
+            <TableRoot>-->
                 <TableSection Title="directions for use">
                     <ViewCell>
                         <StackLayout Padding="15">
                             <Label Text="Description: (by defult)" />
-                            <Editor Text="{Binding Directions}" BackgroundColor="Silver" HeightRequest="100"/>
+                            <Editor x:Name="directionsEntry" Text="{Binding Directions}" BackgroundColor="Silver" HeightRequest="50"/>
                         </StackLayout>
 
                     </ViewCell>
-                    <EntryCell Text="{Binding Duration}" Label="A cycle of treatment(days):" Placeholder="(eg 7)" />
-                    <EntryCell Text="{Binding TimesPerDay}" Label="Frequency(times per day):" Placeholder="(eg 3)" 
-                               Keyboard="Numeric" Completed="FrequancyCompleted" />
-                    <EntryCell Text="{Binding Unit}" Label="Basic unit: " Placeholder="(eg 2 tablets)" />
+                    <EntryCell x:Name="durationEntry" Text="{Binding Duration}" Label="A cycle of treatment(days):" Placeholder="(eg 7)" />
+                     <ViewCell>
+                        <StackLayout Style="{StaticResource cellLayout}" >
+                            <Label Text="Frequency(times per day):" />
+                            <Entry x:Name="timesPerDayEntry" Text="{Binding TimesPerDay}" Placeholder="(eg 3)"  
+                               Keyboard="Numeric" Unfocused="FrequancyCompleted" />  
+                        </StackLayout>
+                    </ViewCell>
+                        
+                   <!-- <EntryCell x:Name="timesPerDayEntry" Text="{Binding TimesPerDay}" Label="Frequency(times per day):" Placeholder="(eg 3)" 
+                               Keyboard="Numeric" Completed="FrequancyCompleted"  
+                                />-->
+                    <EntryCell x:Name="unitEntry" Text="{Binding Unit}" Label="Basic unit: " Placeholder="(eg 2 tablets)" />
 
                     <ViewCell>
                         <StackLayout Style="{StaticResource cellLayout}" >
@@ -64,7 +91,6 @@
                             
                 </TableSection>  
 
-              
             </TableRoot>        
         </TableView> 
             <StackLayout Padding="15,0,15,0" >
@@ -76,10 +102,11 @@
             <StackLayout Padding="15,0,15,0" >
                 
                 <StackLayout Orientation="Horizontal" >
-                    <Button Text="Start" Clicked="StartClicked" HorizontalOptions="Start" />
+                    <Button x:Name="startButtom" Text="Start" Clicked="StartClicked" HorizontalOptions="Start" />
                     <Button Text="End" Clicked="EndClicked" HorizontalOptions="EndAndExpand" />
                     
                 </StackLayout>
+                <Button x:Name="delete" Clicked="DeleteClicked" Text="delete" />
             </StackLayout>
     </StackLayout>
     </ScrollView>
