@@ -415,6 +415,8 @@ namespace MyDiet.Views
 				await DisplayAlert("Notice:", "You are not taking this medicine!", "OK");
 				return;
 			}
+
+            //delete related reminders
 			ReminderManager reminderManager = ReminderManager.DefaultManager;
 			var temp = await reminderManager.GetReminderAsync();
 			foreach(var t in temp)
@@ -425,12 +427,14 @@ namespace MyDiet.Views
 				}
 
 			}
+            //update thie medicine status
 			currentMedicine.IsTaking = false;
 			MedicineManager medicineManager = MedicineManager.DefaultManager;
             await medicineManager.SaveTaskAsync(currentMedicine, isNewItem);
 			status.Text = "You are not taking this medical now";
 			App.contentChanged = true;
 
+            //set a new medicine history 
 			MedicineHistory medicineHistory = new MedicineHistory
 			{
 				Id = Guid.NewGuid().ToString(),

@@ -12,10 +12,27 @@ namespace MyDiet.Views
             InitializeComponent();
         }
 
+		public async void GetAccount()
+        {
+            try
+            {
+                var accountManager = new AccountManager();
+				var account = await accountManager.GetAccountInfosAsync(App.email);
+                App.account = account;
 
+            }
+            catch
+            {
+                await DisplayAlert("Warning", "No Network available", "continue", "cancel");
+
+                await Navigation.PopAsync();
+
+            }
+        }
 
         async void OnDoneClicked(object sender, System.EventArgs e)
         {
+			GetAccount();
 			if(oldEntry.Text==App.account.Password){
 				if(newEntry.Text==comfirmNewEntry.Text){
 					var response = await DisplayAlert("Notice", "Are you sure to change?", "yes", "no");

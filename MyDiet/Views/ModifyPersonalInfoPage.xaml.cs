@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using MyDiet.Manager;
 using Xamarin.Forms;
+using MyDiet.Helpers;
 
 namespace MyDiet.Views
 {
@@ -11,17 +12,36 @@ namespace MyDiet.Views
         public ModifyPersonalInfoPage()
         {
             InitializeComponent();
-			nameCell.Text = App.account.Username;
-			nameCell.Detail = App.account.Email;
-			birthCell.Detail = App.account.DateOfBirth.ToString("dd MMM yyyy");
-			sexCell.Detail = App.account.Gender;
-			weightEntry.Text = App.account.Weight.ToString();
-			heightEntry.Text = App.account.Height.ToString();
-			cuisineEntry.Text = App.account.TypeOfCuisine;
+			GetAccount();
+
 
         }
 
+		public async void GetAccount()
+		{
+			try
+            {
+                var accountManager = new AccountManager();
+                var account = await accountManager.GetAccountInfosAsync(Settings.AccountEmail);
+                App.account = account;
+				nameCell.Text = App.account.Username;
+                nameCell.Detail = App.account.Email;
+                birthCell.Detail = App.account.DateOfBirth.ToString("dd MMM yyyy");
+                sexCell.Detail = App.account.Gender;
+                weightEntry.Text = App.account.Weight.ToString();
+                heightEntry.Text = App.account.Height.ToString();
+                cuisineEntry.Text = App.account.TypeOfCuisine;
 
+            }
+            catch
+            {
+                await DisplayAlert("Warning", "No Network available", "continue", "cancel");
+               
+				await Navigation.PopAsync();
+               
+            }
+		}
+      
 
 		async void OnDoneClicked(object sender, System.EventArgs e)
         {

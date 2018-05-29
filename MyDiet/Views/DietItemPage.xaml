@@ -129,26 +129,30 @@
 
                </StackLayout>
                <ScrollView>
-                <StackLayout Orientation="Horizontal" IsVisible="false" x:Name="imagesStack"
-                             HeightRequest="110" >
-                    <Image x:Name="image00" IsVisible="false" WidthRequest="110" Aspect="AspectFill" >
-                        <Image.GestureRecognizers>
-                            <TapGestureRecognizer
-                                       Tapped="OnImage00Tapped"  />
-                        </Image.GestureRecognizers>
-                    </Image>    
-                    <Image x:Name="image11" IsVisible="false" WidthRequest="110" Aspect="AspectFill" >
-                       <Image.GestureRecognizers>
-                            <TapGestureRecognizer
-                                        Tapped="OnImage11Tapped"  />
-                       </Image.GestureRecognizers>
-                    </Image>    
-                    <Image x:Name="image22" IsVisible="false" WidthRequest="110" Aspect="AspectFill" >
-                        <Image.GestureRecognizers>
-                            <TapGestureRecognizer
-                                        Tapped="OnImage22Tapped" />
-                       </Image.GestureRecognizers>
-                    </Image>    
+                <StackLayout IsVisible="false" x:Name="imagesStack"
+                              >
+                      <Grid >
+
+                            <Image Grid.Column="0" x:Name="image00" IsVisible="false"  Aspect="AspectFill" >
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                               Tapped="OnImage00Tapped"  />
+                                </Image.GestureRecognizers>
+                            </Image>    
+                            <Image  Grid.Column="1" x:Name="image11" IsVisible="false"  Aspect="AspectFill" >
+                               <Image.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                                Tapped="OnImage11Tapped"  />
+                               </Image.GestureRecognizers>
+                            </Image>    
+                            <Image  Grid.Column="2" x:Name="image22" IsVisible="false"  Aspect="AspectFill" >
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                                Tapped="OnImage22Tapped" />
+                               </Image.GestureRecognizers>
+                            </Image>   
+
+                        </Grid>
                 </StackLayout>
 
                </ScrollView>
@@ -173,8 +177,8 @@
                                        Tapped="scanClicked"  />
                         </Image.GestureRecognizers>
                     </Image>
-                    <Button x:Name="BarTest" Text="barTest" Clicked="BarTestClicked" />
-                    <Label x:Name="bar" />
+
+                    <Label x:Name="bar" VerticalOptions="Center" />
                 </StackLayout>
 
 
@@ -185,7 +189,7 @@
                 
 
 
-               <Button Text="Delete" Clicked="OnDeleteActivated" />
+               <Button Text="Delete" Clicked="OnDeleteActivated" x:Name="deleteButton" />
                <Button Text="Cancel" Clicked="OnCancelActivated" x:Name="cancelButton"/>
 
             </StackLayout>

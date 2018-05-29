@@ -38,6 +38,12 @@ namespace MyDiet.Models
 
 		[JsonProperty(PropertyName = "ScanItems")]
         public String ScanItems { get; set; }
+        
+		[JsonProperty(PropertyName = "Height")]
+		public String Height { get; set; }
+
+		[JsonProperty(PropertyName = "ScanBarcodes")]
+		public String ScanBarcodes { get; set; }
 
 		[JsonProperty(PropertyName = "Date")]
 		public DateTime Date { get; set; }

@@ -99,6 +99,10 @@
     <EmbeddedResource Include="Images\icons_number80.png" />
     <EmbeddedResource Include="Images\icons_clock80.png" />
     <EmbeddedResource Include="Images\icons_checked64.png" />
+    <EmbeddedResource Include="Views\PackageFoodPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -168,6 +172,9 @@
     <Compile Include="Manager\MedicineDatabaseManager.cs" />
     <Compile Include="Models\MedicineDatabase.cs" />
     <Compile Include="Manager\PackageFoodDatabaseManager.cs" />
+    <Compile Include="Views\PackageFoodPage.xaml.cs">
+      <DependentUpon>PackageFoodPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\" />

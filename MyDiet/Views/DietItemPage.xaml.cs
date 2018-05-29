@@ -35,6 +35,7 @@ namespace MyDiet.Views
         MediaFile file1 = null;
         MediaFile file2 = null;
 		List<string> items = new List<string>();
+		List<string> barcodes = new List<string>();
        
         public DietItemPage(DietItem dietItem)
         {
@@ -64,16 +65,18 @@ namespace MyDiet.Views
                 dietItemCurrent = dietItem;
 				if(dietItemCurrent.ScanItems!=""){
 					string[] str = dietItemCurrent.ScanItems.Split(';');
+					string[] bars = dietItemCurrent.ScanBarcodes.Split(';');
 					for (int i = 0; i < str.Length;i++){
-						SetScanItems(str[i]);
+						SetScanItems(str[i], bars[i]);
 						items.Add(str[i]);
+						barcodes.Add(bars[i]);
 					}
 
 				}
 				if (dietItemCurrent.Image0LocalPath != null)
                 {
                     imagesStack.IsVisible = true;
-
+					imagesStack.HeightRequest = 110;
                 }
 
             }
@@ -139,19 +142,33 @@ namespace MyDiet.Views
 		async void OnSaveActivated(object sender, EventArgs e)
 		{
 			activityIndicator.IsRunning = true;
-
+			activityIndicator.IsVisible = true;
 			cancelButton.IsEnabled = false;
-            
+			deleteButton.IsEnabled = false;
+
+			if (numberOfPhoto > 0)
+				dietItemCurrent.Height = "110";
+			else
+				dietItemCurrent.Height = "0";
 			var size = items.Count;
 			//System.Diagnostics.Debug.WriteLine("size: "+size);
 			string str = "";
+			string barcodesStr = "";
 			if(size>0){
 				for (int i = 0; i < size; i++)
                 {
                     str = str + items[i] + ";";
+					barcodesStr =barcodesStr+ barcodes[i] + ";";
                 }
-                str = str.Substring(0, str.Length - 2);
+                str = str.Substring(0, str.Length - 1);
+				barcodesStr = barcodesStr.Substring(0, barcodesStr.Length - 1);
                 dietItemCurrent.ScanItems = str;
+				dietItemCurrent.ScanBarcodes = barcodesStr;
+
+			}else
+			{
+				dietItemCurrent.ScanItems ="";
+                dietItemCurrent.ScanBarcodes = "";
 			}
 
 
@@ -159,6 +176,7 @@ namespace MyDiet.Views
 
             if (numberOfPhoto > 0 && existPhotos <= 0)
             {
+				
                 dietItemCurrent.Image0UploadId = await AzureStorage.UploadFileAsync(ContainerType.Image, file0.GetStream());
 
             }
@@ -210,9 +228,17 @@ namespace MyDiet.Views
 			{
 				var response = await DisplayActionSheet("Choose resource", "Cancel", null, "Take a photo", "Choose from album");
 				if (response == "Take a photo")
-					TakePhotoClicked();
+				{
+					
+                    TakePhotoClicked();	
+				}
+					
 				if (response == "Choose from album")
-					PickPhotoClicked();
+				{
+					
+                    PickPhotoClicked();
+				}
+					
 			}
         }
 
@@ -221,7 +247,7 @@ namespace MyDiet.Views
         {
 			
             //MobileBarcodeScanner.Initialize(Application);
-            await DisplayAlert("notice", "start scan carcode", "yes");
+            //await DisplayAlert("notice", "start scan carcode", "yes");
 
 #if __ANDROID__
     // Initialize the scanner first so it can track the current context
@@ -269,35 +295,35 @@ namespace MyDiet.Views
 
         }
 
-		async void BarTestClicked(object sender, System.EventArgs e)
-        {
-			HttpClient _client = new HttpClient();
-			string quary = Constants.BarcodeEndpointUri + "?json=barcode&q=" + "21045622" + "&apikey=" + Constants.APIKey;
+		//async void BarTestClicked(object sender, System.EventArgs e)
+   //     {
+			//HttpClient _client = new HttpClient();
+			//string quary = Constants.BarcodeEndpointUri + "?json=barcode&q=" + "21045622" + "&apikey=" + Constants.APIKey;
 
 
-            var response = await _client.GetAsync(quary);
-            //var posts = JsonConvert.DeserializeObject<List<BarcodeItem>>(content);
-            if (response.IsSuccessStatusCode)
-            {
-                var content = await response.Content.ReadAsStringAsync();
-                var Items = JsonConvert.DeserializeObject(content);
-                System.Diagnostics.Debug.WriteLine("response:"+Items.ToString());
-				System.Diagnostics.Debug.WriteLine("content: "+content);
+    //        var response = await _client.GetAsync(quary);
+    //        //var posts = JsonConvert.DeserializeObject<List<BarcodeItem>>(content);
+    //        if (response.IsSuccessStatusCode)
+    //        {
+    //            var content = await response.Content.ReadAsStringAsync();
+    //            var Items = JsonConvert.DeserializeObject(content);
+    //            System.Diagnostics.Debug.WriteLine("response:"+Items.ToString());
+				//System.Diagnostics.Debug.WriteLine("content: "+content);
 
-                await DisplayAlert("barcode item length", content.Length.ToString(), "sure");
-				var posts = JsonConvert.DeserializeObject<Items>(content);
-				System.Diagnostics.Debug.WriteLine("title: " + posts.title);
+    //            await DisplayAlert("barcode item length", content.Length.ToString(), "sure");
+				//var posts = JsonConvert.DeserializeObject<Items>(content);
+				//System.Diagnostics.Debug.WriteLine("title: " + posts.title);
 
-            }
+        //    }
 
-        }
+        //}
 
 
 		async void SearchBarcodeAsync()
 		{
+			/*
 			try{
 				
-    			
     			activityIndicator.IsRunning = true;
                
     			var client = new RestClient("https://api.upcitemdb.com/prod/trial/");
@@ -336,6 +362,7 @@ namespace MyDiet.Views
 			}catch{
 				await DisplayAlert("notice", "NetWork Error", "Sure");
 			}
+			*/
 			//System.Diagnostics.Debug.WriteLine("obj: " + obj.items.ToString());
 			//JSONObject a = new JSONObject(response.Content);
 			//JsonObjectAttribute json = (Newtonsoft.Json.JsonObjectAttribute)obj;
@@ -345,27 +372,34 @@ namespace MyDiet.Views
 			//var c = a.GetString("a");
 			//System.Diagnostics.Debug.WriteLine("a: " + a);
 			//System.Diagnostics.Debug.WriteLine("obj total: " + obj.total);
-     //**********************************       
-			//HttpClient _client = new HttpClient();
-   //         string quary = Constants.BarcodeEndpointUri + "?json=barcode&q=" + App.barcode + "&apikey=" + Constants.APIKey;
+			//**********************************       
+			activityIndicator.IsVisible = true;
+			activityIndicator.IsRunning = true;
+			await DisplayAlert("Scanned Barcode", App.barcode, "OK");
+			try
+            {
+				PackageFoodDatabaseManager packageFoodDatabaseManager = new PackageFoodDatabaseManager();
+				var temp =await  packageFoodDatabaseManager.GetFoodAsync(App.barcode);
+				if (temp != null)
+                {
+					items.Add(temp.Title);
+					barcodes.Add(temp.Id);
+					SetScanItems(temp.Title, temp.Id);
+                }
+                else
+                {
+                    await DisplayAlert("Sorry!", "This food does not exist in our database", "OK");
+                }
 
-
-			//var response = await _client.GetAsync(quary);
-			////var posts = JsonConvert.DeserializeObject<List<BarcodeItem>>(content);
-			//if (response.IsSuccessStatusCode)
-    //        {
-    //            var content = await response.Content.ReadAsStringAsync();
-				//var Items = JsonConvert.DeserializeObject(content);
-				//System.Diagnostics.Debug.WriteLine("response:"+Items.ToString());
-				//System.Diagnostics.Debug.WriteLine(content);
-
-            //    await DisplayAlert("barcode item title", content.Length.ToString(), "sure");
-            //}
-			//var posts = JsonConvert.DeserializeObject<BarcodeItem>(content);
-
-
-
+            }
+            catch
+            {
+                await DisplayAlert("notice", "NetWork Error", "Sure");
+            }
+                     
             App.barcode = null;
+			activityIndicator.IsVisible = false;
+			activityIndicator.IsRunning = false;
 
 		}
 
@@ -418,7 +452,10 @@ namespace MyDiet.Views
                 imagesStack.IsVisible = false;
             }
             numberOfPhoto--;
-
+			if(numberOfPhoto==0){
+				imagesStack.HeightRequest = 0;
+				imagesStack.IsVisible = false;
+			}
             oStackLayout.IsVisible = true;
             image00StackLayout.IsVisible = false;
 
@@ -611,12 +648,14 @@ namespace MyDiet.Views
 
 
             numberOfPhoto++;
+			imagesStack.HeightRequest = 110;
+            imagesStack.IsVisible = true;
 
 
         }
 
 
-		public void SetScanItems(string title){
+		public void SetScanItems(string title , string id){
 
 			StackLayout stackLayout = new StackLayout();
             stackLayout.Orientation = StackOrientation.Horizontal;
@@ -625,9 +664,14 @@ namespace MyDiet.Views
             label1.VerticalOptions = LayoutOptions.Center;
             Button button = new Button();
             button.VerticalOptions = LayoutOptions.Center;
-            button.Text = "delete";
-            button.HorizontalOptions = LayoutOptions.End;
+            button.Text = "Delete";
+           
+			Button button2 = new Button();
+            button2.VerticalOptions = LayoutOptions.Center;
+            button2.Text = "Details";
+
             stackLayout.Children.Add(label1);
+			stackLayout.Children.Add(button2);
             stackLayout.Children.Add(button);
 
             barItems.Children.Add(stackLayout);
@@ -635,7 +679,14 @@ namespace MyDiet.Views
             {
                 barItems.Children.Remove(stackLayout);
 				items.Remove(title);
+				barcodes.Remove(id);
             };
+
+			button2.Clicked += (sender, e) =>
+			{
+				Navigation.PushAsync(new PackageFoodPage(id));
+			};
+
 		}
 
     }

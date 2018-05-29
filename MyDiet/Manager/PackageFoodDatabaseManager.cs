@@ -28,7 +28,7 @@ namespace MyDiet.Manager
 			this.MedicineDatabase = client.GetTable<PackageFoodDatabase>();
         }
               
-		public async Task<PackageFoodDatabase> GetMedicineAsync(String id)
+		public async Task<PackageFoodDatabase> GetFoodAsync(String id)
         {
             try
             {

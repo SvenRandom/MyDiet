@@ -40,16 +40,21 @@
                                         <Label Text="{Binding Calories}" HorizontalOptions="EndAndExpand" />
                                         <Label Text="cal" HorizontalOptions="End" x:Name="calLabel"/>
                         </StackLayout>
-                        <!--<StackLayout Orientation="Horizontal"> 
-                                <Image Source="{Binding Image0LocalPath}" Aspect="AspectFit"
-                                       HeightRequest="110" WidthRequest="110" />
-                                 <Image Source="{Binding Image1LocalPath}" Aspect="AspectFit"
-                                       HeightRequest="110" WidthRequest="110" />
-                                 <Image Source="{Binding Image2LocalPath}" Aspect="AspectFit"
-                                       HeightRequest="110" WidthRequest="110" />
+
+                        <Label Text="{Binding ScanItems}" />
+                            
+                        <Label Text="{Binding Description}" />
+
+                        <Grid HeightRequest="{Binding Height}">
+                                <Image Source="{Binding Image0LocalPath}" Aspect="AspectFill"
+                                       Grid.Column="0" />
+                                 <Image Source="{Binding Image1LocalPath}" Aspect="AspectFill"
+                                        Grid.Column="1" />
+                                 <Image Source="{Binding Image2LocalPath}" Aspect="AspectFill"
+                                         Grid.Column="2" />
                           
-                        </StackLayout> -->
-                        <StackLayout Orientation="Horizontal" HeightRequest="110"  > 
+                        </Grid>
+                        <!--<StackLayout Orientation="Horizontal" HeightRequest="110"  > 
                                 <Image Source="{Binding Image0LocalPath}" Aspect="AspectFill" WidthRequest="110"
                                         />
                                  <Image Source="{Binding Image1LocalPath}" Aspect="AspectFill" WidthRequest="110"
@@ -57,10 +62,7 @@
                                  <Image Source="{Binding Image2LocalPath}" Aspect="AspectFill" WidthRequest="110"
                                        />
                           
-                        </StackLayout> 
-                        <Label Text="{Binding ScanItems}" />
-                            
-                        <Label Text="{Binding Description}" />
+                        </StackLayout> -->
 
                          
                     </StackLayout>
