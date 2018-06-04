@@ -446,12 +446,18 @@ namespace MyDiet.Views
 				Duration=currentMedicine.Duration,
 				TimesPerDay= currentMedicine.TimesPerDay,
 				Unit = currentMedicine.Unit,
+				StartTime=currentMedicine.StartTime,
 				DirectionsToDisplay = currentMedicine.TimesPerDay + " times a day, " + currentMedicine.Unit + " each time",
 			};
 			if(currentMedicine.TimesPerDay==1)
 			{
 				medicineHistory.DirectionsToDisplay = "Once a day, " + currentMedicine.Unit + " each time";
 			}
+			var startday = new DateTime(currentMedicine.StartTime.Year, currentMedicine.StartTime.Month, currentMedicine.StartTime.Day);
+            var diff = DateTime.Now - startday;
+
+            var difff = diff.Days + 1;
+			medicineHistory.Duration = difff.ToString();
 			MedicineHistoryManager medicineHistoryManager = MedicineHistoryManager.DefaultManager;
 			await medicineHistoryManager.SaveTaskAsync(medicineHistory, true);
 			await DisplayAlert("Notice:", "You have ended this medicine!", "OK");

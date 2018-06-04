@@ -79,6 +79,10 @@
                             </StackLayout>
 
                             <Label Text="{Binding Description}" FontSize="Small" />
+                            <StackLayout Orientation="Horizontal" >
+                                <Switch IsToggled="{Binding IsTaking}" IsEnabled="false" />
+                                
+                            </StackLayout>
                            
                         </StackLayout>
                     </ViewCell>

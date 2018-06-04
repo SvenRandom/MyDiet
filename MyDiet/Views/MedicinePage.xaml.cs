@@ -41,7 +41,7 @@ namespace MyDiet.Views
             medicineListView.ItemsSource = temp1;
 
 			var temp2 = await medicineHistoryManager.GetMedicinesAsync();
-			historyListView.ItemsSource = temp2;
+			historyListView.ItemsSource = temp2.OrderByDescending(history => history.StartTime);
 
 		}
 
