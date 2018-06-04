@@ -79,9 +79,10 @@
                             </StackLayout>
 
                             <Label Text="{Binding Description}" FontSize="Small" />
-                            <StackLayout Orientation="Horizontal" >
+                            <StackLayout Orientation="Horizontal" BackgroundColor="{StaticResource LightGreen}" 
+                                         IsVisible="{Binding IsTaking}" >
                                 <Switch IsToggled="{Binding IsTaking}" IsEnabled="false" />
-                                
+                                <Label Text="Under taken" TextColor="White" VerticalOptions="Center" />
                             </StackLayout>
                            
                         </StackLayout>
