@@ -21,7 +21,7 @@
                 <Button  Grid.Column="0" 
                         Text="Reminder" x:Name="reminder" Clicked="ReminderClicked" />
                 <Button  Grid.Column="1"  
-                        Text="My Medicine" x:Name="medicine" Clicked="MedicineClicked"/>   
+                        Text="Current" x:Name="medicine" Clicked="MedicineClicked"/>   
                 <Button  Grid.Column="2"
                         Text="History" x:Name="history" Clicked="HistoryClicked"/> 
             </Grid>
@@ -88,8 +88,8 @@
         </ListView>
 
 
-         <ListView HasUnevenRows="true" x:Name="historyListView"
-                  IsPullToRefreshEnabled="true" Refreshing="OnHistoryRefresh">
+         <ListView HasUnevenRows="true" x:Name="historyListView" ItemSelected="HistoryItemSelected" 
+                  IsPullToRefreshEnabled="true" Refreshing="OnHistoryRefresh" ItemTapped="Handle_HistoryTapped" >
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -99,9 +99,9 @@
                             <StackLayout HorizontalOptions="FillAndExpand" >
                                
                                     <Label Text="{Binding MedicineName}" VerticalOptions="Center" />
-                                    <Label Text="{Binding Directions}" VerticalOptions="Center" />
+                                    <Label Text="{Binding DirectionsToDisplay}" VerticalOptions="Center" FontSize="Small" />
                                
-                                    <Label Text="{Binding TimeToDisplay}" VerticalOptions="Center" />
+                                    <Label Text="{Binding TimeToDisplay}" VerticalOptions="Center" FontSize="Small" />
                                   
                                
                             </StackLayout>

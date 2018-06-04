@@ -136,7 +136,7 @@ namespace MyDiet.Manager
 
             try
             {
-				Debug.WriteLine("refersh here.");
+				//Debug.WriteLine("refersh here.");
                 await this.client.SyncContext.PushAsync();
 
 				await this.medicineTable.PullAsync(

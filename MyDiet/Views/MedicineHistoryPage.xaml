@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="MyDiet.Views.MedicineHistoryPage"
+             xmlns:local="clr-namespace:MyDiet"
+             Title="History Detail">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="cellLayout" TargetType="StackLayout" >
+                <Setter Property="Orientation" Value="Horizontal" />
+                <Setter Property="Padding" Value="15" />
+
+            </Style>
+            <Style TargetType="Label" >
+                <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+    <StackLayout >
+      
+        <TableView Intent="Data" HasUnevenRows="true" >
+            <TableRoot>
+                <TableSection Title="Medicine details">
+                    <ViewCell>
+                        <StackLayout Style="{StaticResource cellLayout}" >
+                            <Label Text="Medicine name: " />
+                            <Label Text="{Binding MedicineName}"  />
+                        </StackLayout>
+                    </ViewCell>
+                  
+                    <ViewCell>
+                        <StackLayout Padding="15">
+                            <Label Text="Benefits:" />
+                            <Label Text="{Binding Description}" />
+                        </StackLayout>
+
+                    </ViewCell>
+                        
+                </TableSection>  
+
+                <TableSection Title="Directions for use">
+                    <ViewCell>
+                        <StackLayout Padding="15">
+                            <Label Text="Description: " />
+                            <Label Text="{Binding Directions}" />
+                        </StackLayout>
+
+                    </ViewCell>
+
+                    <ViewCell>
+                        <StackLayout Style="{StaticResource cellLayout}" >
+                            <Label Text="A cycle of treatment(days): " />
+                            <Label Text="{Binding Duration}" />
+                        </StackLayout>
+                         
+                    </ViewCell>
+                        
+                   
+                    <ViewCell>
+                        <StackLayout Style="{StaticResource cellLayout}" >
+                            <Label Text="Frequency(times per day):" />
+                            <Label Text="{Binding TimesPerDay}" />  
+                        </StackLayout>
+                    </ViewCell>
+                        
+                    <ViewCell>
+                        <StackLayout Style="{StaticResource cellLayout}" >
+                            <Label Text="Basic unit:" />
+                            <Label Text="{Binding Unit}" />  
+                        </StackLayout>
+                    </ViewCell>
+                        
+                    <ViewCell>
+                        <StackLayout Padding="15" >
+                            <Label Text="Duration: " />
+                            <Label Text="{Binding TimeToDisplay}"  />
+                        </StackLayout>
+                    </ViewCell>
+                            
+                </TableSection>  
+               
+                    
+            </TableRoot>        
+        </TableView> 
+              
+             
+    </StackLayout>
+    </ScrollView>    
+    
+</ContentPage>

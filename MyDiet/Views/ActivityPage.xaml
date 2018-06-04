@@ -15,16 +15,14 @@
      <ScrollView>   
         <StackLayout VerticalOptions="FillAndExpand" >
            
-            <RelativeLayout VerticalOptions="Start" HeightRequest="140" 
+            <RelativeLayout VerticalOptions="Start" HeightRequest="100" 
                             BackgroundColor="#2196F3" >
                  <Grid RelativeLayout.WidthConstraint=
                      "{ConstraintExpression Type=RelativeToParent, Property=Width}"
                         RelativeLayout.HeightConstraint=
                      "{ConstraintExpression Type=RelativeToParent, Property=Height}">
                     
-                 <Label Text="Today" TextColor="White" />
-                 <Label Text="5,700" TextColor="White" FontSize="40"
-                       VerticalOptions="CenterAndExpand" />
+                 <Label Text="Today" TextColor="White" FontSize="Large" />
                      <Grid VerticalOptions="End" >
                         <StackLayout Grid.Column="0" >
                             <Label Text="0.92" FontSize="Large"
@@ -33,7 +31,14 @@
                                    TextColor="White"/>
                         </StackLayout>
 
-                        <StackLayout Grid.Column="1"  >
+                        <StackLayout Grid.Column="1" >
+                            <Label Text="5700" FontSize="Large"
+                                   TextColor="White"/>
+                            <Label Text="Steps"
+                                   TextColor="White"/>
+                        </StackLayout>
+
+                        <StackLayout Grid.Column="2"  >
                             <Label Text="9" FontSize="Large" 
                                    TextColor="White"/>
                             <Label Text="Climbed floor"

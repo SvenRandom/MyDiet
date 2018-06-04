@@ -158,6 +158,20 @@ namespace MyDiet.Views
             
         }
 
+		void Handle_HistoryTapped(object sender, Xamarin.Forms.ItemTappedEventArgs e)
+        {
+			var medicineHistory = e.Item as MedicineHistory;
+
+			Navigation.PushAsync(new MedicineHistoryPage(medicineHistory));
+        }
+
+        void HistoryItemSelected(object sender, Xamarin.Forms.SelectedItemChangedEventArgs e)
+        {
+			historyListView.SelectedItem = null;
+
+        }
+
+
         //*********** reminder edit click ****************
 		//void ReminderEditClicked(object sender, System.EventArgs e)
    //     {

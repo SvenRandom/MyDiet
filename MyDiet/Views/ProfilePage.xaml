@@ -29,7 +29,7 @@
                                </StackLayout.GestureRecognizers>-->
                                <Image Source="{local:EmbeddedImage MyDiet.Images.icons_info40.png}" HorizontalOptions="Start"
                                       Aspect="AspectFit" />
-                               <Label Text="Modify personal information" VerticalOptions="Center" />
+                               <Label Text="Personal information" VerticalOptions="Center" />
                               
                                <Label Text=">" HorizontalOptions="EndAndExpand" VerticalOptions="Center" />
                             </StackLayout>
@@ -38,7 +38,7 @@
                         <ViewCell Tapped="OnPasswordTapped">
                             <StackLayout Style="{StaticResource viewLayout}">
                                <Image Source="{local:EmbeddedImage MyDiet.Images.icons_password40.png}" HorizontalOptions="Start"/>
-                               <Label Text="Change password" VerticalOptions="Center" />
+                               <Label Text="Password" VerticalOptions="Center" />
 
                                <Label Text=">" HorizontalOptions="EndAndExpand" VerticalOptions="Center" />
                             </StackLayout>

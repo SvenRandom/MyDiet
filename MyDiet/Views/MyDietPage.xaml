@@ -23,9 +23,9 @@
             <Button Grid.Row="0" Grid.Column="0" 
                     Text="Today" x:Name="today" Clicked="TodayClicked" />
             <Button Grid.Row="0" Grid.Column="1"  
-                    Text="Recent one Week" x:Name="week" Clicked="WeekClicked"/>   
+                    Text="Recent Week" x:Name="week" Clicked="WeekClicked"/>   
             <Button Grid.Row="0" Grid.Column="2"  
-                    Text="All history" x:Name="history" Clicked="HistoryClicked"/> 
+                    Text="History" x:Name="history" Clicked="HistoryClicked"/> 
        </Grid>
       
     </StackLayout>    

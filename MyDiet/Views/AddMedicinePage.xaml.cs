@@ -440,10 +440,18 @@ namespace MyDiet.Views
 				Id = Guid.NewGuid().ToString(),
 				UserId = App.email,
 				MedicineName = currentMedicine.MedicineName,
-				Directions = currentMedicine.TimesPerDay + " times a day, " + currentMedicine.Unit + " each time",
-				TimeToDisplay = "From " + currentMedicine.StartTime.ToString("dd/MMM/yyyy dddd")
-				                                         + " to " + DateTime.Now.ToString("dd/MMM/yyyy dddd")
+				Directions = currentMedicine.Directions,
+				TimeToDisplay = currentMedicine.StartTime.ToString("dd/MMM/yyyy dddd") + " - " + DateTime.Now.ToString("dd/MMM/yyyy dddd"),
+				Description = currentMedicine.Description,
+				Duration=currentMedicine.Duration,
+				TimesPerDay= currentMedicine.TimesPerDay,
+				Unit = currentMedicine.Unit,
+				DirectionsToDisplay = currentMedicine.TimesPerDay + " times a day, " + currentMedicine.Unit + " each time",
 			};
+			if(currentMedicine.TimesPerDay==1)
+			{
+				medicineHistory.DirectionsToDisplay = "Once a day, " + currentMedicine.Unit + " each time";
+			}
 			MedicineHistoryManager medicineHistoryManager = MedicineHistoryManager.DefaultManager;
 			await medicineHistoryManager.SaveTaskAsync(medicineHistory, true);
 			await DisplayAlert("Notice:", "You have ended this medicine!", "OK");
@@ -458,7 +466,7 @@ namespace MyDiet.Views
         {
 
             //MobileBarcodeScanner.Initialize(Application);
-            await DisplayAlert("notice", "start scan carcode", "yes");
+           
 			//App.barcode = "9316626605835";
 #if __ANDROID__
     // Initialize the scanner first so it can track the current context

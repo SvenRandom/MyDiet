@@ -59,7 +59,7 @@ namespace MyDiet.Views
 			}
 
 
-			calLabel.Text = totalCal + " Total Cal";
+			calLabel.Text = totalCal + " Cal";
 		}
 
 		async public void SetMedicine()

@@ -49,7 +49,7 @@
                 <Label Text="Activity" />
                 <StackLayout HorizontalOptions="EndAndExpand">
                     <Label x:Name="stepLabel" Text="3345 Steps"  HorizontalOptions="EndAndExpand"/> 
-                    <Label x:Name="kmLabel" Text=" 1.1 Walked km"  HorizontalOptions="EndAndExpand"/>
+                    <Label x:Name="kmLabel" Text=" 1.1 km"  HorizontalOptions="EndAndExpand"/>
                 </StackLayout>
                
             </StackLayout>
@@ -74,7 +74,7 @@
            <StackLayout Orientation="Horizontal" >
                 <Label Text="Tips" />
                 <StackLayout HorizontalOptions="EndAndExpand" WidthRequest="250">
-                    <Label Text="Have meal in time! " FontSize="Medium" HorizontalOptions="EndAndExpand"/> 
+                    <Label Text="An apple a day keeps the doctor away! " FontSize="Medium" HorizontalOptions="EndAndExpand"/> 
                     <Label Text=""  HorizontalOptions="EndAndExpand"/>
                 </StackLayout>
                
