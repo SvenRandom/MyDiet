@@ -13,6 +13,7 @@ using Microsoft.WindowsAzure.MobileServices.Sync;
 
 namespace MyDiet.Manager
 {
+	public class ActivityDataManager 
     {
 
         
