@@ -23,10 +23,7 @@
                     <TableSection >
                         <ViewCell Tapped="OnModifyTapped" >
                             <StackLayout Style="{StaticResource viewLayout}">
-                               <!--<StackLayout.GestureRecognizers>
-                                   <TapGestureRecognizer
-                                        Tapped="OnModifyTapped" />
-                               </StackLayout.GestureRecognizers>-->
+                               
                                <Image Source="{local:EmbeddedImage MyDiet.Images.icons_info40.png}" HorizontalOptions="Start"
                                       Aspect="AspectFit" />
                                <Label Text="Personal information" VerticalOptions="Center" />
@@ -68,7 +65,7 @@
                 </TableRoot>
             </TableView>
 
-           <Button Text="add to medicine database" Clicked="SendNotiClicked" />
+<!--           <Button Text="add to medicine database" Clicked="SendNotiClicked" />-->
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

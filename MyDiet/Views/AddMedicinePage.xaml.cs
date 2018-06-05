@@ -441,7 +441,7 @@ namespace MyDiet.Views
 				UserId = App.email,
 				MedicineName = currentMedicine.MedicineName,
 				Directions = currentMedicine.Directions,
-				TimeToDisplay = currentMedicine.StartTime.ToString("dd/MMM/yyyy dddd") + " - " + DateTime.Now.ToString("dd/MMM/yyyy dddd"),
+				TimeToDisplay = currentMedicine.StartTime.ToString("dd/MMM/yyyy ddd") + " - " + DateTime.Now.ToString("dd/MMM/yyyy ddd"),
 				Description = currentMedicine.Description,
 				Duration=currentMedicine.Duration,
 				TimesPerDay= currentMedicine.TimesPerDay,

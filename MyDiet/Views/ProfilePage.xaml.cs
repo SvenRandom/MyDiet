@@ -1,6 +1,4 @@
-﻿
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using HelloWorld;
 using MyDiet.Models;
@@ -46,14 +44,15 @@ namespace MyDiet.Views
         }
 
 
-		void DataSourceTapped(object sender, System.EventArgs e)
+		async void DataSourceTapped(object sender, System.EventArgs e)
         {
-           
+			
+			await Navigation.PushAsync(new DataSourcePage());
         }
 
-		void AboutTapped(object sender, System.EventArgs e)
+		async void AboutTapped(object sender, System.EventArgs e)
         {
-
+			await Navigation.PushAsync(new AboutPage());
         }
 
 

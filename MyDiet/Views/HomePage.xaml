@@ -48,8 +48,8 @@
            <StackLayout Orientation="Horizontal" >
                 <Label Text="Activity" />
                 <StackLayout HorizontalOptions="EndAndExpand">
-                    <Label x:Name="stepLabel" Text="3345 Steps"  HorizontalOptions="EndAndExpand"/> 
-                    <Label x:Name="kmLabel" Text=" 1.1 km"  HorizontalOptions="EndAndExpand"/>
+                    <Label x:Name="stepLabel" Text="0 Steps"  HorizontalOptions="EndAndExpand"/> 
+                    <Label x:Name="kmLabel" Text=" 0.00 km"  HorizontalOptions="EndAndExpand"/>
                 </StackLayout>
                
             </StackLayout>

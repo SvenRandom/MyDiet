@@ -224,11 +224,22 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\Contents.json" />
     <ImageAsset Include="Assets.xcassets\LaunchImage.launchimage\Contents.json" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icons8-健康食品-40.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icons8-健康食品-80.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icons8-健康食品-87.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icons8-健康食品-60.png" />
-    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icons8-健康食品-58.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icon-40.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icon-20%403x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icon-29%402x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icon-29%403x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icon-40%402x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icon-40%403x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icon-60%402x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icon-60%403x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icon-20-ipad.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icon-20%402x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icon-29-ipad.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icon-29%402x-ipad.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icon-76.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icon-76%402x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icon-83.5%402x.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\icon-1024.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />

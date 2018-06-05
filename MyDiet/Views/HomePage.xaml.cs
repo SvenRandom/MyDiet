@@ -11,6 +11,7 @@ namespace MyDiet.Views
     {
 		DietManager dietManager;
         ReminderManager reminderManager;
+		ActivityDataManager activityDataManager;
         public HomePage()
         {
 			
@@ -19,6 +20,7 @@ namespace MyDiet.Views
 			date.Text = DateTime.Now.ToString("dd MMM yyyy dddd");
 			dietManager = DietManager.DefaultManager;
 			reminderManager = ReminderManager.DefaultManager;
+			activityDataManager = new ActivityDataManager();
 			//dietFrame.Tapped += async (sender, e) => {
     //            var tabbedPage = this.Parent as TabbedPage;
 				//tabbedPage.SwitchToDiet();
@@ -32,7 +34,9 @@ namespace MyDiet.Views
 			base.OnAppearing();
 			SetDiet();
 			SetMedicine();
+			SetActivity();
 		}
+
 
 		async public void SetDiet()
 		{
@@ -91,7 +95,27 @@ namespace MyDiet.Views
 			}
 
 		}
+        
+		async public void SetActivity()
+        {
+			var _data = await activityDataManager.GetActivityDataAsync();
+			var current = _data.Where(data => data.date.Year == DateTime.Now.Year &&
+                                        data.date.Month == DateTime.Now.Month &&
+                                        data.date.Day == DateTime.Now.Day);
+			var nums = current.Count();
+            
+            if (nums > 0)
+            {
+				var t = current.ElementAt(0);
+                kmLabel.Text = t.walkedkm.ToString("0.00") + " km";
+                //System.Diagnostics.Debug.WriteLine("km: " + t.walkedkm);
+				stepLabel.Text = t.steps.ToString() + " Steps";
+               
 
+            }
+           
+   
+        }
 
 		void OnDietTapped(object sender, System.EventArgs e)
         {
