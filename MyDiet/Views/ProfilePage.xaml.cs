@@ -59,24 +59,24 @@ namespace MyDiet.Views
 
 		async void SendNotiClicked(object sender, System.EventArgs e)
         {
-			//CrossLocalNotifications.Current.Show("Medicine Notification", "Now: "+DateTime.Now+" is time to take pill" , 1);
-			//CrossLocalNotifications.Current.Show("Medicine Notification", 
-			//"10 second later is time to take pill", 1, 
-			//DateTime.Now.AddSeconds(10));
-			//MedicineDatabase medicineDatabase = new MedicineDatabase
-			//{
-			//	Id="9311770597111",
-			//	MedicineName="Swisse Liver Detox",
-			//	Description="Swisse Ultiboost Liver Detox is a premium quality formula containing herbs traditionally " +
-			//		"used to help support liver function and provide relief from indigestion and bloating.",
-			//	Directions="Two tablets daily, during or immediately after a meal, or as directed by a healthcare professional.",
-			//	Duration="30",
-			//	TimesPerDay=1,
-			//	Unit="Two tablets"
-			//};
+			/*CrossLocalNotifications.Current.Show("Medicine Notification", "Now: "+DateTime.Now+" is time to take pill" , 1);
+			CrossLocalNotifications.Current.Show("Medicine Notification", 
+			"10 second later is time to take pill", 1, 
+			DateTime.Now.AddSeconds(10));
+			MedicineDatabase medicineDatabase = new MedicineDatabase
+			{
+				Id="9311770597111",
+				MedicineName="Swisse Liver Detox",
+				Description="Swisse Ultiboost Liver Detox is a premium quality formula containing herbs traditionally " +
+					"used to help support liver function and provide relief from indigestion and bloating.",
+				Directions="Two tablets daily, during or immediately after a meal, or as directed by a healthcare professional.",
+				Duration="30",
+				TimesPerDay=1,
+				Unit="Two tablets"
+			};
 
-			//MedicineDatabaseManager medicineDatabaseManager = new MedicineDatabaseManager();
-			//await medicineDatabaseManager.SaveTaskAsync(medicineDatabase, true);
+			MedicineDatabaseManager medicineDatabaseManager = new MedicineDatabaseManager();
+			await medicineDatabaseManager.SaveTaskAsync(medicineDatabase, true);
 			PackageFoodDatabase medicineDatabase = new PackageFoodDatabase
             {
                 Id="9310761130269",
@@ -116,6 +116,39 @@ namespace MyDiet.Views
 
 			await packageFoodDatabaseManager.SaveTaskAsync(Database, true);
             await DisplayAlert("ok", "creat succeed", "ok");
+
+			ActivityDataManager activityDataManager = new ActivityDataManager();
+			ActivityData activityData = new ActivityData
+			{
+				Id = Guid.NewGuid().ToString(),
+				UserId = App.email,
+				date = new DateTime(2018, 6, 1),
+				steps = 12144,
+				climbedFloor = 11,
+				walkedkm = 7.9
+			};
+           
+            
+			Random ran = new Random();
+
+			for (int i = 1; i < 7;i++){
+				int n = ran.Next(1400, 20000);
+				int m = ran.Next(0, 20);
+                activityData = new ActivityData
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    UserId = App.email,
+                    date = new DateTime(2018, 6, i),
+					steps = n,
+                    climbedFloor = m,
+					walkedkm = (double) 0.0007*n
+                };
+				await activityDataManager.SaveTaskAsync(activityData, true);
+			}
+   
+            */
+			await DisplayAlert("ok", "creat succeed", "ok");
+
         }
 
              

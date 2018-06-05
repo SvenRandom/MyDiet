@@ -182,6 +182,8 @@
     <Compile Include="Views\MedicineHistoryPage.xaml.cs">
       <DependentUpon>MedicineHistoryPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Models\ActivityData.cs" />
+    <Compile Include="Manager\ActivityDataManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\" />

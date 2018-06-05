@@ -4,23 +4,111 @@ using Microcharts;
 using SkiaSharp; 
 using Entry = Microcharts.Entry;  
 using Xamarin.Forms;
+using MyDiet.Manager;
+using System.Linq;
+using MyDiet.Models;
 
 namespace MyDiet.Views
 {
     public partial class ActivityPage : ContentPage
     {
+		ActivityDataManager activityDataManager = new ActivityDataManager();
+		List<ActivityData> allData=null;
+		int start = 0; 
         public ActivityPage()
         {
-            InitializeComponent();
-			 
-            Chart4.Chart = new BarChart() { Entries = entries };
-
-            //Chart5.Chart = new PointChart() { Entries = entries };
+			InitializeComponent();
 
         }
 
+		protected async override void OnAppearing()
+		{
+			base.OnAppearing();
+			allData = await activityDataManager.GetActivityDataAsync();
+			var current = allData.Where(data=>data.date.Year == DateTime.Now.Year &&
+			                            data.date.Month == DateTime.Now.Month &&
+			                            data.date.Day == DateTime.Now.Day);
+			var number =current.Count();
+			System.Diagnostics.Debug.WriteLine("number: " + number);
+            if(number>=1)
+			{
+				var t = current.ElementAt(0);
+				kmLabel.Text = t.walkedkm.ToString("0.00");
+				System.Diagnostics.Debug.WriteLine("km: " + t.walkedkm);
+				stepsLabel.Text = t.steps.ToString();
+				floorLabel.Text = t.climbedFloor.ToString();
+			}
+
+			setChart();
+		}
+
+        public void setChart()
+		{
+			
+			entries.Clear();
+			for (int i = 0; i < 7;i++)
+			{
+				var temp = allData.ElementAt(i + start);
+				Entry entry = new Entry(temp.steps);
+				entry.Label = temp.date.DayOfWeek.ToString();
+				entry.ValueLabel = temp.steps.ToString();
+				if(temp.steps<4000)
+				{
+					entry.Color = SKColor.Parse("#FF1943");
+				}else if(temp.steps<10000)
+				{
+					entry.Color = SKColor.Parse("#2196F3");
+				}else
+				{
+					entry.Color = SKColor.Parse("#00CED1");
+				}
+
+				entries.Add(entry);
+
+				if(i==0){
+					day6.Text = temp.date.ToString("M.d");
+				}
+				if (i == 1)
+                {
+					day5.Text = temp.date.ToString("M.d");
+                }
+				if (i == 2)
+                {
+					day4.Text = temp.date.ToString("M.d");
+                }
+				if (i == 3)
+                {
+					day3.Text = temp.date.ToString("M.d");
+                }
+				if (i == 4)
+                {
+						day2.Text = temp.date.ToString("M.d");
+                }
+				if (i == 5)
+                {
+					day1.Text = temp.date.ToString("M.d");
+                }
+				if (i == 6)
+                {
+					day0.Text = temp.date.ToString("M.d");
+                }
+					
+			}
+
+			entries.Reverse();
+
+			Chart4.Chart = new BarChart() { Entries = entries };
+		}
+
+
 		List<Entry> entries = new List<Entry>  
         {  
+			new Entry(5700)
+            {
+                Color =  SKColor.Parse("#2196F3"),
+                Label = "Sunday",
+                ValueLabel = "5700"
+            },
             new Entry(3490)  
             {  
                 Color=SKColor.Parse("#FF1943"),  
@@ -57,15 +145,31 @@ namespace MyDiet.Views
                 Label = "Saturday",
 				ValueLabel = "1100"
             },
-			new Entry(5700)
-            {
-				Color =  SKColor.Parse("#2196F3"),
-                Label = "Sunday",
-				ValueLabel = "5700"
-            },
             };  
         
+		void OnLeftTapped(object sender, System.EventArgs e)
+        {
+			System.Diagnostics.Debug.WriteLine("start: " + start);
+			if(start>=30)
+			{
+				DisplayAlert("Warning", "No more data", "OK");
+			}else
+			{
+				start += 7;
+                setChart();
+			}
 
+        }
+
+		void OnRightTapped(object sender, System.EventArgs e)
+        {
+			if (start >=6)
+            {
+				start -= 7;
+				setChart();
+            }
+            
+        }
 	
     }
 }
