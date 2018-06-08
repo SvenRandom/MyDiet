@@ -147,7 +147,21 @@ namespace MyDiet.Views
    //             };
 			//	await activityDataManager.SaveTaskAsync(activityData, true);
 			//}
-   
+			n = ran.Next(1400, 20000);
+            m = ran.Next(0, 20);
+            			activityData = new ActivityData
+               {
+                   Id = Guid.NewGuid().ToString(),
+                   UserId = App.email,
+                   date = new DateTime(2018, 6, 8),
+                   steps = n,
+                   climbedFloor = m,
+                   walkedkm = (double)0.0007 * n
+               };
+
+
+
+            await activityDataManager.SaveTaskAsync(activityData, true);
             
 			await DisplayAlert("ok", "creat succeed", "ok");
 
