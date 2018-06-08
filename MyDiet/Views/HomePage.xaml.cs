@@ -54,12 +54,12 @@ namespace MyDiet.Views
 					noOfMeals++;
 				}
 
-				mealLabel.Text = noOfMeals + " meals";
+				mealLabel.Text = noOfMeals + " Meals";
 
 			}
 			else
 			{
-				mealLabel.Text = noOfMeals + " meal";
+				mealLabel.Text = noOfMeals + " Meal";
 			}
 
 
