@@ -35,21 +35,34 @@ namespace MyDiet.Views
 		{
 			var temp = await reminderManager.GetReminderAsync();
             reminderListView.ItemsSource = temp.OrderBy(reminder => reminder.Time);
-            
-            
-            var temp1 = await medicineManager.GetMedicinesAsync();
-            medicineListView.ItemsSource = temp1;
 
 			var temp2 = await medicineHistoryManager.GetMedicinesAsync();
 			historyListView.ItemsSource = temp2.OrderByDescending(history => history.StartTime);
+            
+            var temp1 = await medicineManager.GetMedicinesAsync();
+			//bool fresh = false;
+			foreach (var t in temp1)
+			{
+				t.Max = int.Parse(t.Duration);
+				var startday = new DateTime(t.StartTime.Year, t.StartTime.Month, t.StartTime.Day);
+				var diff = DateTime.Now - startday;
+
+				var difff = diff.Days + 1;
+				t.Status = difff + " out of " + t.Duration + " days";
+				t.CurrentDay = difff;
+			}
+                 medicineListView.ItemsSource = temp1;
+
+
+
 
 		}
 
 		protected override void OnAppearing()
         {
             base.OnAppearing();
-			if(!(Settings.ReminderDate.Month==DateTime.Now.Month && Settings.ReminderDate.Day==DateTime.Now.Day
-			     && Settings.ReminderDate.Minute == DateTime.Now.Minute))
+			if(!(Settings.ReminderDate.Month==DateTime.Now.Month && Settings.ReminderDate.Day==DateTime.Now.Day))
+			    // && Settings.ReminderDate.Minute == DateTime.Now.Minute))
 			{
 				UpdateCheck();
 			}
@@ -389,7 +402,21 @@ namespace MyDiet.Views
             {
                 
 				var temp = await medicineManager.GetMedicinesAsync(syncItems);
-				medicineListView.ItemsSource = temp;
+
+                foreach (var t in temp)
+                {
+                    t.Max = int.Parse(t.Duration);
+                    var startday = new DateTime(t.StartTime.Year, t.StartTime.Month, t.StartTime.Day);
+                    var diff = DateTime.Now - startday;
+
+                    var difff = diff.Days + 1;
+                    t.Status = difff + " out of " + t.Duration + " days";
+                    t.CurrentDay = difff;
+					            
+				}
+                    medicineListView.ItemsSource = temp;
+
+
                 
                 
             }
@@ -466,7 +493,7 @@ namespace MyDiet.Views
             {
 
 				var temp2 = await medicineHistoryManager.GetMedicinesAsync();
-                historyListView.ItemsSource = temp2;
+				historyListView.ItemsSource = temp2.OrderByDescending(history => history.StartTime);
 
 
             }
@@ -510,6 +537,56 @@ namespace MyDiet.Views
                     indicatorDelay.ContinueWith(t => SetIndicatorActivity(false), TaskScheduler.FromCurrentSynchronizationContext());
                 }
             }
+        }
+
+
+
+		public async void end(Medicine currentMedicine){
+			
+            var temp = await reminderManager.GetReminderAsync();
+            foreach (var t in temp)
+            {
+                if (t.MedicineId == currentMedicine.Id)
+                {
+                    await reminderManager.DeleteTaskAsync(t);
+                    DeleteNotification(t);
+                }
+
+            }
+            //delete thie medicine 
+            currentMedicine.IsTaking = false;
+			await medicineManager.DeleteTaskAsync(currentMedicine);
+            App.contentChanged = true;
+
+            //set a new medicine history 
+            MedicineHistory medicineHistory = new MedicineHistory
+            {
+                Id = Guid.NewGuid().ToString(),
+                UserId = App.email,
+                MedicineName = currentMedicine.MedicineName,
+                Directions = currentMedicine.Directions,
+                TimeToDisplay = currentMedicine.StartTime.ToString("dd/MMM/yyyy ddd") + " - " + DateTime.Now.ToString("dd/MMM/yyyy ddd"),
+                Description = currentMedicine.Description,
+                Duration = currentMedicine.Duration,
+                TimesPerDay = currentMedicine.TimesPerDay,
+                Unit = currentMedicine.Unit,
+                StartTime = currentMedicine.StartTime,
+                DirectionsToDisplay = currentMedicine.TimesPerDay + " times a day, " + currentMedicine.Unit + " each time",
+				IsDone =true,
+				IsUnDone=false
+            };
+            if (currentMedicine.TimesPerDay == 1)
+            {
+                medicineHistory.DirectionsToDisplay = "Once a day, " + currentMedicine.Unit + " each time";
+            }
+            //medicineHistoryManager = MedicineHistoryManager.DefaultManager;
+            await medicineHistoryManager.SaveTaskAsync(medicineHistory, true);
+            await DisplayAlert("Notice:", "You have ended this medicine!", "OK");
+		}
+
+		public void DeleteNotification(Reminder reminder)
+        {
+            CrossLocalNotifications.Current.Cancel(reminder.GetHashCode());
         }
 
 

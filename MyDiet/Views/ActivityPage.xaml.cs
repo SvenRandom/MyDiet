@@ -29,7 +29,7 @@ namespace MyDiet.Views
 			                            data.date.Month == DateTime.Now.Month &&
 			                            data.date.Day == DateTime.Now.Day);
 			var number =current.Count();
-			System.Diagnostics.Debug.WriteLine("number: " + number);
+
             if(number>=1)
 			{
 				var t = current.ElementAt(0);

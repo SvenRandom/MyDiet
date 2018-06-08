@@ -73,17 +73,20 @@
                             <StackLayout Orientation="Horizontal" >
                                 <Label Text="{Binding MedicineName}" 
                                        HorizontalOptions="StartAndExpand" />
-                                <Image Source="{local:EmbeddedImage MyDiet.Images.icons_pill50.png}" HorizontalOptions="Center"
-                                       Aspect="AspectFit" />
+                                <!--<Image Source="{local:EmbeddedImage MyDiet.Images.icons_pill50.png}" HorizontalOptions="Center"
+                                       Aspect="AspectFit" />-->
                                 <Label Text="{Binding Unit}" HorizontalOptions="EndAndExpand" />
                             </StackLayout>
 
                             <Label Text="{Binding Description}" FontSize="Small" />
-                            <StackLayout Orientation="Horizontal" BackgroundColor="{StaticResource LightGreen}" 
+                           <!-- <StackLayout Orientation="Horizontal" BackgroundColor="{StaticResource LightGreen}" 
                                          IsVisible="{Binding IsTaking}" >
                                 <Switch IsToggled="{Binding IsTaking}" IsEnabled="false" />
                                 <Label Text="Under taken" TextColor="White" VerticalOptions="Center" />
-                            </StackLayout>
+                            </StackLayout>-->
+                            <Slider  Maximum="{Binding Max}" Minimum="0" Value="{Binding CurrentDay}"
+                                     IsEnabled="false" />
+                            <Label Text="{Binding Status}" />
                            
                         </StackLayout>
                     </ViewCell>
@@ -100,7 +103,9 @@
                     <ViewCell>
                         <StackLayout Orientation="Horizontal" Padding="15">
                             <Image Source="{local:EmbeddedImage MyDiet.Images.icons_checked64.png}" HorizontalOptions="Start"
-                                      Aspect="AspectFit" />
+                                      Aspect="AspectFit" IsVisible="{Binding IsDone}" />
+                            <Image Source="{local:EmbeddedImage MyDiet.Images.icons_undo64.png}" HorizontalOptions="Start"
+                                      Aspect="AspectFit" IsVisible="{Binding IsUnDone}" />
                             <StackLayout HorizontalOptions="FillAndExpand" >
                                
                                     <Label Text="{Binding MedicineName}" VerticalOptions="Center" />

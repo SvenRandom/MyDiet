@@ -24,12 +24,12 @@ namespace MyDiet
    
                         medicinePage = new MedicinePage()
                         {
-                            Title = "Medicine"
+                            Title = "Medication"
                         };
             
                         activityPage = new ActivityPage()
                         {
-                            Title = "Activity"
+                            Title = "Exercise"
                         };
 
                         profilePage = new ProfilePage()

@@ -38,5 +38,11 @@ namespace MyDiet.Models
 		[JsonProperty(PropertyName = "TimeToDisplay")]
         public string TimeToDisplay { get; set; }
 
+		[JsonProperty(PropertyName = "IsDone")]
+		public bool IsDone { get; set; }
+
+		[JsonProperty(PropertyName = "IsUnDone")]
+		public bool IsUnDone { get; set; }
+
     }
 }

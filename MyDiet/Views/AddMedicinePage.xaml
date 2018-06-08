@@ -20,13 +20,13 @@
     
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Done" Clicked="DoneClicked" />
+        <ToolbarItem Text="Done" Clicked="StartClicked" />
     </ContentPage.ToolbarItems>
     <ScrollView>
     <StackLayout >
-            <StackLayout Padding="15" >
+           <!-- <StackLayout Padding="15" >
                   <Label x:Name="status" HorizontalOptions="CenterAndExpand" />
-            </StackLayout>
+            </StackLayout>-->
       
             
         <StackLayout Orientation="Horizontal" x:Name="choice" Padding="15" IsVisible="false" >
@@ -68,7 +68,7 @@
                         </StackLayout>
 
                     </ViewCell>
-                    <EntryCell x:Name="durationEntry" Text="{Binding Duration}" Label="A cycle of treatment(days):" Placeholder="(eg 7)" />
+                    <EntryCell x:Name="durationEntry" Text="{Binding Duration}" Label="The cycle of medication(days):" Placeholder="(eg 7)" />
                      <ViewCell>
                         <StackLayout Style="{StaticResource cellLayout}" >
                             <Label Text="Frequency(times per day):" />

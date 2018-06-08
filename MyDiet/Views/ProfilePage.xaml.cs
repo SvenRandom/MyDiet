@@ -115,37 +115,40 @@ namespace MyDiet.Views
 
 			await packageFoodDatabaseManager.SaveTaskAsync(Database, true);
             await DisplayAlert("ok", "creat succeed", "ok");
-
+*/
 			ActivityDataManager activityDataManager = new ActivityDataManager();
+			Random ran = new Random();
+			int n = ran.Next(1400, 20000);
+            int m = ran.Next(0, 20);
 			ActivityData activityData = new ActivityData
 			{
 				Id = Guid.NewGuid().ToString(),
 				UserId = App.email,
-				date = new DateTime(2018, 6, 1),
-				steps = 12144,
-				climbedFloor = 11,
-				walkedkm = 7.9
+				date = new DateTime(2018, 6, 7),
+				steps = n,
+                climbedFloor = m,
+                walkedkm = (double)0.0007 * n
 			};
            
             
-			Random ran = new Random();
 
-			for (int i = 1; i < 7;i++){
-				int n = ran.Next(1400, 20000);
-				int m = ran.Next(0, 20);
-                activityData = new ActivityData
-                {
-                    Id = Guid.NewGuid().ToString(),
-                    UserId = App.email,
-                    date = new DateTime(2018, 6, i),
-					steps = n,
-                    climbedFloor = m,
-					walkedkm = (double) 0.0007*n
-                };
-				await activityDataManager.SaveTaskAsync(activityData, true);
-			}
+			await activityDataManager.SaveTaskAsync(activityData, true);
+			//for (int i = 1; i < 7;i++){
+			//	int n = ran.Next(1400, 20000);
+			//	int m = ran.Next(0, 20);
+   //             activityData = new ActivityData
+   //             {
+   //                 Id = Guid.NewGuid().ToString(),
+   //                 UserId = App.email,
+   //                 date = new DateTime(2018, 6, i),
+			//		steps = n,
+   //                 climbedFloor = m,
+			//		walkedkm = (double) 0.0007*n
+   //             };
+			//	await activityDataManager.SaveTaskAsync(activityData, true);
+			//}
    
-            */
+            
 			await DisplayAlert("ok", "creat succeed", "ok");
 
         }

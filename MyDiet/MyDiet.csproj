@@ -116,6 +116,7 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="Images\icons-100.png" />
+    <EmbeddedResource Include="Images\icons_undo64.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">

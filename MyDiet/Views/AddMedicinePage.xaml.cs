@@ -40,23 +40,23 @@ namespace MyDiet.Views
 					StartTime = DateTime.Now,
 					IsTaking=false
                 };
-				status.Text = "This is a new medicine for you";
+				//status.Text = "This is a new medicine for you";
 				choice.IsVisible = true;
 			}else
 			{
 				currentMedicine = medicine;
-				if(currentMedicine.IsTaking){
-					var startday = new DateTime(currentMedicine.StartTime.Year, currentMedicine.StartTime.Month, currentMedicine.StartTime.Day);
-					var diff = DateTime.Now - startday;
+				//if(currentMedicine.IsTaking){
+				//	var startday = new DateTime(currentMedicine.StartTime.Year, currentMedicine.StartTime.Month, currentMedicine.StartTime.Day);
+				//	var diff = DateTime.Now - startday;
 
-					var difff = diff.Days + 1;
-					status.Text = "You are recovering! Today is the "+difff+" of "+currentMedicine.Duration+ " days treament";
+				//	var difff = diff.Days + 1;
+				//	status.Text = "You are recovering! Today is the "+difff+" of "+currentMedicine.Duration+ " days treament";
 
 						
-				}else
-				{
-					status.Text = "You are not taking this medical now";
-				}
+				//}else
+				//{
+				//	status.Text = "You are not taking this medical now";
+				//}
 
 				if (currentMedicine.IsTaking)
 					GetReminders();
@@ -72,6 +72,7 @@ namespace MyDiet.Views
 		{
 			
 			//System.Diagnostics.Debug.WriteLine("currentMedicine for done: " + currentMedicine.Description);
+
 			MedicineManager medicineManager = MedicineManager.DefaultManager;
 			await medicineManager.SaveTaskAsync(currentMedicine, isNewItem);
 			App.contentChanged = true;
@@ -283,8 +284,13 @@ namespace MyDiet.Views
 
 		async void StartClicked(object sender, EventArgs e)
 		{
+			if(!ValidCheck())
+			{
+				await DisplayAlert("Notice!", "Please fill name, The cycle of medication, Frequency and Basic unit", "Sure");
+				return;
+			}
 			if(currentMedicine.IsTaking){
-				await DisplayAlert("Notice:", "Please end this cycle of treament first!", "Ok");
+				await DisplayAlert("Notice:", "Please end this medication first!", "Ok");
 				return;
 			}
 			var result = await DisplayAlert("Notices", "Your new reminders starts from "+currentMedicine.StartTime.ToString("dd/MMM/yyyy dddd")
@@ -396,72 +402,130 @@ namespace MyDiet.Views
                     }
                 }
 
-    			var startday = new DateTime(currentMedicine.StartTime.Year, currentMedicine.StartTime.Month, currentMedicine.StartTime.Day);
-                        var diff = DateTime.Now - startday;
+				//var startday = new DateTime(currentMedicine.StartTime.Year, currentMedicine.StartTime.Month, currentMedicine.StartTime.Day);
+				//var diff = DateTime.Now - startday;
 
-                        var difff = diff.Days + 1;
-                        status.Text = "You are recovering! Today is the "+difff+" of "+currentMedicine.Duration+ " days treament";
-                        
+				//var difff = diff.Days + 1;
+				//status.Text = "You are recovering! Today is the "+difff+" of "+currentMedicine.Duration+ " days treament";
+				currentMedicine.Max = int.Parse(currentMedicine.Duration);        
     			MedicineManager medicineManager = MedicineManager.DefaultManager;
                 await medicineManager.SaveTaskAsync(currentMedicine, isNewItem);
 				App.contentChanged = true;
+				await Navigation.PopAsync();
 			}
             
 		}
 
 		async void EndClicked(object sender, EventArgs e)
         {
-			if(!currentMedicine.IsTaking){
-				await DisplayAlert("Notice:", "You are not taking this medicine!", "OK");
-				return;
-			}
-
-            //delete related reminders
-			ReminderManager reminderManager = ReminderManager.DefaultManager;
-			var temp = await reminderManager.GetReminderAsync();
-			foreach(var t in temp)
-			{
-				if(t.MedicineId==currentMedicine.Id){
-					await reminderManager.DeleteTaskAsync(t);
-                    DeleteNotification(t);
-				}
-
-			}
-            //update thie medicine status
-			currentMedicine.IsTaking = false;
-			MedicineManager medicineManager = MedicineManager.DefaultManager;
-            await medicineManager.SaveTaskAsync(currentMedicine, isNewItem);
-			status.Text = "You are not taking this medical now";
-			App.contentChanged = true;
-
-            //set a new medicine history 
-			MedicineHistory medicineHistory = new MedicineHistory
-			{
-				Id = Guid.NewGuid().ToString(),
-				UserId = App.email,
-				MedicineName = currentMedicine.MedicineName,
-				Directions = currentMedicine.Directions,
-				TimeToDisplay = currentMedicine.StartTime.ToString("dd/MMM/yyyy ddd") + " - " + DateTime.Now.ToString("dd/MMM/yyyy ddd"),
-				Description = currentMedicine.Description,
-				Duration=currentMedicine.Duration,
-				TimesPerDay= currentMedicine.TimesPerDay,
-				Unit = currentMedicine.Unit,
-				StartTime=currentMedicine.StartTime,
-				DirectionsToDisplay = currentMedicine.TimesPerDay + " times a day, " + currentMedicine.Unit + " each time",
-			};
-			if(currentMedicine.TimesPerDay==1)
-			{
-				medicineHistory.DirectionsToDisplay = "Once a day, " + currentMedicine.Unit + " each time";
-			}
+			//if(!currentMedicine.IsTaking){
+			//	await DisplayAlert("Notice:", "You are not taking this medicine!", "OK");
+			//	return;
+			//}
 			var startday = new DateTime(currentMedicine.StartTime.Year, currentMedicine.StartTime.Month, currentMedicine.StartTime.Day);
             var diff = DateTime.Now - startday;
 
             var difff = diff.Days + 1;
-			medicineHistory.Duration = difff.ToString();
-			MedicineHistoryManager medicineHistoryManager = MedicineHistoryManager.DefaultManager;
-			await medicineHistoryManager.SaveTaskAsync(medicineHistory, true);
-			await DisplayAlert("Notice:", "You have ended this medicine!", "OK");
+			if(difff<int.Parse(currentMedicine.Duration))
+			{
+				var res = await DisplayAlert("Notice!", "You haven't finished this medication. Are you sure to terminate it early? ", "Yes", "No");
+			    if(res)
+				{
+					//delete related reminders
+                    ReminderManager reminderManager = ReminderManager.DefaultManager;
+                    var temp = await reminderManager.GetReminderAsync();
+                    foreach (var t in temp)
+                    {
+                        if (t.MedicineId == currentMedicine.Id)
+                        {
+                            await reminderManager.DeleteTaskAsync(t);
+                            DeleteNotification(t);
+                        }
 
+                    }
+					//delete thie medicine 
+                    //currentMedicine.IsTaking = false;
+					MedicineManager medicineManager = MedicineManager.DefaultManager;
+                    await medicineManager.DeleteTaskAsync(currentMedicine);
+                           
+                    App.contentChanged = true;
+
+                    //set a new medicine history 
+                    MedicineHistory medicineHistory = new MedicineHistory
+                    {
+                        Id = Guid.NewGuid().ToString(),
+                        UserId = App.email,
+                        MedicineName = currentMedicine.MedicineName,
+                        Directions = currentMedicine.Directions,
+                        TimeToDisplay = currentMedicine.StartTime.ToString("dd/MMM/yyyy ddd") + " - " + DateTime.Now.ToString("dd/MMM/yyyy ddd"),
+                        Description = currentMedicine.Description,
+                        Duration = currentMedicine.Duration,
+                        TimesPerDay = currentMedicine.TimesPerDay,
+                        Unit = currentMedicine.Unit,
+                        StartTime = currentMedicine.StartTime,
+                        DirectionsToDisplay = currentMedicine.TimesPerDay + " times a day, " + currentMedicine.Unit + " each time",
+						IsDone=false,
+						IsUnDone=true
+                    };
+                    if (currentMedicine.TimesPerDay == 1)
+                    {
+                        medicineHistory.DirectionsToDisplay = "Once a day, " + currentMedicine.Unit + " each time";
+                    }
+
+                    medicineHistory.Duration = difff.ToString();
+                    MedicineHistoryManager medicineHistoryManager = MedicineHistoryManager.DefaultManager;
+                    await medicineHistoryManager.SaveTaskAsync(medicineHistory, true);
+                    await DisplayAlert("Notice:", "You have ended this medicine!", "OK");
+				}
+			}else
+			{
+				//delete related reminders
+                ReminderManager reminderManager = ReminderManager.DefaultManager;
+                var temp = await reminderManager.GetReminderAsync();
+                foreach (var t in temp)
+                {
+                    if (t.MedicineId == currentMedicine.Id)
+                    {
+                        await reminderManager.DeleteTaskAsync(t);
+                        DeleteNotification(t);
+                    }
+
+                }
+				//delete thie medicine 
+				MedicineManager medicineManager = MedicineManager.DefaultManager;
+                await medicineManager.DeleteTaskAsync(currentMedicine);
+                App.contentChanged = true;
+
+
+                //set a new medicine history 
+                MedicineHistory medicineHistory = new MedicineHistory
+                {
+                    Id = Guid.NewGuid().ToString(),
+                    UserId = App.email,
+                    MedicineName = currentMedicine.MedicineName,
+                    Directions = currentMedicine.Directions,
+                    TimeToDisplay = currentMedicine.StartTime.ToString("dd/MMM/yyyy ddd") + " - " + DateTime.Now.ToString("dd/MMM/yyyy ddd"),
+                    Description = currentMedicine.Description,
+                    Duration = currentMedicine.Duration,
+                    TimesPerDay = currentMedicine.TimesPerDay,
+                    Unit = currentMedicine.Unit,
+                    StartTime = currentMedicine.StartTime,
+                    DirectionsToDisplay = currentMedicine.TimesPerDay + " times a day, " + currentMedicine.Unit + " each time",
+					IsDone = true,
+					IsUnDone = false
+                };
+                if (currentMedicine.TimesPerDay == 1)
+                {
+                    medicineHistory.DirectionsToDisplay = "Once a day, " + currentMedicine.Unit + " each time";
+                }
+
+                medicineHistory.Duration = difff.ToString();
+                MedicineHistoryManager medicineHistoryManager = MedicineHistoryManager.DefaultManager;
+                await medicineHistoryManager.SaveTaskAsync(medicineHistory, true);
+                await DisplayAlert("Notice:", "You have ended this medicine!", "OK");
+			}
+            
+			await Navigation.PopAsync();
         }
 
 
@@ -557,6 +621,17 @@ namespace MyDiet.Views
 
 		async void DeleteClicked(object sender, System.EventArgs e)
         {
+			ReminderManager reminderManager = ReminderManager.DefaultManager;
+            var temp = await reminderManager.GetReminderAsync();
+            foreach (var t in temp)
+            {
+                if (t.MedicineId == currentMedicine.Id)
+                {
+                    await reminderManager.DeleteTaskAsync(t);
+                    DeleteNotification(t);
+                }
+
+            }
 			MedicineManager medicineManager = MedicineManager.DefaultManager;
 			await medicineManager.DeleteTaskAsync(currentMedicine);
 			App.contentChanged = true;
@@ -584,6 +659,21 @@ namespace MyDiet.Views
 		{
 			CrossLocalNotifications.Current.Cancel(reminder.GetHashCode());
 		}
+
+
+		public bool ValidCheck()
+		{
+
+			return (!string.IsNullOrEmpty(currentMedicine.MedicineName) &&
+					!string.IsNullOrWhiteSpace(currentMedicine.MedicineName) &&
+					!string.IsNullOrWhiteSpace(currentMedicine.Unit) &&
+					(currentMedicine.TimesPerDay > 0) &&
+					int.TryParse(currentMedicine.Duration, out int i));
+                   
+			
+		}
+
+
 
     }
 }

@@ -44,7 +44,7 @@ namespace MyDiet.Manager
 				var temp=await items.Where(data => data.UserId == App.email).ToListAsync();
 				var result = new List<ActivityData>(temp);
 				//var resul = new List<ActivityData>(await activityData.ToListAsync());
-				System.Diagnostics.Debug.WriteLine("activitydata: "+ result.Count);
+				//System.Diagnostics.Debug.WriteLine("activitydata: "+ result.Count);
 				return result;
             }
             catch (MobileServiceInvalidOperationException msioe)

@@ -21,7 +21,7 @@ namespace MyDiet.Models
         public string Directions { get; set; }
 
         [JsonProperty(PropertyName = "Duration")]
-        public string Duration { get; set; }
+		public string Duration { get; set; }
 
         [JsonProperty(PropertyName = "TimesPerDay")]
         public int TimesPerDay { get; set; }
@@ -35,5 +35,14 @@ namespace MyDiet.Models
 		[JsonProperty(PropertyName = "IsTaking")]
 		public bool IsTaking { get; set; }
   
+		[JsonProperty(PropertyName = "Status")]
+		public string Status { get; set; }
+
+		[JsonProperty(PropertyName = "CurrentDay")]
+		public int CurrentDay { get; set; }
+
+		[JsonProperty(PropertyName = "Max")]
+        public int Max { get; set; }
+
     }
 }
