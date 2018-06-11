@@ -386,7 +386,8 @@ namespace MyDiet.Views
 
             if (error != null)
             {
-                await DisplayAlert("Refresh Error", "Couldn't refresh data (" + error.Message + ")", "OK");
+				if (Device.RuntimePlatform == Device.iOS)
+                    await DisplayAlert("Refresh Error", "Couldn't refresh data (" + error.Message + ")", "OK");
             }
         }
 
@@ -414,7 +415,7 @@ namespace MyDiet.Views
                     t.CurrentDay = difff;
 					            
 				}
-                    medicineListView.ItemsSource = temp;
+                medicineListView.ItemsSource = temp;
 
 
                 
