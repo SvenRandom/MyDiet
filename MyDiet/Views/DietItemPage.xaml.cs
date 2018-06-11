@@ -99,7 +99,7 @@ namespace MyDiet.Views
                     var fileSoure = ImageSource.FromFile(dietItemCurrent.Image0LocalPath);
                     //if(fileSoure.ToString()!="")
                     image00.Source = fileSoure;
-                    delete00.IsVisible = false;
+					delete00.IsVisible = true;
 					image00.IsVisible = true;
                     //else
                     //{
@@ -115,16 +115,16 @@ namespace MyDiet.Views
                     {
                         numberOfPhoto = 2;
                         image11.Source = ImageSource.FromFile(dietItemCurrent.Image1LocalPath);
-                        delete11.IsVisible = false;
+						delete11.IsVisible = true;
 						image11.IsVisible = true;
-                        //imageData = await AzureStorage.GetFileAsync(ContainerType.Image, dietItemCurrent.Image1UploadId);
+                        //var imageData = await AzureStorage.GetFileAsync(ContainerType.Image, dietItemCurrent.Image1UploadId);
                         //image1.Source = ImageSource.FromStream(() => new MemoryStream(imageData));
 
                         if (dietItemCurrent.Image2LocalPath != null)
                         {
                             numberOfPhoto = 3;
                             image22.Source = ImageSource.FromFile(dietItemCurrent.Image2LocalPath);
-                            delete22.IsVisible = false;
+							delete22.IsVisible = true;
 							image22.IsVisible = true;
                             //imageData = await AzureStorage.GetFileAsync(ContainerType.Image, dietItemCurrent.Image2UploadId);
                             //image2.Source = ImageSource.FromStream(() => new MemoryStream(imageData));
@@ -419,17 +419,20 @@ namespace MyDiet.Views
 
         void OnImage00DeleteClicked(object sender, System.EventArgs e)
         {
-            if (file1 != null)
+			if (dietItemCurrent.Image1LocalPath != null)
             {
-                file0 = file1;
-                image00.Source = ImageSource.FromFile(file0.Path);
-                dietItemCurrent.Image0LocalPath = dietItemCurrent.Image1LocalPath;
-                if (file2 != null)
+				if(file1!=null)
+                    file0 = file1;
+				dietItemCurrent.Image0LocalPath = dietItemCurrent.Image1LocalPath;
+				image00.Source = ImageSource.FromFile(dietItemCurrent.Image0LocalPath);
+                
+				if (dietItemCurrent.Image2LocalPath != null)
                 {
-                    file1 = file2;
-
-                    image11.Source = ImageSource.FromFile(file2.Path);
-                    dietItemCurrent.Image1LocalPath = dietItemCurrent.Image2LocalPath;
+					if (file2 != null)
+                        file1 = file2;
+					dietItemCurrent.Image1LocalPath = dietItemCurrent.Image2LocalPath;
+					image11.Source = ImageSource.FromFile(dietItemCurrent.Image1LocalPath);
+                    
                     file2 = null;
                     image22.Source = "";
 					image22.IsVisible = false;
@@ -477,11 +480,13 @@ namespace MyDiet.Views
 
         void OnImage11DeleteClicked(object sender, System.EventArgs e)
         {
-            if (file2 != null)
+			if (dietItemCurrent.Image2LocalPath != null)
             {
-                file1 = file2;
-                image11.Source = ImageSource.FromFile(file2.Path);
-                dietItemCurrent.Image1LocalPath = dietItemCurrent.Image2LocalPath;
+				if(file2!=null)
+                    file1 = file2;
+				dietItemCurrent.Image1LocalPath = dietItemCurrent.Image2LocalPath;
+				image11.Source = ImageSource.FromFile(dietItemCurrent.Image1LocalPath);
+                
                 file2 = null;
                 image22.Source = "";
 				image22.IsVisible = false;
@@ -525,6 +530,7 @@ namespace MyDiet.Views
 
             oStackLayout.IsVisible = true;
             image22StackLayout.IsVisible = false;
+			dietItemCurrent.Image2LocalPath = null;
 
         }
 
