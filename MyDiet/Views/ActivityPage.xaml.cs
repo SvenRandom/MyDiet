@@ -38,8 +38,13 @@ namespace MyDiet.Views
 				stepsLabel.Text = t.steps.ToString();
 				floorLabel.Text = t.climbedFloor.ToString();
 			}
-
-			setChart();
+			if(allData.Count>1)
+			{
+				setChart();
+			}
+			else{
+				Chart4.Chart = new BarChart() { Entries = entries };
+			}
 		}
 
         public void setChart()
@@ -103,71 +108,83 @@ namespace MyDiet.Views
 
 		List<Entry> entries = new List<Entry>  
         {  
-			new Entry(5700)
+			new Entry(0)
             {
-                Color =  SKColor.Parse("#2196F3"),
-                Label = "Sunday",
-                ValueLabel = "5700"
+				Color =  SKColor.Parse("#FF1943"),
+                Label = "Thursday",
+                ValueLabel = "0"
             },
-            new Entry(3490)  
+            new Entry(0)
+            {
+				Color =  SKColor.Parse("#FF1943"),
+                Label = "Friday",
+                ValueLabel = "0"
+            },
+            new Entry(0)
+            {
+                Color =  SKColor.Parse("#FF1943"),
+                Label = "Saturday",
+                ValueLabel = "0"
+            },
+			new Entry(0)
+            {
+				Color =  SKColor.Parse("#FF1943"),
+                Label = "Sunday",
+                ValueLabel = "0"
+            },
+            new Entry(0)  
             {  
                 Color=SKColor.Parse("#FF1943"),  
                 Label ="Monday",  
-				ValueLabel = "3490"  
+				ValueLabel = "0"  
             },  
-            new Entry(4483)  
+            new Entry(0)  
             {  
-				Color = SKColor.Parse("#2196F3"),  
+				Color = SKColor.Parse("#FF1943"),  
                 Label = "TuesDay",  
-				ValueLabel = "4483"  
+				ValueLabel = "0"  
             },  
-            new Entry(1236)  
+            new Entry(0)  
             {  
 				Color =  SKColor.Parse("#FF1943"),  
                 Label = "Wednesday",  
-				ValueLabel = "1236"  
+				ValueLabel = "0"  
             },  
-			new Entry(7694)
-            {
-				Color =  SKColor.Parse("#2196F3"),
-                Label = "Thursday",
-				ValueLabel = "7694"
-            },
-			new Entry(13952)
-            {
-                Color =  SKColor.Parse("#00CED1"),
-                Label = "Friday",
-				ValueLabel = "13952"
-            },
-			new Entry(1100)
-            {
-				Color =  SKColor.Parse("#FF1943"),
-                Label = "Saturday",
-				ValueLabel = "1100"
-            },
+
             };  
         
 		void OnLeftTapped(object sender, System.EventArgs e)
         {
-			System.Diagnostics.Debug.WriteLine("start: " + start);
-			if(start>=30)
+			if(allData.Count>1)
 			{
-				DisplayAlert("Warning", "No more data", "OK");
-			}else
-			{
-				start += 7;
-                setChart();
+				//System.Diagnostics.Debug.WriteLine("start: " + start);
+                if (start >= 30)
+                {
+                    DisplayAlert("Warning", "No more data", "OK");
+                }
+                else
+                {
+                    start += 7;
+                    setChart();
+                }
 			}
+			else
+				DisplayAlert("Warning", "No more data", "OK");
 
         }
 
 		void OnRightTapped(object sender, System.EventArgs e)
         {
-			if (start >=6)
-            {
-				start -= 7;
-				setChart();
-            }
+			if(allData.Count > 1)
+			{
+				if (start >= 6)
+                {
+                    start -= 7;
+                    setChart();
+                }
+			}
+			else
+				DisplayAlert("Warning", "No more data", "OK");
             
         }
 	

@@ -46,7 +46,7 @@
                                        Tapped="OnActivityTapped"  />
             </Frame.GestureRecognizers>
            <StackLayout Orientation="Horizontal" >
-                <Label Text="Activity" />
+                <Label Text="Exercise" />
                 <StackLayout HorizontalOptions="EndAndExpand">
                     <Label x:Name="stepLabel" Text="0 Steps"  HorizontalOptions="EndAndExpand"/> 
                     <Label x:Name="kmLabel" Text=" 0.00 km"  HorizontalOptions="EndAndExpand"/>
@@ -61,10 +61,10 @@
                                        Tapped="OnMedicineTapped"  />
             </Frame.GestureRecognizers>
            <StackLayout Orientation="Horizontal" >
-                <Label Text="Medicine" />
+                <Label Text="Medication" />
                 <StackLayout HorizontalOptions="EndAndExpand">
-                    <Label x:Name="takenLabel" Text="2 Taken"  HorizontalOptions="EndAndExpand"/> 
-                    <Label x:Name="toTakeLabel" Text="1 To take"  HorizontalOptions="EndAndExpand"/>
+                    <Label x:Name="takenLabel" Text="0 Taken"  HorizontalOptions="EndAndExpand"/> 
+                    <Label x:Name="toTakeLabel" Text="0 To take"  HorizontalOptions="EndAndExpand"/>
                 </StackLayout>
                
             </StackLayout>
