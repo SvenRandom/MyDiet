@@ -65,7 +65,7 @@
                 </TableRoot>
             </TableView>
 
-           <Button Text="add to medicine database" Clicked="SendNotiClicked" />
+          <!-- <Button Text="add to medicine database" Clicked="SendNotiClicked" />-->
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
