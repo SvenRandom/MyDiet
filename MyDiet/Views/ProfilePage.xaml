@@ -4,6 +4,15 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
     xmlns:local="clr-namespace:MyDiet"
     x:Class="MyDiet.Views.ProfilePage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="viewLayout" TargetType="StackLayout" >
+                <Setter Property="Orientation" Value="Horizontal" />
+                <Setter Property="Padding" Value="15,0,15,0" />
+                <!--<Setter Property="VerticalOptions" Value="Center" />-->
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Log out" Clicked="LogOutClicked" />
     </ContentPage.ToolbarItems>
@@ -13,38 +22,50 @@
                 <TableRoot>
                     <TableSection >
                         <ViewCell Tapped="OnModifyTapped" >
-                            <StackLayout Orientation="Horizontal" VerticalOptions="Center" Padding="15,0,15,0">
-                               <!--<StackLayout.GestureRecognizers>
-                                   <TapGestureRecognizer
-                                        Tapped="OnModifyTapped" />
-                               </StackLayout.GestureRecognizers>-->
-                               <Image Source="{local:EmbeddedImage MyDiet.Images.tab_info70.png}" HorizontalOptions="Start"
+                            <StackLayout Style="{StaticResource viewLayout}">
+                               
+                               <Image Source="{local:EmbeddedImage MyDiet.Images.icons_info40.png}" HorizontalOptions="Start"
                                       Aspect="AspectFit" />
-                               <Label Text="Modify personal information" VerticalOptions="Center" />
+                               <Label Text="Personal information" VerticalOptions="Center" />
                               
                                <Label Text=">" HorizontalOptions="EndAndExpand" VerticalOptions="Center" />
                             </StackLayout>
                         </ViewCell>
 
                         <ViewCell Tapped="OnPasswordTapped">
-                            <StackLayout Orientation="Horizontal" VerticalOptions="Center" Padding="15,0,15,0">
-                              <!-- <StackLayout.GestureRecognizers>
-                                   <TapGestureRecognizer
-                                        Tapped="OnPasswordTapped" />
-                               </StackLayout.GestureRecognizers>-->
-                               <Image Source="{local:EmbeddedImage MyDiet.Images.tab_password70.png}" HorizontalOptions="Start"/>
-                               <Label Text="Change password" VerticalOptions="Center" />
+                            <StackLayout Style="{StaticResource viewLayout}">
+                               <Image Source="{local:EmbeddedImage MyDiet.Images.icons_password40.png}" HorizontalOptions="Start"/>
+                               <Label Text="Password" VerticalOptions="Center" />
 
                                <Label Text=">" HorizontalOptions="EndAndExpand" VerticalOptions="Center" />
                             </StackLayout>
                         </ViewCell>
+                      </TableSection> 
+                      <TableSection> 
+                        <ViewCell Tapped="DataSourceTapped" >
+                            <StackLayout Style="{StaticResource viewLayout}">
+                               <Image Source="{local:EmbeddedImage MyDiet.Images.icons_source40.png}" HorizontalOptions="Start"
+                                      Aspect="AspectFit" />
+                               <Label Text="Activtiy data source " VerticalOptions="Center" />
+                               <Label Text=">" HorizontalOptions="EndAndExpand" VerticalOptions="Center" />
+                            </StackLayout>
+                        </ViewCell>
+
+                        <ViewCell Tapped="AboutTapped" >
+                            <StackLayout Style="{StaticResource viewLayout}">
+                               <Image Source="{local:EmbeddedImage MyDiet.Images.icons_about40.png}" HorizontalOptions="Start"
+                                      Aspect="AspectFit" />
+                               <Label Text="About" VerticalOptions="Center" />
+                               <Label Text=">" HorizontalOptions="EndAndExpand" VerticalOptions="Center" />
+                            </StackLayout>
+                        </ViewCell>
                         
-                    </TableSection>
-                    
+                   
+                      </TableSection> 
                 </TableRoot>
             </TableView>
 
-
+          <!-- <Button Text="add to medicine database" Clicked="SendNotiClicked" />-->
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -1,5 +1,86 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="MyDiet.Views.ActivityPage">
-    <ContentPage.Content>
-    </ContentPage.Content>
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms" 
+             xmlns:local="clr-namespace:MyDiet"
+             x:Class="MyDiet.Views.ActivityPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label" >
+                <Setter Property="HorizontalOptions" Value="Center" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+     <ScrollView>   
+        <StackLayout VerticalOptions="FillAndExpand" >
+           
+            <RelativeLayout VerticalOptions="Start" HeightRequest="100" 
+                            BackgroundColor="#2196F3" >
+                 <Grid RelativeLayout.WidthConstraint=
+                     "{ConstraintExpression Type=RelativeToParent, Property=Width}"
+                        RelativeLayout.HeightConstraint=
+                     "{ConstraintExpression Type=RelativeToParent, Property=Height}">
+                    
+                 <Label Text="Today" TextColor="White" FontSize="Large" />
+                     <Grid VerticalOptions="End" >
+                        <StackLayout Grid.Column="0" >
+                            <Label x:Name="kmLabel" Text="0" FontSize="Large"
+                                   TextColor="White"/>
+                            <Label Text="Walked km"
+                                   TextColor="White"/>
+                        </StackLayout>
+
+                        <StackLayout Grid.Column="1" >
+                            <Label x:Name="stepsLabel" Text="0" FontSize="Large"
+                                   TextColor="White"/>
+                            <Label Text="Steps"
+                                   TextColor="White"/>
+                        </StackLayout>
+
+                        <StackLayout Grid.Column="2"  >
+                            <Label x:Name="floorLabel" Text="0" FontSize="Large" 
+                                   TextColor="White"/>
+                            <Label Text="Climbed floor"
+                                   TextColor="White"/>
+                        </StackLayout>
+                     </Grid>
+                 </Grid>   
+            </RelativeLayout>
+           
+            <StackLayout VerticalOptions="EndAndExpand">
+                <microcharts:ChartView x:Name="Chart4" HeightRequest="350"  /> 
+                <Grid x:Name="dayGrid" RowSpacing="5" ColumnSpacing="5" Padding="10"  >
+                    <Label Grid.Column="0" x:Name="day0" Text="6.7" />
+                    <Label Grid.Column="1" x:Name="day1" Text="6.8" />
+                    <Label Grid.Column="2" x:Name="day2" Text="6.9" />
+                    <Label Grid.Column="3" x:Name="day3" Text="6.10" />
+                    <Label Grid.Column="4" x:Name="day4" Text="6.11" />
+                    <Label Grid.Column="5" x:Name="day5" Text="6.12" />
+                    <Label Grid.Column="6" x:Name="day6" Text="6.13" />
+
+                </Grid>
+                <StackLayout Orientation="Horizontal" Padding="10" VerticalOptions="End" >
+                    <Image Source="{local:EmbeddedImage MyDiet.Images.icons_left48.png}"
+                           HorizontalOptions="StartAndExpand" > 
+                        <Image.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                               Tapped="OnLeftTapped"  />
+                             </Image.GestureRecognizers>
+                        </Image>
+                   
+                    <Label Text="Day" HorizontalOptions="Center" />
+                   
+                    <Image Source="{local:EmbeddedImage MyDiet.Images.icons_right48.png}"
+                           HorizontalOptions="EndAndExpand" >
+                        <Image.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                               Tapped="OnRightTapped"  />
+                             </Image.GestureRecognizers>
+                        </Image>
+                </StackLayout>
+            </StackLayout> 
+        </StackLayout>
+    </ScrollView>  
+
 </ContentPage>

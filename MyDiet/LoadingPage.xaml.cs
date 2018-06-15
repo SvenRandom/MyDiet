@@ -16,7 +16,7 @@ namespace MyDiet
         public LoadingPage()
         {
             InitializeComponent();
-			image.Source = ImageSource.FromResource("MyDiet.Images.bigWhite.jpg");
+			image.Source = ImageSource.FromResource("MyDiet.Images.bigWhite2.jpg");
 			//var app = Application.Current as App;
 			//if (Application.Current.Properties.ContainsKey("log"))
 			//	isLoggedIn.Text = Application.Current.Properties["log"].ToString();
@@ -25,7 +25,15 @@ namespace MyDiet
 			//	//isLoggedIn.Text = Application.Current.Properties["log"].ToString();
 
 			//}
+			if (Settings.LogStateSettings){
+				App.email = Settings.AccountEmail;
+				Navigation.PushModalAsync(new NavigationPage(new MainPage()));
+			}else
+            {
 
+                Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
+
+            }
 				
 				
         }
@@ -48,6 +56,8 @@ namespace MyDiet
 					continueButton.IsVisible = true;
 					loadingIndicator.IsRunning = false;
 					loadingIndicator.IsVisible = false;
+					Settings.LogStateSettings = false;
+					await Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
 				}
 				await Navigation.PushModalAsync(new NavigationPage(new MainPage()));
 

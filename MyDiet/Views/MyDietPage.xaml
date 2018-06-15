@@ -1,12 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:local="clr-namespace:MyDiet"
              x:Class="MyDiet.Views.MyDietPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Button" >
+                <Setter Property="BorderRadius" Value="0" />
+
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+
     <ContentPage.ToolbarItems>
-        <ToolbarItem Clicked="OnItemAdded" Text="Add" />
+        <ToolbarItem Clicked="OnItemAdded" Text="Add" Icon="icons_add30.png" />
     </ContentPage.ToolbarItems>
     <StackLayout>
     <ActivityIndicator HorizontalOptions="Center" VerticalOptions="Center" IsVisible="False" IsEnabled="True" x:Name="syncIndicator" />
+    <StackLayout >
+       <Grid ColumnSpacing="2" >
+            <Button Grid.Row="0" Grid.Column="0" 
+                    Text="Today" x:Name="today" Clicked="TodayClicked" />
+            <Button Grid.Row="0" Grid.Column="1"  
+                    Text="Recent Week" x:Name="week" Clicked="WeekClicked"/>   
+            <Button Grid.Row="0" Grid.Column="2"  
+                    Text="History" x:Name="history" Clicked="HistoryClicked"/> 
+       </Grid>
+      
+    </StackLayout>    
     <ListView x:Name="listView" HasUnevenRows="true" ItemSelected="OnItemSelected" IsPullToRefreshEnabled="true" Refreshing="OnRefresh">
         <ListView.ItemTemplate>
             <DataTemplate>
@@ -16,14 +38,31 @@
                                         <Label   Text="{Binding DateToDisplay}" />
 
                                         <Label Text="{Binding Calories}" HorizontalOptions="EndAndExpand" />
-                                        <Label Text="cal" HorizontalOptions="End" />
+                                        <Label Text="cal" HorizontalOptions="End" x:Name="calLabel"/>
                         </StackLayout>
-                        <StackLayout Orientation="Horizontal"> 
-                            <!--<Image0 Source="{Binding Path=image0LocalPath}" />-->
-                        </StackLayout>    
 
+                        <Label Text="{Binding ScanItems}" />
                             
                         <Label Text="{Binding Description}" />
+
+                        <Grid HeightRequest="{Binding Height}">
+                                <Image Source="{Binding Image0LocalPath}" Aspect="AspectFill"
+                                       Grid.Column="0" />
+                                 <Image Source="{Binding Image1LocalPath}" Aspect="AspectFill"
+                                        Grid.Column="1" />
+                                 <Image Source="{Binding Image2LocalPath}" Aspect="AspectFill"
+                                         Grid.Column="2" />
+                          
+                        </Grid>
+                        <!--<StackLayout Orientation="Horizontal" HeightRequest="110"  > 
+                                <Image Source="{Binding Image0LocalPath}" Aspect="AspectFill" WidthRequest="110"
+                                        />
+                                 <Image Source="{Binding Image1LocalPath}" Aspect="AspectFill" WidthRequest="110"
+                                        />
+                                 <Image Source="{Binding Image2LocalPath}" Aspect="AspectFill" WidthRequest="110"
+                                       />
+                          
+                        </StackLayout> -->
 
                          
                     </StackLayout>

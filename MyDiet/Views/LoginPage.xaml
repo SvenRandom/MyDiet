@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              x:Class="MyDiet.Views.LoginPage"
+             xmlns:local="clr-namespace:MyDiet"
              Title="Welcome">
     <ContentPage.Content>
         <StackLayout Padding="15">
@@ -11,10 +12,24 @@
             <StackLayout VerticalOptions="CenterAndExpand" >                
                 <Label x:Name="messageLabel" />
                   <ActivityIndicator IsVisible="False" IsEnabled="True" x:Name="logingIndicator" />
+                
                 <Label Text="Email" FontSize="18"/>
-                <Entry x:Name="emailEntry" Placeholder="eg abc@123.com" Keyboard="Email" />
+                <StackLayout Orientation="Horizontal">
+                   <!-- <Image Source="{local:EmbeddedImage MyDiet.Images.icons_email80.png}" HorizontalOptions="Start"
+                                           Aspect="AspectFit" />-->
+                    <Entry x:Name="emailEntry" Placeholder="eg abc@123.com" 
+                           Keyboard="Email" HorizontalOptions="FillAndExpand" />
+                </StackLayout>
+                    
+                
                 <Label Text="Password" FontSize="18"/>
-                <Entry x:Name="passwordEntry" IsPassword="true" />
+                <StackLayout Orientation="Horizontal">
+                   <!-- <Image Source="{local:EmbeddedImage MyDiet.Images.icons_password80.png}" HorizontalOptions="Start"
+                                           Aspect="AspectFit" />-->
+                    <Entry x:Name="passwordEntry" IsPassword="true" HorizontalOptions="FillAndExpand" />
+                </StackLayout>
+                
+
                 <Button Text="Log in" Clicked="OnLoginButtonClicked" 
                         BackgroundColor="{StaticResource Primary}" TextColor="White" />
                 

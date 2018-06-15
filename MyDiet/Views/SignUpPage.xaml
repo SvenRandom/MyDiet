@@ -8,18 +8,18 @@
     </ContentPage.ToolbarItems>
 
    <ContentPage.Content >
-        <ScrollView>
+        <ScrollView >
         <StackLayout VerticalOptions="StartAndExpand" Padding="15" >
             <ActivityIndicator IsVisible="False" IsEnabled="True" x:Name="signingIndicator" />
             <Label x:Name="messageLabel" />
-            <Label Text="Email" />
+            <Label Text="Email" FontSize="Large"/>
             <Entry x:Name="emailEntry" Keyboard="Email" Placeholder="sign up by email" />
-            <Label Text="Password" />
+            <Label Text="Password" FontSize="Large"/>
             <Entry x:Name="passwordEntry" IsPassword="true" />
-            <Label Text="Name" />
+            <Label Text="Name" FontSize="Large"/> 
             <Entry x:Name="usernameEntry" />
 
-            <Label Text="Gender" />
+            <Label Text="Gender" FontSize="Large"/>
             <Picker x:Name="genderPicker" Title="select your gender" 
                     SelectedItem="Male" SelectedIndex="1" > 
                 <Picker.Items>
@@ -27,18 +27,17 @@
                     <x:String>Male</x:String>
                 </Picker.Items>
             </Picker>
-            <Label Text="Date of birth " />
+            <Label Text="Date of birth " FontSize="Large" />
             <DatePicker x:Name="dateOfBirthPicker" MinimumDate="1 1 1900" Format="dd MMM yyyy"
                         MaximumDate="1 1 2020"/>
 
-            
-            <Label Text=" " />
-            <Label Text="Height (cm)" />
+        
+            <Label Text="Height (cm)" FontSize="Large" />
             <Entry x:Name="heightEntry" Keyboard="Numeric" Placeholder="eg 175 " />
             
-            <Label Text="Weight (kg)" />
+            <Label Text="Weight (kg)" FontSize="Large"/>
             <Entry x:Name="weightEntry" Keyboard="Numeric" Placeholder="eg 70 " />
-           <Label Text="Type of cuisine eaten at home" />
+           <Label Text="Type of cuisine eaten at home" FontSize="Large"/>
                 <Entry x:Name="typeOfCuisineEntry" Placeholder="eg Chinese food" />
             
         </StackLayout>

@@ -72,6 +72,7 @@ namespace MyDiet.Views
                     {
 
 						App.account = currentAccount;
+						App.email = currentAccount.Email;
 						Settings.LogStateSettings = true;
 						Settings.AccountEmail = currentAccount.Email;
                         Navigation.InsertPageBefore(new MainPage(), this);

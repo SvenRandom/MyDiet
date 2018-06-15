@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+    Padding="15"
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    x:Class="MyDiet.Views.PackageFoodPage"
+    Title="Nutrition">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+
+            <Style TargetType="Label" >
+                <Setter Property="BackgroundColor" Value="White" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="BackgroundColor" Value="White" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+    <StackLayout>
+        <StackLayout Orientation="Horizontal" >
+            <Label Text=" Barcode: "  FontSize="Large" HorizontalTextAlignment="Start" />
+            <Label Text="{Binding Path=Id}"  />
+        </StackLayout>
+
+        <StackLayout Orientation="Horizontal"  >
+            <Label Text=" Title: "  FontSize="Large" HorizontalTextAlignment="Start" />
+            <Label Text="{Binding Path=Title}" HorizontalTextAlignment="Start" />
+        </StackLayout>
+        
+        <StackLayout >
+            <Label Text=" Description: " HorizontalTextAlignment="Start" FontSize="Large" />
+            <Label Text="{Binding Path=Description}" HorizontalTextAlignment="Start" />
+        </StackLayout>
+        
+        <StackLayout Orientation="Horizontal" >
+            <Label Text=" Weight: "   FontSize="Large" HorizontalTextAlignment="Start" />
+            <Label Text="{Binding Path=Weight}" />
+        </StackLayout>
+
+       
+    <Grid Padding="5" BackgroundColor="{StaticResource LightGreen}" 
+          RowSpacing="1" ColumnSpacing="1" > 
+        <Label Grid.Row="0" Grid.ColumnSpan="2" Text="Nutrition Information" />
+        <Label Grid.Row="1" Grid.Column="0" />   
+        <Label Grid.Row="1" Grid.Column="1" Text="Average.QTY per 100g" />    
+       
+        <Label Grid.Row="2" Grid.Column="0" Text="Energy: " />
+        <Label Grid.Row="2" Grid.Column="1" Text="{Binding Path=Energy}" />      
+
+        <Label Grid.Row="3" Grid.Column="0" Text="Protein: " />
+        <Label Grid.Row="3" Grid.Column="1" Text="{Binding Path=Protein}" />      
+
+        <Label Grid.Row="4" Grid.Column="0" Text="Carbs: " />
+        <Label Grid.Row="4" Grid.Column="1" Text="{Binding Path=Carbs}" />      
+
+        <Label Grid.Row="5" Grid.Column="0" Text="Sodium: " />
+        <Label Grid.Row="5" Grid.Column="1" Text="{Binding Path=Sodium}" />      
+       
+        <Label Grid.Row="6" Grid.Column="0" Text="Fat: " />
+        <Label Grid.Row="6" Grid.Column="1" Text="{Binding Path=Fat}" />      
+
+        <Label Grid.Row="7" Grid.Column="0" Text="Satfat: " />
+        <Label Grid.Row="7" Grid.Column="1" Text="{Binding Path=Satfat}" />      
+
+        <Label Grid.Row="8" Grid.Column="0" Text="Salt: " />
+        <Label Grid.Row="8" Grid.Column="1" Text="{Binding Path=Salt}" />      
+
+        <Label Grid.Row="9" Grid.Column="0" Text="Sugar: " />
+        <Label Grid.Row="9" Grid.Column="1" Text="{Binding Path=Sugar}" />     
+
+        <Label Grid.Row="10" Grid.Column="0" Text="Fibre: " />
+        <Label Grid.Row="10" Grid.Column="1" Text="{Binding Path=Fibre}" />      
+
+        
+    </Grid>
+    </StackLayout>
+    </ScrollView>
+</ContentPage>

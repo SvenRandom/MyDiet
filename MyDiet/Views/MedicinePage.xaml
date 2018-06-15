@@ -1,5 +1,129 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="MyDiet.Views.MedicinePage">
-    <ContentPage.Content>
-    </ContentPage.Content>
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:local="clr-namespace:MyDiet"
+             x:Class="MyDiet.Views.MedicinePage">
+     <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Button" >
+                <Setter Property="BorderRadius" Value="0" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Clicked="OnAdded" Text="Add" Icon="icons_add30.png" />
+    </ContentPage.ToolbarItems>
+    
+    <StackLayout>
+        
+        <StackLayout>
+            <Grid ColumnSpacing="2" >
+                <Button  Grid.Column="0" 
+                        Text="Reminder" x:Name="reminder" Clicked="ReminderClicked" />
+                <Button  Grid.Column="1"  
+                        Text="Current" x:Name="medicine" Clicked="MedicineClicked"/>   
+                <Button  Grid.Column="2"
+                        Text="History" x:Name="history" Clicked="HistoryClicked"/> 
+            </Grid>
+        </StackLayout>  
+        <ActivityIndicator HorizontalOptions="Center" VerticalOptions="Center" IsVisible="False" IsEnabled="True" x:Name="syncIndicator" />
+        
+        <ListView HasUnevenRows="true" x:Name="reminderListView" ItemSelected="ReminderItemSelected" 
+                  IsPullToRefreshEnabled="true" Refreshing="OnReminderRefresh">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" Padding="15">
+                            <Image Source="{local:EmbeddedImage MyDiet.Images.icons_clock64.png}" HorizontalOptions="Start"
+                                      Aspect="AspectFit" IsVisible="{Binding UnChecked}" />
+                            <Image Source="{local:EmbeddedImage MyDiet.Images.icons_checked64.png}" HorizontalOptions="Start"
+                                      Aspect="AspectFit" IsVisible="{Binding  Checked}" />
+                            <StackLayout HorizontalOptions="FillAndExpand">
+                                <StackLayout  Orientation="Horizontal">
+                                    <Label Text="{Binding TimeToDisplay}" />
+
+                                    <Label Text="{Binding MedicineName}" />
+
+
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <Switch IsToggled="{Binding Checked}"  
+                                            x:Name="checkState" IsEnabled="false" />
+                                    <Label Text="Check" VerticalOptions="Center" />
+
+                                    <Label Text="{Binding Unit}" HorizontalOptions="EndAndExpand" />
+                                </StackLayout>
+                            </StackLayout>
+                        </StackLayout>
+                        <ViewCell.ContextActions>
+                                <!--<MenuItem Text="Edit" Clicked="ReminderEditClicked" CommandParameter="{Binding .}"/>-->
+                                <MenuItem Text="Delete" Clicked="ReminderDeleteClicked"  IsDestructive="true" CommandParameter="{Binding .}"/>
+                            </ViewCell.ContextActions>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>            
+                
+        </ListView>
+        <ListView HasUnevenRows="true" x:Name="medicineListView" ItemSelected="MedicineItemSelected"
+                  IsPullToRefreshEnabled="true" Refreshing="OnMedicineRefresh" ItemTapped="Handle_MedicineTapped" >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Padding="15" >
+                            <StackLayout Orientation="Horizontal" >
+                                <Label Text="{Binding MedicineName}" 
+                                       HorizontalOptions="StartAndExpand" />
+                                <!--<Image Source="{local:EmbeddedImage MyDiet.Images.icons_pill50.png}" HorizontalOptions="Center"
+                                       Aspect="AspectFit" />-->
+                                <Label Text="{Binding Unit}" HorizontalOptions="EndAndExpand" />
+                            </StackLayout>
+
+                            <Label Text="{Binding Description}" FontSize="Small" />
+                           <!-- <StackLayout Orientation="Horizontal" BackgroundColor="{StaticResource LightGreen}" 
+                                         IsVisible="{Binding IsTaking}" >
+                                <Switch IsToggled="{Binding IsTaking}" IsEnabled="false" />
+                                <Label Text="Under taken" TextColor="White" VerticalOptions="Center" />
+                            </StackLayout>-->
+                            <Slider  Maximum="{Binding Max}" Minimum="0" Value="{Binding CurrentDay}"
+                                     IsEnabled="false" />
+                            <Label Text="{Binding Status}" />
+                           
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>            
+                
+        </ListView>
+
+
+         <ListView HasUnevenRows="true" x:Name="historyListView" ItemSelected="HistoryItemSelected" 
+                  IsPullToRefreshEnabled="true" Refreshing="OnHistoryRefresh" ItemTapped="Handle_HistoryTapped" >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" Padding="15">
+                            <Image Source="{local:EmbeddedImage MyDiet.Images.icons_checked64.png}" HorizontalOptions="Start"
+                                      Aspect="AspectFit" IsVisible="{Binding IsDone}" />
+                            <Image Source="{local:EmbeddedImage MyDiet.Images.icons_undo64.png}" HorizontalOptions="Start"
+                                      Aspect="AspectFit" IsVisible="{Binding IsUnDone}" />
+                            <StackLayout HorizontalOptions="FillAndExpand" >
+                               
+                                    <Label Text="{Binding MedicineName}" VerticalOptions="Center" />
+                                    <Label Text="{Binding DirectionsToDisplay}" VerticalOptions="Center" FontSize="Small" />
+                               
+                                    <Label Text="{Binding TimeToDisplay}" VerticalOptions="Center" FontSize="Small" />
+                                  
+                               
+                            </StackLayout>
+                        </StackLayout>
+                        <ViewCell.ContextActions>
+                                <MenuItem Text="Delete" Clicked="HistoryDeleteClicked"  IsDestructive="true" CommandParameter="{Binding .}"/>
+                            </ViewCell.ContextActions>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>            
+                
+        </ListView>
+        
+    </StackLayout>
 </ContentPage>

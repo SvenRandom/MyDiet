@@ -2,31 +2,107 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              x:Class="MyDiet.Views.HomePage">
-    <ContentPage.Content>
-          <StackLayout >
-            <Label Text="Welcome" HorizontalOptions="Center" VerticalOptions="Start" FontSize="20" />
-            <Label Text="  "/> 
-            <Label x:Name="currentUser" HorizontalOptions="Center" VerticalOptions="Start" FontSize="12" /> 
-            <Label Text="28/03/2018" HorizontalOptions="Center" VerticalOptions="Start" FontSize="12" />  
-            <Label Text="  "/>  
-
-                
-            <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" Padding="10">
-                    
-                 <Grid HorizontalOptions="Center" VerticalOptions="Center" BackgroundColor="Silver"
-                   RowSpacing="5" ColumnSpacing="5" >
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="200" />
-                        <RowDefinition Height="200" />
-             
-                    </Grid.RowDefinitions>
-                   <Label Grid.Row="0" Grid.Column="0"  Text="meal diary" BackgroundColor="White" />
-                   <Label Grid.Row="0" Grid.Column="1"  Text="Activity"  BackgroundColor="White"/>
-                   <Label Grid.Row="1" Grid.Column="0"  Text="Tips"  BackgroundColor="White"/>
-                   <Label Grid.Row="1" Grid.Column="1"  Text="Reminder"  BackgroundColor="White"/>
-                </Grid>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="frameBlue" TargetType="Frame">
+                <Setter Property="CornerRadius" Value="15" />
+                <Setter Property="HeightRequest" Value="65" />
+                <Setter Property="HasShadow" Value="false" />
+                <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+            </Style>
+            <Style x:Key="frameGreen" TargetType="Frame" BasedOn="{StaticResource frameBlue}">
+                <Setter Property="BackgroundColor" Value="{StaticResource LightGreen}" />
+            </Style>
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="White" />
+                <Setter Property="FontSize" Value="Large" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <StackLayout Padding="15" Spacing="7" >
+       
+        <Label x:Name="date" HorizontalOptions="Center" VerticalOptions="Start" TextColor="Black" /> 
+        <ScrollView>
+            <StackLayout>
+        <Frame Style="{StaticResource frameGreen}" >
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer x:Name="dietFrame"
+                                       Tapped="OnDietTapped"  />
+            </Frame.GestureRecognizers>
+            <StackLayout Orientation="Horizontal" >
+                <Label Text="Diet" />
+                <StackLayout HorizontalOptions="EndAndExpand">
+                    <Label x:Name="mealLabel"  HorizontalOptions="EndAndExpand"/> 
+                    <Label x:Name="calLabel"  HorizontalOptions="EndAndExpand"/>
+                </StackLayout>
+               
             </StackLayout>
-                    
-          </StackLayout>
-        </ContentPage.Content>
+
+        </Frame>
+
+        <Frame Style="{StaticResource frameBlue}" >
+            <Frame.GestureRecognizers>
+                <TapGestureRecognizer
+                                       Tapped="OnActivityTapped"  />
+            </Frame.GestureRecognizers>
+           <StackLayout Orientation="Horizontal" >
+                <Label Text="Exercise" />
+                <StackLayout HorizontalOptions="EndAndExpand">
+                    <Label x:Name="stepLabel" Text="0 Steps"  HorizontalOptions="EndAndExpand"/> 
+                    <Label x:Name="kmLabel" Text=" 0.00 km"  HorizontalOptions="EndAndExpand"/>
+                </StackLayout>
+               
+            </StackLayout>
+        </Frame>
+
+        <Frame  Style="{StaticResource frameGreen}" >
+           <Frame.GestureRecognizers>
+                <TapGestureRecognizer
+                                       Tapped="OnMedicineTapped"  />
+            </Frame.GestureRecognizers>
+           <StackLayout Orientation="Horizontal" >
+                <Label Text="Medication" />
+                <StackLayout HorizontalOptions="EndAndExpand">
+                    <Label x:Name="takenLabel" Text="0 Taken"  HorizontalOptions="EndAndExpand"/> 
+                    <Label x:Name="toTakeLabel" Text="0 To take"  HorizontalOptions="EndAndExpand"/>
+                </StackLayout>
+               
+            </StackLayout>
+        </Frame>
+         
+        <Frame Style="{StaticResource frameBlue}" >
+           <StackLayout Orientation="Horizontal" >
+                <Label Text="Tips" />
+                <StackLayout HorizontalOptions="EndAndExpand" WidthRequest="250">
+                    <Label Text="An apple a day keeps the doctor away! " FontSize="Medium" HorizontalOptions="EndAndExpand"/> 
+                    <Label Text=""  HorizontalOptions="EndAndExpand"/>
+                </StackLayout>
+               
+            </StackLayout>
+        </Frame>
+<!--
+        <Frame CornerRadius="15"  HeightRequest="75" BackgroundColor="#FC4865" HasShadow="false" >
+            <Label Text="Diet" FontSize="Large" TextColor="White" />
+            
+        </Frame>
+
+        <Frame CornerRadius="15"  HeightRequest="75" BackgroundColor="#1CD898" HasShadow="false" >
+     
+        </Frame>
+
+        <Frame CornerRadius="15"  HeightRequest="75" BackgroundColor="#1EC0D6" HasShadow="false" >
+     
+        </Frame>
+         
+        <Frame CornerRadius="15"  HeightRequest="75" BackgroundColor="#F2BE24" HasShadow="false" >
+    
+        </Frame>-->
+        </StackLayout>
+        </ScrollView>
+        
+    </StackLayout>
+
+         
+  
+    
 </ContentPage>

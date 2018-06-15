@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="MyDiet.Views.AboutPage"
+             xmlns:local="clr-namespace:MyDiet"
+             Title="About">
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="FillAndExpand" >
+            <Label Text=" " />
+             <Image Source="{local:EmbeddedImage MyDiet.Images.icons-100.png}" HorizontalOptions="CenterAndExpand"
+                                      Aspect="AspectFit" />
+            
+            <Label Text="MyDiet 1.0.1" HorizontalOptions="CenterAndExpand" />
+
+            <Label Text="Copyright 2018-2020" HorizontalOptions="CenterAndExpand" VerticalOptions="EndAndExpand" />
+            <Label Text="The University of Sydney" HorizontalOptions="CenterAndExpand" VerticalOptions="End" />
+             <Label Text="School of IT" HorizontalOptions="CenterAndExpand" VerticalOptions="End" />
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

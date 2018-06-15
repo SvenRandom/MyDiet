@@ -19,7 +19,8 @@
           <Button Text="continue" 
             Clicked="Handle_Clicked" 
             x:Name="continueButton" 
-            VerticalOptions="End"/>
+            VerticalOptions="End"
+                 TextColor="White" BorderColor="White"/>
         </Grid>
       </RelativeLayout>
 
