@@ -9,3 +9,4 @@ There are five core targets for this app.
 5.	record and remind about user’s medication.
 
 Responsibility: This is a personal capstone project. I am taking the lead and also a high effective role in the project. I finished the design part, development and testing part independently. 
+https://github.com/SvenRandom/MyDiet/blob/master/MyDiet/Images/bigWhite2.jpg
