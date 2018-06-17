@@ -9,6 +9,25 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyDiet.Droid", "Droid\MyDie
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyDiet.UITests", "UITests\MyDiet.UITests.csproj", "{6D072547-A5DE-46D3-80D7-CB2833B318BA}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pic", "Pic", "{1580EAF4-4291-45EC-B2A4-E85C99FD6873}"
+	ProjectSection(SolutionItems) = preProject
+		LoginPage.png = LoginPage.png
+		SignUpPage.png = SignUpPage.png
+		current.jpeg = current.jpeg
+		dietdetail.jpeg = dietdetail.jpeg
+		exercise.jpeg = exercise.jpeg
+		exercisedatasource.jpeg = exercisedatasource.jpeg
+		homePage_Android.jpeg = homePage_Android.jpeg
+		homepageIOS.jpeg = homepageIOS.jpeg
+		medicine.jpeg = medicine.jpeg
+		medicine2.jpeg = medicine2.jpeg
+		mediction_history.jpeg = mediction_history.jpeg
+		nutrition.jpeg = nutrition.jpeg
+		profile.jpeg = profile.jpeg
+		reminder.jpeg = reminder.jpeg
+		today.jpeg = today.jpeg
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
