@@ -10,4 +10,9 @@ There are five core targets for this app.
 
 Responsibility: This is a personal capstone project. I am taking the lead and also a high effective role in the project. I finished the design part, development and testing part independently. 
 
-<img src="MyDiet/Images/bigWhite2.jpg" alt="alt text" width="30%" height="30%">
+<img src="Pic/LoginPage.png" alt="alt text" width="30%" height="30%">
+<img src="Pic/SignUpPage.png" alt="alt text" width="30%" height="30%">
+<img src="Pic/homepageIOS.jpeg" alt="alt text" width="30%" height="30%">
+<img src="Pic/bigWhite2.jpg" alt="alt text" width="30%" height="30%">
+<img src="Pic/bigWhite2.jpg" alt="alt text" width="30%" height="30%">
+<img src="Pic/bigWhite2.jpg" alt="alt text" width="30%" height="30%">
