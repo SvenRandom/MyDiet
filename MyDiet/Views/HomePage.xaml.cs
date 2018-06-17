@@ -16,15 +16,12 @@ namespace MyDiet.Views
         {
 			
             InitializeComponent();
-			//currentUser.Text = App.account.Email;
+
 			date.Text = DateTime.Now.ToString("dd MMM yyyy dddd");
 			dietManager = DietManager.DefaultManager;
 			reminderManager = ReminderManager.DefaultManager;
 			activityDataManager = new ActivityDataManager();
-			//dietFrame.Tapped += async (sender, e) => {
-    //            var tabbedPage = this.Parent as TabbedPage;
-				//tabbedPage.SwitchToDiet();
-            //};
+
 
         }
 

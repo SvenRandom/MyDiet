@@ -43,42 +43,5 @@
         </StackLayout>
         </ScrollView>
     </ContentPage.Content>
-<!--    <ContentPage.Content>
-    <TableView Intent="Form">
-        <TableView.Root>
-        <TableRoot>
-             <TableSection Title="Basics" >
-                <EntryCell Label="Email" Placeholder="(eg abc123@456.com)" 
-                           />
-                <EntryCell Label="Password" IsPassword="true"  
-                          />
-                <EntryCell Label="Name" Placeholder="(Bat Man)" 
-                          />
-                <EntryCell Label="Gender" Placeholder="Female" 
-                         />   
 
-               <ViewCell>
-                    <StackLayout Padding="15,0" Orientation="Horizontal" >
-                            <Label Text="Date of birth"  VerticalOptions="CenterAndExpand"
-                                   />
-                            <DatePicker 
-                                        HorizontalOptions="EndAndExpand"
-                                        VerticalOptions="CenterAndExpand"
-                                        MinimumDate="1 1 1900" 
-                                        MaximumDate="1 1 2020"/>
-                    </StackLayout>
-                        
-               </ViewCell>    
-               <EntryCell Label="Height (cm)" Placeholder="(eg 175)" 
-                           Keyboard="Numeric"/>
-               <EntryCell Label="Weight (kg)" Placeholder="(eg 70)" 
-                          Keyboard="Numeric"/>     
-                    
-               <TextCell  BackgroundColor="Red" />
-                    
-            </TableSection>
-        </TableRoot>      
-            </TableView.Root>
-    </TableView>
-    </ContentPage.Content>-->
 </ContentPage>

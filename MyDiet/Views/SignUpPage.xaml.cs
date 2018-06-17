@@ -51,18 +51,7 @@ namespace MyDiet.Views
                 var rootPage = Navigation.NavigationStack.FirstOrDefault();
                 if (rootPage != null)
                 {
-					//App.user = new User()
-					//{
-					//    Username = usernameEntry.Text,
-					//    Password = passwordEntry.Text,
-					//    Email = emailEntry.Text,
-					//    Gender = genderPicker.Items[genderPicker.SelectedIndex],
-					//    DateOfBirth = dateOfBirthPicker.Date,
-					//    Height = Convert.ToInt32(heightEntry.Text),
-					//    Weight = Convert.ToInt32(weightEntry.Text)
-
-					//};
-
+					
 
 					try{
 					    await accountManager.SaveTaskAsync(account, isNew);

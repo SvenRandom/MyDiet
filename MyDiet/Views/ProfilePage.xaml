@@ -9,7 +9,7 @@
             <Style x:Key="viewLayout" TargetType="StackLayout" >
                 <Setter Property="Orientation" Value="Horizontal" />
                 <Setter Property="Padding" Value="15,0,15,0" />
-                <!--<Setter Property="VerticalOptions" Value="Center" />-->
+              
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>

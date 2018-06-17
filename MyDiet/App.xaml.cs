@@ -6,7 +6,7 @@ namespace MyDiet
 {
     public partial class App : Application
     {
-        //public static bool UseMockDataStore = true; 
+       
         
 		public static AccountInfo account;
 		public static string email;
@@ -18,10 +18,7 @@ namespace MyDiet
         {
             InitializeComponent();
 
-            //if (UseMockDataStore)
-            //    DependencyService.Register<MockDataStore>();
-            //else
-                //DependencyService.Register<CloudDataStore>();
+            
             
 			MainPage = new LoadingPage();
         }

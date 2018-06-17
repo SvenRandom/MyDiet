@@ -15,8 +15,7 @@
                 
                 <Label Text="Email" FontSize="18"/>
                 <StackLayout Orientation="Horizontal">
-                   <!-- <Image Source="{local:EmbeddedImage MyDiet.Images.icons_email80.png}" HorizontalOptions="Start"
-                                           Aspect="AspectFit" />-->
+                   
                     <Entry x:Name="emailEntry" Placeholder="eg abc@123.com" 
                            Keyboard="Email" HorizontalOptions="FillAndExpand" />
                 </StackLayout>
@@ -24,8 +23,7 @@
                 
                 <Label Text="Password" FontSize="18"/>
                 <StackLayout Orientation="Horizontal">
-                   <!-- <Image Source="{local:EmbeddedImage MyDiet.Images.icons_password80.png}" HorizontalOptions="Start"
-                                           Aspect="AspectFit" />-->
+                   
                     <Entry x:Name="passwordEntry" IsPassword="true" HorizontalOptions="FillAndExpand" />
                 </StackLayout>
                 

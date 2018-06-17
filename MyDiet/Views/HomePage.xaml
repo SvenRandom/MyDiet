@@ -80,23 +80,7 @@
                
             </StackLayout>
         </Frame>
-<!--
-        <Frame CornerRadius="15"  HeightRequest="75" BackgroundColor="#FC4865" HasShadow="false" >
-            <Label Text="Diet" FontSize="Large" TextColor="White" />
-            
-        </Frame>
 
-        <Frame CornerRadius="15"  HeightRequest="75" BackgroundColor="#1CD898" HasShadow="false" >
-     
-        </Frame>
-
-        <Frame CornerRadius="15"  HeightRequest="75" BackgroundColor="#1EC0D6" HasShadow="false" >
-     
-        </Frame>
-         
-        <Frame CornerRadius="15"  HeightRequest="75" BackgroundColor="#F2BE24" HasShadow="false" >
-    
-        </Frame>-->
         </StackLayout>
         </ScrollView>
         

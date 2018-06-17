@@ -40,7 +40,7 @@ namespace MyDiet.Views
 			historyListView.ItemsSource = temp2.OrderByDescending(history => history.StartTime);
             
             var temp1 = await medicineManager.GetMedicinesAsync();
-			//bool fresh = false;
+
 			foreach (var t in temp1)
 			{
 				t.Max = int.Parse(t.Duration);
@@ -72,17 +72,7 @@ namespace MyDiet.Views
 				Init();
 				App.contentChanged = false;
 			}
-    //        if (currentView == 0)
-    //        {
-				//ReminderClicked(); 
-
-    //        }
-    //        if (currentView == 1)
-				//MedicineClicked();
-
-            //if (currentView == 2)
-                //HistoryClicked();
-                     
+                      
         }
         
 		async public void UpdateCheck()
@@ -103,17 +93,7 @@ namespace MyDiet.Views
 		}
 		void OnAdded(object sender, System.EventArgs e)
         {
-			//var response = await DisplayActionSheet("Which to add?", "Cancel", null, "New Reminder", "New Medicine");
-			//if (response == "New Reminder"){
-			//	Reminder reminder = null;
-			//	await Navigation.PushAsync(new AddReminderPage(reminder));
-			//}
-               
-			//if (response == "New Medicine"){
-			//	Medicine medicine =null;
-
-			//	await Navigation.PushAsync(new AddMedicinePage(medicine));
-			//}
+			
 			Medicine medicine = null;
 
             Navigation.PushAsync(new AddMedicinePage(medicine));
@@ -185,13 +165,7 @@ namespace MyDiet.Views
         }
 
 
-        //*********** reminder edit click ****************
-		//void ReminderEditClicked(object sender, System.EventArgs e)
-   //     {
-			//var reminder1 = (sender as MenuItem).CommandParameter as Reminder;
-			//Navigation.PushAsync(new AddReminderPage(reminder1));
-
-        //}
+        
 
         //************** reminder delete ******************
 		async void ReminderDeleteClicked(object sender, System.EventArgs e)
@@ -236,8 +210,7 @@ namespace MyDiet.Views
 
 		void ReminderClicked()
         {
-			//var temp =await reminderManager.GetReminderAsync();
-			//reminderListView.ItemsSource = temp;
+			
 
 			medicineListView.IsVisible = false;
 			historyListView.IsVisible = false;
@@ -251,36 +224,7 @@ namespace MyDiet.Views
             history.TextColor = Color.FromHex("#2196F3");
             currentView = 0;
 
-			//List<Reminder> reminders = new List<Reminder>();
-   //         Reminder reminder1 = new Reminder
-   //         {
-			//	MedicineName = "enalapril(Vasotec)",
-   //             Time = new TimeSpan(9, 00, 00),
-			//	Quantity = "2 Tablet"
-   //         };
-   //         reminder1.SetTimeToDisplay();
 
-   //         Reminder reminder2 = new Reminder
-   //         {
-			//	MedicineName = "Eplerenone (Inspra)",
-   //             Time = new TimeSpan(12, 00, 00),
-   //             Quantity = "1 Tablet"
-   //         };
-   //         reminder1.SetTimeToDisplay();
-   //         Reminder reminder3 = new Reminder
-   //         {
-			//	MedicineName = "enalapril(Vasotec)",
-   //             Time = new TimeSpan(19, 00, 00),
-			//	Quantity = "2 Tablet"
-   //         };
-   //         reminder1.SetTimeToDisplay();
-   //         reminder2.SetTimeToDisplay();
-   //         reminder3.SetTimeToDisplay();
-
-   //         reminders.Add(reminder1);
-   //         reminders.Add(reminder2);
-   //         reminders.Add(reminder3);
-			//reminderListView.ItemsSource = reminders;
             
         }
 
@@ -293,8 +237,7 @@ namespace MyDiet.Views
 
 		void MedicineClicked()
         {
-			//var temp =await medicineManager.GetMedicinesAsync();
-			//medicineListView.ItemsSource = temp;
+			
 
 			reminderListView.IsVisible = false;
 			historyListView.IsVisible = false;
@@ -306,35 +249,7 @@ namespace MyDiet.Views
             history.BackgroundColor = Color.WhiteSmoke;
             history.TextColor = Color.FromHex("#2196F3");
             currentView = 1;
-
-			//List<Medicine> medicines = new List<Medicine>();
-			//Medicine medicine1 = new Medicine
-   //         {
-			//	MedicineName = "enalapril(Vasotec)",
-			//	Description="This is a medicine for lowering blood pressure",
-			//	Unit = "Tablet"
-   //         };
-
-			//Medicine medicine2 = new Medicine
-   //         {
-			//	MedicineName = "Eplerenone (Inspra)",
-			//	Description = "Treat heart disease",
-			//	Unit = "Tablet"
-   //         };
-
-			//Medicine medicine3 = new Medicine
-
-   //         {
-			//	MedicineName = "Lomotil",
-			//	Description = "Treat diarrhea",
-			//	Unit = "Tablet"
-   //         };
-           
-
-			//medicines.Add(medicine1);
-			//medicines.Add(medicine2);
-			//medicines.Add(medicine3);
-			//medicineListView.ItemsSource = medicines;
+   
 
                 
         }

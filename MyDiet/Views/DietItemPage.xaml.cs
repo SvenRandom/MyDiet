@@ -97,7 +97,7 @@ namespace MyDiet.Views
                     imagesStack.IsVisible = true;
                     numberOfPhoto = 1;
                     var fileSoure = ImageSource.FromFile(dietItemCurrent.Image0LocalPath);
-                    //if(fileSoure.ToString()!="")
+                    
                     image00.Source = fileSoure;
 					delete00.IsVisible = true;
 					image00.IsVisible = true;
@@ -171,8 +171,7 @@ namespace MyDiet.Views
                 dietItemCurrent.ScanBarcodes = "";
 			}
 
-
-            //imagesPath[0]=await AzureStorage.UploadFileAsync(ContainerType.Image, stream);
+   
 
             if (numberOfPhoto > 0 && existPhotos <= 0)
             {
@@ -186,8 +185,7 @@ namespace MyDiet.Views
             if (numberOfPhoto > 2 && existPhotos <= 2)
                 dietItemCurrent.Image2UploadId = await AzureStorage.UploadFileAsync(ContainerType.Image, file2.GetStream());
 
-            //var uploadedFilename = await AzureStorage.UploadFileAsync(ContainerType.Image, file1.GetStream());
-            //await DisplayAlert("File ID", uploadedFilename, "OK");
+       
             dietItemCurrent.SetTime();
             dietItemCurrent.SetDateToDisplay();
             //file0.Dispose();
@@ -295,84 +293,12 @@ namespace MyDiet.Views
 
         }
 
-		//async void BarTestClicked(object sender, System.EventArgs e)
-   //     {
-			//HttpClient _client = new HttpClient();
-			//string quary = Constants.BarcodeEndpointUri + "?json=barcode&q=" + "21045622" + "&apikey=" + Constants.APIKey;
-
-
-    //        var response = await _client.GetAsync(quary);
-    //        //var posts = JsonConvert.DeserializeObject<List<BarcodeItem>>(content);
-    //        if (response.IsSuccessStatusCode)
-    //        {
-    //            var content = await response.Content.ReadAsStringAsync();
-    //            var Items = JsonConvert.DeserializeObject(content);
-    //            System.Diagnostics.Debug.WriteLine("response:"+Items.ToString());
-				//System.Diagnostics.Debug.WriteLine("content: "+content);
-
-    //            await DisplayAlert("barcode item length", content.Length.ToString(), "sure");
-				//var posts = JsonConvert.DeserializeObject<Items>(content);
-				//System.Diagnostics.Debug.WriteLine("title: " + posts.title);
-
-        //    }
-
-        //}
 
 
 		async void SearchBarcodeAsync()
 		{
-			/*
-			try{
-				
-    			activityIndicator.IsRunning = true;
-               
-    			var client = new RestClient("https://api.upcitemdb.com/prod/trial/");
-                // lookup request with GET
-    			RestSharp.Portable.IRestRequest request = new RestRequest("lookup", Method.GET);
-
-
-    			request.AddQueryParameter("upc", App.barcode);
-    			//request.AddQueryParameter("upc", "0000093613903");
-    			//var response = await client.Execute(request);
-    			var response =await client.Execute(request);
-    			//System.Diagnostics.Debug.WriteLine("response: " + response.ToString());
-    			//System.Diagnostics.Debug.WriteLine("response content: " + response.Content);
-                // parsing json
-    			var obj = JsonConvert.DeserializeObject<BarcodeItem>(response.Content);
-                
-    			var a = obj.items.ToString().Trim();
-    			//var b = a.Substring(1,a.Length-2);
-
-    			if(obj.total=="0"){
-    				await DisplayAlert("notice", "no result", "Sure");
-					activityIndicator.IsRunning = false;
-    			}
-    			else
-    			{
-    				var c = JsonConvert.DeserializeObject<List<Items>>(a);
-                    var title = c[0].title;
-    				await DisplayAlert("notice", title, "Sure");
-    				items.Add(title);
-					SetScanItems(title);
-
-    				activityIndicator.IsRunning = false;
-
-    			}
-
-			}catch{
-				await DisplayAlert("notice", "NetWork Error", "Sure");
-			}
-			*/
-			//System.Diagnostics.Debug.WriteLine("obj: " + obj.items.ToString());
-			//JSONObject a = new JSONObject(response.Content);
-			//JsonObjectAttribute json = (Newtonsoft.Json.JsonObjectAttribute)obj;
-			//System.Diagnostics.Debug.WriteLine("c: " + c[0].title);
-			//JSONObject a =new JSONObject();
-			//a.Put("a","b");
-			//var c = a.GetString("a");
-			//System.Diagnostics.Debug.WriteLine("a: " + a);
-			//System.Diagnostics.Debug.WriteLine("obj total: " + obj.total);
-			//**********************************       
+			
+			      
 			activityIndicator.IsVisible = true;
 			activityIndicator.IsRunning = true;
 			await DisplayAlert("Scanned Barcode", App.barcode, "OK");
@@ -586,7 +512,7 @@ namespace MyDiet.Views
                 MaxWidthHeight = 600
 
             });
-            //image.Source = ImageSource.FromFile(photos.Path);
+            
             if (photos != null)
                 SetStream(photos);
             //else
@@ -603,33 +529,19 @@ namespace MyDiet.Views
             {
                 case 0:
                     file0 = file;
-                    //              image0.Source = ImageSource.FromStream(() =>
-                    //              {                  
-                    //var stream = file.GetStream();
-                    //    //file.Dispose();
-                    //    return stream;
-                    //});
+                    
                     image00.Source = ImageSource.FromFile(file.Path);
 					image00.IsVisible = true;
                     dietItemCurrent.Image0LocalPath = file.Path;
-                    //stream0 = file.GetStream();
-                    //dietItemCurrent.Image0 = await AzureStorage.UploadFileAsync(ContainerType.Image, stream0);
-
+                   
                     break;
                 case 1:
                     file1 = file;
-                    //              image1.Source = ImageSource.FromStream(() =>
-                    //              {   
-                    //var stream = file.GetStream();
-                    //    //file.Dispose();
-                    //    return stream;
-                    //});
+                    
                     dietItemCurrent.Image1LocalPath = file.Path;
                     image11.Source = ImageSource.FromFile(file.Path);
 					image11.IsVisible = true;
-                    //stream1 = file.GetStream();
-                    //dietItemCurrent.Image1 = await AzureStorage.UploadFileAsync(ContainerType.Image, stream1);
-
+                    
                     break;
                 case 2:
                     file2 = file;

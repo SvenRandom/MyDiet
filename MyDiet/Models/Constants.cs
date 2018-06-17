@@ -8,10 +8,7 @@ namespace MyDiet.Models
         public static string Email = "123@163.com";
 		public static readonly string EndpointUri = "https://byan8307.documents.azure.com:443/";
 		public static readonly string PrimaryKey = "PX6M7QngYfyvhJvMunl6peFDKN5GqONMeNMM1fnmbKlgBeXAMfpTVDDAh3ZZURXfwUKQ8NfgzFwUS45BlFAroA==";
-
-		//public static readonly string DatabaseName = "TodoList";
-  //      public static readonly string CollectionName = "TodoItems";
-		//public static readonly string CollectionNameDiet = "DietItem";
+  
 
         //use Azure mobile and blog storage
 		public static string ApplicationURL = @"https://mydietappversion2.azurewebsites.net";

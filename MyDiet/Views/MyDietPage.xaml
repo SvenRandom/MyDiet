@@ -54,15 +54,7 @@
                                          Grid.Column="2" />
                           
                         </Grid>
-                        <!--<StackLayout Orientation="Horizontal" HeightRequest="110"  > 
-                                <Image Source="{Binding Image0LocalPath}" Aspect="AspectFill" WidthRequest="110"
-                                        />
-                                 <Image Source="{Binding Image1LocalPath}" Aspect="AspectFill" WidthRequest="110"
-                                        />
-                                 <Image Source="{Binding Image2LocalPath}" Aspect="AspectFill" WidthRequest="110"
-                                       />
-                          
-                        </StackLayout> -->
+
 
                          
                     </StackLayout>

@@ -32,19 +32,10 @@ namespace MyDiet.Manager
         {
             try
             {
-				//var items = await activityData.LookupAsync(id);
-				//MobileServiceTableQuery<TodoItem> query = todoTable
-                //.Take(3);
-                //List<TodoItem> items = await query.ToListAsync();
-
-				//IEnumerable<ActivityData> items = await activityData.Take(365);
-					//.Where(data => data.UserId == App.email).ToListAsync();
-                   // .ToEnumerableAsync();
 				var items = activityData.IncludeTotalCount().OrderByDescending(data => data.date);
 				var temp=await items.Where(data => data.UserId == App.email).ToListAsync();
 				var result = new List<ActivityData>(temp);
-				//var resul = new List<ActivityData>(await activityData.ToListAsync());
-				//System.Diagnostics.Debug.WriteLine("activitydata: "+ result.Count);
+
 				return result;
             }
             catch (MobileServiceInvalidOperationException msioe)

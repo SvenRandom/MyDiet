@@ -24,9 +24,6 @@
     </ContentPage.ToolbarItems>
     <ScrollView>
     <StackLayout >
-           <!-- <StackLayout Padding="15" >
-                  <Label x:Name="status" HorizontalOptions="CenterAndExpand" />
-            </StackLayout>-->
       
             
         <StackLayout Orientation="Horizontal" x:Name="choice" Padding="15" IsVisible="false" >
@@ -77,9 +74,7 @@
                         </StackLayout>
                     </ViewCell>
                         
-                   <!-- <EntryCell x:Name="timesPerDayEntry" Text="{Binding TimesPerDay}" Label="Frequency(times per day):" Placeholder="(eg 3)" 
-                               Keyboard="Numeric" Completed="FrequancyCompleted"  
-                                />-->
+             
                     <EntryCell x:Name="unitEntry" Text="{Binding Unit}" Label="Basic unit: " Placeholder="(eg 2 tablets)" />
 
                     <ViewCell>

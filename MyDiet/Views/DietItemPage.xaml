@@ -7,11 +7,9 @@
      <ContentPage.Resources>
         <ResourceDictionary>
             <Style TargetType="Button" >
-                <!--<Setter Property="BackgroundColor" Value="{StaticResource LightGreen}" />
-                <Setter Property="TextColor" Value="White" />-->
+                
                 <Setter Property="HorizontalOptions" Value="Center" />
-               <!-- <Setter Property="BorderRadius" Value="10" />
-                <Setter Property="HeightRequest" Value="25" />-->
+               
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -25,87 +23,7 @@
           <ActivityIndicator x:Name="activityIndicator" HorizontalOptions="Center"  
                                   VerticalOptions="Start" IsVisible="False" IsEnabled="True"/>
           <ScrollView>
-             <!--<StackLayout x:Name="oStackLayout" IsVisible="true"> 
-                <TableView Intent="Form" HasUnevenRows="true" >
-                    <TableRoot>
-                        <TableSection Title="Meal time" >
-                            <ViewCell>
-                                <StackLayout Orientation="Horizontal" Padding="15" >
-                                    <Image Source="{local:EmbeddedImage MyDiet.Images.icons_watch50.png}" HorizontalOptions="Start"
-                                           Aspect="AspectFit" />
-                                    <TimePicker x:Name="timePicker" Time="{Binding Path=Time}"/>
-                                    <DatePicker x:Name="datePicker" Date="{Binding Path=Date}" Format="dd MMM yyyy" />
-                                </StackLayout>
-                            </ViewCell>
-                        </TableSection>
-
-                        <TableSection Title="Images" >
-                            <ViewCell>
-                                 <StackLayout Padding="15">
-                                        <Button Text="Add Photo" Clicked="AddPhotoClicked" />
-                                               
-                                        <StackLayout Orientation="Horizontal" IsVisible="false" x:Name="imagesStack"
-                                                     HeightRequest="120" WidthRequest="360">
-                                            <Image x:Name="image00"  IsVisible="false" Aspect="AspectFit" >
-                                                <Image.GestureRecognizers>
-                                                    <TapGestureRecognizer
-                                                               Tapped="OnImage00Tapped"  />
-                                                </Image.GestureRecognizers>
-                                            </Image>    
-                                            <Image x:Name="image11" IsVisible="false" >
-                                               <Image.GestureRecognizers>
-                                                    <TapGestureRecognizer
-                                                                Tapped="OnImage11Tapped" />
-                                               </Image.GestureRecognizers>
-                                            </Image>    
-                                            <Image x:Name="image22" IsVisible="false" >
-                                                <Image.GestureRecognizers>
-                                                    <TapGestureRecognizer
-                                                                Tapped="OnImage22Tapped" />
-                                               </Image.GestureRecognizers>
-                                            </Image>    
-                                        </StackLayout>
-                                </StackLayout>
-                            </ViewCell>
-                        </TableSection>
-
-                         <TableSection Title="Calories (KJ)" >
-                            <ViewCell>
-                                <StackLayout Orientation="Horizontal" Padding="15" >
-                                    <Image Source="{local:EmbeddedImage MyDiet.Images.icons_calories50.png}" HorizontalOptions="Start"
-                                           Aspect="AspectFit" />
-                                    <Entry x:Name="calEntry" Text="{Binding Path=Calories}" 
-                                           Keyboard="Numeric" Placeholder="(eg 200)" /> 
-                                </StackLayout>
-                            </ViewCell>
-                        </TableSection>
-
-                        <TableSection Title="Quick Import" >
-                            <ViewCell>
-                                <StackLayout Padding="15">
-                                        <Button Text="Scan Barcode" Clicked="scanClicked" />
-                                        <Label x:Name="bar" />
-                                        <StackLayout x:Name="barItems" />>
-  
-                                 </StackLayout>
-                            </ViewCell>
-                        </TableSection>
-
-                        <TableSection Title="Description of new meal" >
-                            <ViewCell>
-                                <StackLayout Padding="15">
-                                       <Editor Text="{Binding Path=Description}" x:Name="descriptionEditor" 
-                                               BackgroundColor="Silver" HeightRequest="150"  />
-                
-                                </StackLayout>
-                            </ViewCell>
-                        </TableSection>
-                    </TableRoot>    
-                </TableView>
-
-                <Button Text="Delete" Clicked="OnDeleteActivated" />
-                 <Button Text="Cancel" Clicked="OnCancelActivated" x:Name="cancelButton"/>    
-             </StackLayout>-->      
+               
                 
          <StackLayout Padding="15" x:Name="oStackLayout" IsVisible="true">
                

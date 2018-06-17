@@ -45,9 +45,6 @@ namespace MyDiet.Views
 		async protected override void OnAppearing()
 		{
 			
-			//vs.Add("enalapril(Vasotec)");
-			//vs.Add("Eplerenone (Inspra)");
-			//vs.Add("Lomotil");
 			var temp =await medicineManager.GetMedicinesAsync();
 
 			foreach (var item in temp)

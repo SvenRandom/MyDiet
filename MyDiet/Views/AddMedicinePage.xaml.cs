@@ -40,23 +40,12 @@ namespace MyDiet.Views
 					StartTime = DateTime.Now,
 					IsTaking=false
                 };
-				//status.Text = "This is a new medicine for you";
+
 				choice.IsVisible = true;
 			}else
 			{
 				currentMedicine = medicine;
-				//if(currentMedicine.IsTaking){
-				//	var startday = new DateTime(currentMedicine.StartTime.Year, currentMedicine.StartTime.Month, currentMedicine.StartTime.Day);
-				//	var diff = DateTime.Now - startday;
 
-				//	var difff = diff.Days + 1;
-				//	status.Text = "You are recovering! Today is the "+difff+" of "+currentMedicine.Duration+ " days treament";
-
-						
-				//}else
-				//{
-				//	status.Text = "You are not taking this medical now";
-				//}
 
 				if (currentMedicine.IsTaking)
 					GetReminders();
@@ -71,7 +60,6 @@ namespace MyDiet.Views
 		async void DoneClicked(object sender, EventArgs e)
 		{
 			
-			//System.Diagnostics.Debug.WriteLine("currentMedicine for done: " + currentMedicine.Description);
 
 			MedicineManager medicineManager = MedicineManager.DefaultManager;
 			await medicineManager.SaveTaskAsync(currentMedicine, isNewItem);
@@ -195,8 +183,7 @@ namespace MyDiet.Views
 		}
 		public void SetReminders()
 		{
-			//StackLayout stackLayout = new StackLayout();
-			//stackLayout.Orientation = StackOrientation.Horizontal;
+			
 			reminders.Children.Clear();
 			switch(currentMedicine.TimesPerDay)
 			{
@@ -402,11 +389,6 @@ namespace MyDiet.Views
                     }
                 }
 
-				//var startday = new DateTime(currentMedicine.StartTime.Year, currentMedicine.StartTime.Month, currentMedicine.StartTime.Day);
-				//var diff = DateTime.Now - startday;
-
-				//var difff = diff.Days + 1;
-				//status.Text = "You are recovering! Today is the "+difff+" of "+currentMedicine.Duration+ " days treament";
 				currentMedicine.Max = int.Parse(currentMedicine.Duration);        
     			MedicineManager medicineManager = MedicineManager.DefaultManager;
                 await medicineManager.SaveTaskAsync(currentMedicine, isNewItem);
@@ -418,10 +400,7 @@ namespace MyDiet.Views
 
 		async void EndClicked(object sender, EventArgs e)
         {
-			//if(!currentMedicine.IsTaking){
-			//	await DisplayAlert("Notice:", "You are not taking this medicine!", "OK");
-			//	return;
-			//}
+
 			var startday = new DateTime(currentMedicine.StartTime.Year, currentMedicine.StartTime.Month, currentMedicine.StartTime.Day);
             var diff = DateTime.Now - startday;
 
@@ -444,7 +423,7 @@ namespace MyDiet.Views
 
                     }
 					//delete thie medicine 
-                    //currentMedicine.IsTaking = false;
+                    
 					MedicineManager medicineManager = MedicineManager.DefaultManager;
                     await medicineManager.DeleteTaskAsync(currentMedicine);
                            

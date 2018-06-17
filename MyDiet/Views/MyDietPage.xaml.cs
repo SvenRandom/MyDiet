@@ -32,7 +32,7 @@ namespace MyDiet.Views
 		protected override void OnAppearing()
         {
             base.OnAppearing();
-			//await RefreshItems(true, syncItems: true);
+
 			if(currentView==0){
 				TodayClicked();
              
@@ -43,12 +43,7 @@ namespace MyDiet.Views
 			if (currentView == 2)
 				HistoryClicked();
 
-            
-			//await RefreshItems(true, syncItems: false);//show activity indicator and not sync
-
-            
-
-
+        
 
         }
        

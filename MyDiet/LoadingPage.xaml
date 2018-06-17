@@ -12,8 +12,6 @@
                 RelativeLayout.HeightConstraint=
                   "{ConstraintExpression Type=RelativeToParent, Property=Height}">
 
-            <!--<Label Text="Checking account state"  
-            HorizontalOptions="Center" VerticalOptions="Center"/>-->
            <ActivityIndicator IsEnabled="True" IsVisible="false" x:Name="loadingIndicator" />
 
           <Button Text="continue" 

@@ -29,40 +29,7 @@ namespace MyDiet.Views
         {
 			logingIndicator.IsRunning = true;
 			logingIndicator.IsVisible = true;
-            //get user info from SQlite 
-   //         _connection = DependencyService.Get<ISQLiteDb>().GetConnection();
-			//await _connection.CreateTableAsync<AccountInfo>();
-
-            //var currentUser1 = from s in _connection.Table<User>()
-                        //                           where s.Email.Equals(emailEntry.Text) 
-                        //select s;
-
-            //var currentUser2 = _connection.QueryAsync<User>("SELECT * FROM Items WHERE Email = ?", emailEntry.Text);
-            //get the number of result
-     //       int temp = await currentUser1.CountAsync();
-
-     //       if(temp!=0){
-     //           var currentUser = await currentUser1.FirstAsync();
-
-     //           var isValid = AreCredentialsCorrect(currentUser);
-     //           if (isValid)
-     //           {
-     //               App.user = currentUser;
-     //               App.IsUserLoggedIn = true;
-					//var app = Application.Current as App;
-					//Application.Current.Properties["log"] = true;
-					//app.IsLoggedIn = true;
-					//app.CurrentUser = currentUser;
-            //        Navigation.InsertPageBefore(new MainPage(), this);
-            //        await Navigation.PopAsync();
-            //    }
-            //    else
-            //    {
-            //        loginFailed();
-            //    }
-            //}else{
-            //    loginFailed();
-            //}
+            
 			try{
 				var currentAccount = await accountManager.GetAccountInfosAsync(emailEntry.Text);
                 if (currentAccount != null)
